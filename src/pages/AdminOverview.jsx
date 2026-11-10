@@ -117,24 +117,37 @@ export default function AdminOverview() {
         </header>
 
         <section className="platform-health" aria-labelledby="platform-health-heading">
-          <h2 id="platform-health-heading" className="sr-only">System health</h2>
-          <span className="eyebrow platform-health-label">System health</span>
+          <div className="platform-health-heading">
+            <div>
+              <span className="eyebrow platform-health-label">Operations</span>
+              <h2 id="platform-health-heading">System health</h2>
+            </div>
           {health.isLoading ? (
-            <span className="badge" role="status">Checking services…</span>
+              <span className="badge" role="status">Checking services…</span>
           ) : health.isError ? (
             <div className="platform-health-error">
               <span role="alert">{messageFor(health.error)}</span>
               <button type="button" onClick={() => health.refetch()}>Retry health check</button>
             </div>
           ) : (
-            <>
               <span className={`badge${healthOk ? ' ok' : ' danger'}`}>{healthOk ? 'All services operational' : 'Service degradation reported'}</span>
-              <ul className="platform-health-services">
-                <li>API <strong>online</strong></li>
-                <li>Database <strong>{health.data.db ? 'online' : 'unavailable'}</strong></li>
-                <li>Redis <strong>{health.data.redis ? 'online' : 'unavailable'}</strong></li>
-              </ul>
-            </>
+          )}
+          </div>
+          {!health.isLoading && !health.isError && (
+            <ul className="platform-health-services">
+              {[
+                ['API', true],
+                ['Database', health.data.db],
+                ['Redis', health.data.redis],
+              ].map(([service, online]) => (
+                <li key={service}>
+                  <span>{service}</span>
+                  <strong className={online ? 'service-online' : 'service-offline'}>
+                    <i aria-hidden="true" />{online ? 'Online' : 'Unavailable'}
+                  </strong>
+                </li>
+              ))}
+            </ul>
           )}
         </section>
       </div>

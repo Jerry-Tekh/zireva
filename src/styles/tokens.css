@@ -2178,7 +2178,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 
 /* Dashboard composition tuned to the compact metric-and-work-area reference. */
 .platform-overview { gap: 19px !important; }
-.platform-overview-header { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 28px; }
+.platform-overview-header { display: grid; grid-template-columns: minmax(0,1fr) minmax(400px,500px); align-items: center; gap: 28px; }
 .platform-overview-header .page-hero { gap: 8px; }
 .platform-overview-header .page-hero p { font-size: .88rem; }
 .platform-health { display: grid; justify-items: end; gap: 10px; padding-bottom: 3px; }
@@ -2360,20 +2360,39 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .dashboard-profile-link .dashboard-glyph { width: 19px; height: 19px; }
 .dashboard-overview-header .platform-health,
 .platform-overview-header .platform-health {
-  min-width: min(100%, 370px);
-  padding: 14px 16px;
+  display: grid;
+  width: 100%;
+  max-width: 500px;
+  justify-items: stretch;
+  gap: 14px;
+  padding: 17px !important;
   border: 1px solid #e4eae4;
-  border-radius: 13px;
+  border-radius: 15px;
   background: #fff !important;
   box-shadow: 0 1px 2px rgba(23,43,26,.025);
 }
-.platform-overview-header .platform-health { gap: 8px; }
-.platform-overview-header .platform-health-label { color: #47724c; }
+.platform-overview-header .platform-health-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.platform-overview-header .platform-health-heading > div { display: grid; gap: 4px; }
+.platform-overview-header .platform-health-heading h2 { margin: 0; color: #18231b; font-size: .98rem; font-weight: 640; letter-spacing: -.025em; }
+.platform-overview-header .platform-health-label { color: #758176; font-size: .59rem !important; }
+.platform-overview-header .platform-health-heading .badge { flex: 0 0 auto; max-width: 58%; padding: 7px 10px; font-size: .59rem; line-height: 1.3; letter-spacing: .055em; text-align: center; }
+.platform-overview-header .platform-health-services { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; width: 100%; margin: 0; }
+.platform-overview-header .platform-health-services li { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; padding: 10px; border: 1px solid #edf1ed; border-radius: 10px; color: #707b71; background: #fafcfa; font-size: .69rem; }
+.platform-overview-header .platform-health-services strong { display: inline-flex; align-items: center; gap: 5px; margin: 0; color: #246b34; font-size: .67rem; font-weight: 620; }
+.platform-overview-header .platform-health-services strong i { width: 6px; height: 6px; border-radius: 50%; background: #14853a; }
+.platform-overview-header .platform-health-services .service-offline { color: #a52d29; }
+.platform-overview-header .platform-health-services .service-offline i { background: #c73c35; }
+.platform-overview-header .platform-health-error { justify-items: end; max-width: 58%; }
 @media (max-width: 620px) {
   .dashboard-profile-link { width: 36px; height: 36px; flex-basis: 36px; }
   .dashboard-topbar-context { max-width: none; }
   .dashboard-nav-heading { margin-top: 20px; }
-  .platform-overview-header .platform-health { min-width: 0; width: 100%; }
+  .platform-overview-header .platform-health { max-width: none; padding: 14px !important; }
+  .platform-overview-header .platform-health-services { grid-template-columns: 1fr; gap: 7px; }
+  .platform-overview-header .platform-health-services li { padding: 9px 11px; }
+  .platform-overview-header .platform-health-heading { align-items: flex-start; flex-direction: column; }
+  .platform-overview-header .platform-health-heading .badge,
+  .platform-overview-header .platform-health-error { max-width: none; }
 }
 
 /* Page level dashboard layouts: consistent rhythm, clear work areas, and mobile-first controls. */
