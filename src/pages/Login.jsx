@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth.jsx';
 import { messageFor } from '../lib/errors';
 import { DEMO_CREDENTIALS, DEMO_PASSWORD } from '../lib/demoCredentials';
+import AuthVisual from '../components/AuthVisual.jsx';
 
 export default function Login() {
   const { login } = useAuth();
@@ -32,17 +33,24 @@ export default function Login() {
   }
 
   return (
-    <div className="auth-wrap reveal">
+    <div className="auth-wrap auth-split reveal">
+      <AuthVisual
+        kicker="Your next live moment"
+        title="Good to have you back."
+        copy="Pick up where your plans left off. Find an event, manage your tickets, or get ready to host."
+        linkLabel="Explore events"
+      />
       <section className="auth-card panel">
         <span className="eyebrow">Welcome back</span>
-        <h1 style={{ fontSize: '2.2rem', marginTop: 10 }}>Log in</h1>
+        <h1>Log in to Zireva</h1>
+        <p className="auth-intro">Sign in to continue to your tickets and events.</p>
         {err && <p className="alert danger" style={{ marginTop: 16 }}>{err}</p>}
-        <form onSubmit={onSubmit} className="stack" style={{ marginTop: 22 }}>
-          <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
-          <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
+        <form onSubmit={onSubmit} className="stack auth-form">
+          <label>Email<input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
+          <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
           <button className="primary" disabled={busy} type="submit">{busy ? 'Logging in…' : 'Log in'}</button>
         </form>
-        <div className="stack" style={{ marginTop: 24 }}>
+        <div className="stack demo-roles">
           <span className="eyebrow">Demo roles</span>
           <div className="grid-2" style={{ gap: 8 }}>
             {DEMO_CREDENTIALS.map((demo) => (
@@ -52,7 +60,7 @@ export default function Login() {
             ))}
           </div>
         </div>
-        <p className="muted" style={{ marginTop: 22, fontSize: '0.9rem' }}>
+        <p className="muted auth-switch">
           No account? <Link to="/register" style={{ color: 'var(--accent)', fontWeight: 800 }}>Create one</Link>
         </p>
       </section>

@@ -97,6 +97,10 @@ export default function App() {
       </main>
       {landingRoute ? (
         <footer className="app-footer landing-footer">
+          <div className="landing-footer-cta">
+            <div><span className="eyebrow">Make room for the next one</span><h2>Find your next live moment.</h2><p>Explore the events already listed on Zireva, or create an account and start planning.</p></div>
+            <div className="landing-footer-actions"><a href="#all-events" className="footer-action-primary">Explore events <span aria-hidden="true">→</span></a><Link to="/register" className="footer-action-secondary">Create an account</Link></div>
+          </div>
           <div className="landing-footer-main">
             <div className="landing-footer-brand">
               <Link to="/" className="brand">
@@ -109,7 +113,7 @@ export default function App() {
               <h2>Discover</h2>
               <a href="#events">Upcoming events</a>
               <a href="#all-events">All events</a>
-              <a href="#venues">Venues</a>
+              <a href="#venues">Places</a>
               <a href="#for-everyone">Who it’s for</a>
             </nav>
             <nav className="landing-footer-column" aria-label="How Zireva works">
