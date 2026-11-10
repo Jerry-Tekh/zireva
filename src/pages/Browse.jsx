@@ -101,18 +101,15 @@ export default function Browse() {
       <header className="browse-hero reveal" id="top">
         <div className="browse-hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow"><span className="live-dot" /> Made for the moments that move you</span>
-            <h1>Make room for <span>something unforgettable.</span></h1>
-            <p>
-              The best nights don’t happen by accident. Find your next live experience and make it yours.
-            </p>
+            <span className="eyebrow"><span className="live-dot" /> Live starts here</span>
+            <h1>Find your next <span>live moment.</span></h1>
+            <p>Big nights. New sounds. Your kind of crowd. Find the moments you’ll talk about long after the lights come up.</p>
             <form className="browse-search" role="search" onSubmit={(e) => e.preventDefault()}>
-              <label htmlFor="event-search">Search events</label>
               <div className={`hero-search-row${q ? ' has-clear' : ''}`}>
                 <input
                   id="event-search"
                   aria-label="Search events"
-                  placeholder="Event name or venue"
+                  placeholder="Search events, artists, or venues"
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
                 />
@@ -121,16 +118,16 @@ export default function Browse() {
                     Clear
                   </button>
                 )}
-                <button type="submit" className="primary">Find events <span aria-hidden="true">→</span></button>
+                <button type="submit" className="primary">Explore events <span aria-hidden="true">→</span></button>
               </div>
             </form>
-            <p className="hero-search-hint">Concerts&nbsp; · &nbsp;Culture&nbsp; · &nbsp;Community</p>
-          </div>
-          <div className="hero-visual">
-            <img src="/images/events/nicholas-green-nPz8akkUmDI-unsplash.jpg" alt="Audience at a live event" />
-            <div className="hero-image-caption"><span className="caption-spark">✳</span><span><strong>Be there when it happens.</strong><small>Find your people. Find your next.</small></span></div>
+            <a className="hero-secondary-link" href="#events">See what’s coming up <span aria-hidden="true">↓</span></a>
           </div>
         </div>
+        <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/images/events/nicholas-green-nPz8akkUmDI-unsplash.jpg" aria-hidden="true" tabIndex={-1}>
+          <source src="/video/herovideobg.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-shade" aria-hidden="true" />
       </header>
 
       <section className="browse-section reveal" id="events" aria-labelledby="featured-heading">

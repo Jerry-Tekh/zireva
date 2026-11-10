@@ -94,12 +94,48 @@ export default function App() {
           </Route>
         </Routes>
       </main>
-      <footer className="app-footer">
-        <div className="app-footer-inner">
-        <span className="eyebrow">Zireva Live Events</span>
-        <SystemHealth />
-        </div>
-      </footer>
+      {landingRoute ? (
+        <footer className="app-footer landing-footer">
+          <div className="landing-footer-main">
+            <div className="landing-footer-brand">
+              <Link to="/" className="brand">
+                <img className="brand-logo" src={logoTicUrl} alt="" aria-hidden="true" />
+                <span className="brand-name">Zireva</span>
+              </Link>
+              <p>Find your people. Find your next.<br />Make more room for live experiences.</p>
+            </div>
+            <nav className="landing-footer-column" aria-label="Discover">
+              <h2>Discover</h2>
+              <a href="#events">Upcoming events</a>
+              <a href="#all-events">All events</a>
+              <a href="#venues">Venues</a>
+            </nav>
+            <nav className="landing-footer-column" aria-label="How Zireva works">
+              <h2>The experience</h2>
+              <a href="#how-it-works">How it works</a>
+              <Link to="/tickets">My tickets</Link>
+              <Link to="/login">Sign in</Link>
+            </nav>
+            <nav className="landing-footer-column" aria-label="For organizers">
+              <h2>For organizers</h2>
+              <a href="#organizers">Why Zireva</a>
+              <Link to="/register">Start hosting</Link>
+              <Link to="/login">Organizer sign in</Link>
+            </nav>
+          </div>
+          <div className="landing-footer-bottom">
+            <span>© {new Date().getFullYear()} Zireva. Made for live moments.</span>
+            <div className="landing-footer-status"><span>Platform status</span><SystemHealth /></div>
+          </div>
+        </footer>
+      ) : (
+        <footer className="app-footer">
+          <div className="app-footer-inner">
+            <span className="eyebrow">Zireva Live Events</span>
+            <SystemHealth />
+          </div>
+        </footer>
+      )}
     </div>
   );
 }
