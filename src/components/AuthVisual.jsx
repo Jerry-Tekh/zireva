@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import BrandMark from './BrandMark.jsx';
 
 const POSTER = '/images/events/nicholas-green-nPz8akkUmDI-unsplash.webp';
 
@@ -15,7 +16,7 @@ export default function AuthVisual({ kicker, title, copy, linkLabel, linkTo = '/
         <p>{copy}</p>
         <Link to={linkTo} className="auth-visual-link">{linkLabel}<span aria-hidden="true">→</span></Link>
       </div>
-      <span className="auth-visual-mark" aria-hidden="true">Z</span>
+      <BrandMark className="auth-visual-mark" />
     </aside>
   );
 }

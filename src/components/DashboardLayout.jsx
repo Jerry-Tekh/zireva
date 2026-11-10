@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth.jsx';
 import SystemHealth from './SystemHealth.jsx';
+import BrandMark from './BrandMark.jsx';
 
 const ROLE_NAMES = {
   registered_user: 'Attendee',
@@ -83,7 +84,7 @@ export default function DashboardLayout() {
       <aside className="dashboard-sidebar" aria-label={`${roleName} navigation`}>
         <div className="dashboard-sidebar-top">
           <Link to="/" className="dashboard-sidebar-brand" aria-label="Zireva home">
-            <span className="dashboard-brand-mark">Z</span>
+            <BrandMark className="dashboard-brand-mark" />
             <span className="dashboard-brand-name">Zireva</span>
           </Link>
           <button

@@ -14,9 +14,15 @@ import Scanner from './pages/Scanner.jsx';
 import AdminOverview from './pages/AdminOverview.jsx';
 import AdminUsers from './pages/AdminUsers.jsx';
 import SystemHealth from './components/SystemHealth.jsx';
+import BrandMark from './components/BrandMark.jsx';
 import { RequireAuth, RequireRole } from './components/RouteGuards.jsx';
 import DashboardLayout from './components/DashboardLayout.jsx';
-import logoTicUrl from './assets/logoTic.webp?url';
+
+function FooterSectionLink({ landingRoute, id, className, children }) {
+  return landingRoute
+    ? <a className={className} href={`#${id}`}>{children}</a>
+    : <a className={className} href={`/#${id}`}>{children}</a>;
+}
 
 function Nav({ isLanding }) {
   const { user, logout } = useAuth();
@@ -72,7 +78,7 @@ export default function App() {
       <header className="app-header">
         <div className="app-header-inner">
         <Link to="/" className="brand">
-          <img className="brand-logo" src={logoTicUrl} alt="" aria-hidden="true" />
+          <BrandMark />
           <span className="brand-name">Zireva</span>
         </Link>
         <Nav isLanding={landingRoute} />
@@ -97,36 +103,36 @@ export default function App() {
           </Route>
         </Routes>
       </main>
-      {landingRoute ? (
+      {landingRoute || authRoute || eventRoute ? (
         <footer className="app-footer landing-footer">
           <div className="landing-footer-cta">
             <div><span className="eyebrow">Make room for the next one</span><h2>Find your next live moment.</h2><p>Explore the events already listed on Zireva, or create an account and start planning.</p></div>
-            <div className="landing-footer-actions"><a href="#all-events" className="footer-action-primary">Explore events <span aria-hidden="true">→</span></a><Link to="/register" className="footer-action-secondary">Create an account</Link></div>
+            <div className="landing-footer-actions"><FooterSectionLink landingRoute={landingRoute} id="all-events" className="footer-action-primary">Explore events <span aria-hidden="true">→</span></FooterSectionLink><Link to="/register" className="footer-action-secondary">Create an account</Link></div>
           </div>
           <div className="landing-footer-main">
             <div className="landing-footer-brand">
               <Link to="/" className="brand">
-                <img className="brand-logo" src={logoTicUrl} alt="" aria-hidden="true" />
+                <BrandMark />
                 <span className="brand-name">Zireva</span>
               </Link>
               <p>Find your people. Find your next.<br />Make more room for live experiences.</p>
             </div>
             <nav className="landing-footer-column" aria-label="Discover">
               <h2>Discover</h2>
-              <a href="#events">Upcoming events</a>
-              <a href="#all-events">All events</a>
-              <a href="#venues">Places</a>
-              <a href="#for-everyone">Who it’s for</a>
+              <FooterSectionLink landingRoute={landingRoute} id="events">Upcoming events</FooterSectionLink>
+              <FooterSectionLink landingRoute={landingRoute} id="all-events">All events</FooterSectionLink>
+              <FooterSectionLink landingRoute={landingRoute} id="venues">Places</FooterSectionLink>
+              <FooterSectionLink landingRoute={landingRoute} id="for-everyone">Who it is for</FooterSectionLink>
             </nav>
             <nav className="landing-footer-column" aria-label="How Zireva works">
               <h2>The experience</h2>
-              <a href="#how-it-works">How it works</a>
+              <FooterSectionLink landingRoute={landingRoute} id="how-it-works">How it works</FooterSectionLink>
               <Link to="/tickets">My tickets</Link>
               <Link to="/login">Sign in</Link>
             </nav>
             <nav className="landing-footer-column" aria-label="For organizers">
               <h2>For organizers</h2>
-              <a href="#organizers">Why Zireva</a>
+              <FooterSectionLink landingRoute={landingRoute} id="organizers">Why Zireva</FooterSectionLink>
               <Link to="/register">Start hosting</Link>
               <Link to="/login">Organizer sign in</Link>
             </nav>

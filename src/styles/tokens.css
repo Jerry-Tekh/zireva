@@ -1040,7 +1040,7 @@ input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible
   .landing-shell *, .landing-shell *::before, .landing-shell *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 html:has(.landing-shell) { scroll-behavior: smooth; }
-.landing-shell .landing-footer {
+.landing-footer {
   padding: 0 clamp(22px, calc((100vw - 1248px) / 2), 80px);
   color: #28322b;
   background: #f7f9f7;
@@ -1077,7 +1077,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .landing-footer-status > span { color: #778078; }
 .landing-footer-status .health-pill { font-size: .74rem; font-weight: 550; }
 @media (max-width: 760px) {
-  .landing-shell .landing-footer { padding-inline: 18px; }
+  .landing-footer { padding-inline: 18px; }
   .landing-footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; padding: 42px 4px 36px; }
   .landing-footer-brand { grid-column: 1 / -1; }
   .landing-footer-bottom { align-items: flex-start; flex-direction: column; padding: 18px 4px 22px; }
@@ -1798,7 +1798,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .auth-split .alert { overflow-wrap: anywhere; }
 
 /* A clearer footer close, with intentional spacing and easy-to-tap destinations. */
-.landing-shell .landing-footer { padding-bottom: 0; background: #f7f9f7; }
+.landing-footer { padding-bottom: 0; background: #f7f9f7; }
 .landing-footer-cta {
   display: flex;
   align-items: center;
@@ -1846,7 +1846,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-footer-main { padding-top: 34px; }
 }
 @media (max-width: 420px) {
-  .landing-shell .landing-footer { padding-inline: 14px; }
+  .landing-footer { padding-inline: 14px; }
   .landing-footer-main { grid-template-columns: 1fr 1fr; gap: 28px 12px; padding-inline: 0; }
   .landing-footer-column a { font-size: .78rem; }
   .landing-footer-bottom { padding-inline: 0; font-size: .7rem; }
@@ -1980,4 +1980,17 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   .event-detail-image { transition: none; }
   .event-loading-hero { animation: none; }
+}
+
+/* Zireva's new spark mark: light, line-based, and legible at small sizes. */
+.brand-mark { display: grid; width: 38px; height: 38px; flex: none; place-items: center; overflow: hidden; border: 1px solid #e5eee5; border-radius: 50%; background: #f3f8f2; }
+.brand-mark svg { display: block; width: 88%; height: 88%; overflow: visible; }
+.brand-mark-orbit { fill: none; stroke: #c5ddc6; stroke-width: 1; stroke-linecap: round; }
+.brand-mark-ray { fill: none; stroke: #8ab98c; stroke-width: 1; stroke-linecap: round; }
+.brand-mark-spark { fill: #07851a; stroke: #07851a; stroke-width: .6; stroke-linejoin: round; }
+.brand-mark circle { fill: #f7fbf6; }
+.landing-shell .brand-mark { width: 34px; height: 34px; }
+.auth-visual-mark { position: absolute; top: 28px; left: 30px; z-index: 2; width: 42px; height: 42px; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.9); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+@media (max-width: 720px) {
+  .auth-visual-mark { top: 18px; left: 20px; width: 36px; height: 36px; }
 }
