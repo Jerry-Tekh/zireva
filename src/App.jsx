@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Link, useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from './lib/auth.jsx';
 import Browse from './pages/Browse.jsx';
@@ -68,7 +68,11 @@ function Nav({ isLanding }) {
 }
 
 export default function App() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const landingRoute = pathname === '/';
   const authRoute = pathname === '/login' || pathname === '/register';
   const eventRoute = pathname.startsWith('/events/');
