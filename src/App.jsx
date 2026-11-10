@@ -63,10 +63,11 @@ function Nav({ isLanding }) {
 export default function App() {
   const { pathname } = useLocation();
   const landingRoute = pathname === '/';
+  const authRoute = pathname === '/login' || pathname === '/register';
   const dashboardRoute = ['/dashboard', '/account', '/tickets', '/scan', '/admin/overview', '/admin/users'].includes(pathname)
     || pathname.startsWith('/organizer');
   return (
-    <div className={`app-shell${dashboardRoute ? ' has-dashboard' : ''}${landingRoute ? ' landing-shell' : ''}`}>
+    <div className={`app-shell${dashboardRoute ? ' has-dashboard' : ''}${landingRoute ? ' landing-shell' : ''}${authRoute ? ' auth-shell' : ''}`}>
       <header className="app-header">
         <div className="app-header-inner">
         <Link to="/" className="brand">
