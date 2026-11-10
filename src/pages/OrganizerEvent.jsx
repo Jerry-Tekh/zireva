@@ -212,7 +212,7 @@ export default function OrganizerEvent() {
   }
 
   return (
-    <div className="page reveal">
+    <div className="page reveal organizer-event-page">
       <section className="hero-media" style={{ minHeight: 280 }}>
         <img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async" />
         <div className="hero-overlay" />
@@ -222,6 +222,15 @@ export default function OrganizerEvent() {
           <p className="mono" style={{ color: 'rgba(255, 255, 255, 0.84)', marginTop: 8 }}>{ev.location || 'Location TBA'}</p>
         </div>
       </section>
+
+      <nav className="event-manage-nav" aria-label="Event management sections">
+        <a href="#event-analytics">Performance</a>
+        <a href="#event-details">Event details</a>
+        <a href="#event-tickets">Ticket tiers</a>
+        <a href="#event-staff">Gate staff</a>
+        <a href="#event-refunds">Refunds</a>
+        <a href="#event-orders">Orders</a>
+      </nav>
 
       <div className="row">
         {sales.isLoading ? (
@@ -247,7 +256,7 @@ export default function OrganizerEvent() {
       </div>
       {err && <p className="alert danger">{err}</p>}
 
-      <section className="section event-analytics">
+      <section className="section event-analytics" id="event-analytics">
         <div className="between event-analytics-heading">
           <div>
             <span className="eyebrow">Performance</span>
@@ -301,7 +310,7 @@ export default function OrganizerEvent() {
       </section>
 
       <form onSubmit={(e) => { e.preventDefault(); setErr(null); saveDetails.mutate(); }}
-        className="section form-grid">
+        className="section form-grid" id="event-details">
         <div style={{ gridColumn: '1 / -1' }}>
           <span className="eyebrow">Event info</span>
           <h2 style={{ marginTop: 6 }}>Details</h2>
@@ -318,7 +327,7 @@ export default function OrganizerEvent() {
         <button className="primary" type="submit" disabled={!eventTitle || saveDetails.isPending}>{saveDetails.isPending ? 'Saving…' : 'Save details'}</button>
       </form>
 
-      <section className="section">
+      <section className="section" id="event-tickets">
       <span className="eyebrow">Inventory</span>
       <h2 style={{ marginTop: 6 }}>Ticket categories</h2>
       <ul className="data-list" style={{ marginTop: 16 }}>
@@ -375,7 +384,7 @@ export default function OrganizerEvent() {
         <button className="primary" type="submit" disabled={addCategory.isPending}>{addCategory.isPending ? 'Adding…' : 'Add category'}</button>
       </form>
 
-      <section className="section">
+      <section className="section" id="event-staff">
       <span className="eyebrow">Access control</span>
       <h2 style={{ marginTop: 6 }}>Gate staff</h2>
       <form onSubmit={(e) => { e.preventDefault(); setErr(null); assignStaff.mutate(); }}
@@ -401,7 +410,7 @@ export default function OrganizerEvent() {
       </ul>
       </section>
 
-      <section className="section">
+      <section className="section" id="event-refunds">
       <span className="eyebrow">Refund queue</span>
       <h2 style={{ marginTop: 6 }}>Refund requests</h2>
       <label style={{ display: 'inline-flex', marginTop: 12 }}>Status
@@ -450,7 +459,7 @@ export default function OrganizerEvent() {
       )}
       </section>
 
-      <section className="section">
+      <section className="section" id="event-orders">
       <span className="eyebrow">Orders</span>
       <h2 style={{ marginTop: 6 }}>Recent orders</h2>
       <label style={{ display: 'inline-flex', marginTop: 12 }}>Status

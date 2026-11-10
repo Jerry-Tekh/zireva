@@ -98,11 +98,11 @@ export default function OrganizerDashboard() {
   }
 
   return (
-    <div className="page reveal">
-      <header className="page-hero">
-        <span className="eyebrow">Organizer</span>
-        <h1>Overview</h1>
-        <p>Keep track of your events and manage what is coming up.</p>
+    <div className="page reveal organizer-dashboard-page">
+      <header className="page-hero workspace-page-hero">
+        <span className="eyebrow">Organizer workspace</span>
+        <h1>Your events</h1>
+        <p>Review publication status, ticket sales, capacity, and refunds across the events you manage.</p>
       </header>
 
       {isError && (
@@ -112,22 +112,22 @@ export default function OrganizerDashboard() {
         </div>
       )}
 
-      <div className="grid-3">
-        <div className="section">
-          <span className="eyebrow">Events</span>
-          <h2 style={{ marginTop: 8 }}>{isLoading || isError ? '—' : Object.values(result?.statusCounts ?? {}).reduce((sum, count) => sum + count, 0)}</h2>
-          <p className="muted">Total managed</p>
-        </div>
-        <div className="section">
+      <div className="grid-3 organizer-summary-grid" aria-label="Event totals">
+        <section className="section organizer-summary-card">
+          <span className="eyebrow">Events managed</span>
+          <strong>{isLoading || isError ? '—' : Object.values(result?.statusCounts ?? {}).reduce((sum, count) => sum + count, 0)}</strong>
+          <p className="muted">Across all event statuses</p>
+        </section>
+        <section className="section organizer-summary-card">
           <span className="eyebrow">Published</span>
-          <h2 style={{ marginTop: 8 }}>{isLoading || isError ? '—' : result?.statusCounts?.published ?? 0}</h2>
-          <p className="muted">Visible to buyers</p>
-        </div>
-        <div className="section">
+          <strong>{isLoading || isError ? '—' : result?.statusCounts?.published ?? 0}</strong>
+          <p className="muted">Available for guests to discover</p>
+        </section>
+        <section className="section organizer-summary-card">
           <span className="eyebrow">Drafts</span>
-          <h2 style={{ marginTop: 8 }}>{isLoading || isError ? '—' : result?.statusCounts?.draft ?? 0}</h2>
-          <p className="muted">Awaiting publish</p>
-        </div>
+          <strong>{isLoading || isError ? '—' : result?.statusCounts?.draft ?? 0}</strong>
+          <p className="muted">Not yet visible to guests</p>
+        </section>
       </div>
 
       <details className="organizer-create">
@@ -154,12 +154,12 @@ export default function OrganizerDashboard() {
       </details>
       {err && <p className="alert danger">{err}</p>}
 
-      <section className="section" id="events">
-      <div className="between">
+      <section className="section organizer-performance-section" id="events">
+      <div className="between organizer-performance-heading">
         <div>
-          <span className="eyebrow">Performance</span>
+          <span className="eyebrow">Sales and attendance</span>
           <h2 style={{ marginTop: 6 }}>Event performance</h2>
-          <p className="muted">Sales and refunds use the selected UTC period; remaining capacity is current inventory.</p>
+          <p className="muted">Compare gross sales, refunds, and net revenue for the selected reporting window.</p>
         </div>
       </div>
       <form
@@ -179,7 +179,7 @@ export default function OrganizerDashboard() {
       </form>
       {periodError && <p role="alert" className="alert danger">{periodError}</p>}
       <form
-        className="row"
+        className="row organizer-event-filters"
         role="search"
         onSubmit={(e) => {
           e.preventDefault();
@@ -207,6 +207,22 @@ export default function OrganizerDashboard() {
       ) : (
         <>
         <EventPerformanceChart events={events} />
+        <div className="organizer-mobile-events" aria-label="Event performance list">
+          {events.map((event) => (
+            <article className="organizer-mobile-event" key={event.id}>
+              <div className="organizer-mobile-event-title">
+                <div><span className="eyebrow">{eventStartLabel(event.startsAt)}</span><h3>{event.title}</h3></div>
+                <span className={`badge${event.status === 'published' ? ' ok' : ''}`}>{event.status}</span>
+              </div>
+              <dl>
+                <div><dt>Tickets sold</dt><dd>{event.ticketsSold}</dd></div>
+                <div><dt>Capacity left</dt><dd>{event.capacityRemaining} / {event.capacity}</dd></div>
+                <div><dt>Net revenue</dt><dd>{money.format(event.netRevenueCents / 100)}</dd></div>
+              </dl>
+              <Link to={`/organizer/events/${event.id}`} className="btn ghost">Manage event <span aria-hidden="true">→</span></Link>
+            </article>
+          ))}
+        </div>
         <div className="table-card organizer-performance-table">
           <table>
             <caption className="sr-only">Event performance and sales for the selected reporting window</caption>

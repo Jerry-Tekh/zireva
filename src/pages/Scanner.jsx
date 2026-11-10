@@ -42,9 +42,10 @@ export default function Scanner() {
 
   return (
     <div className="scanner-shell page">
-      <header className="page-hero" style={{ textAlign: 'center', margin: '0 auto' }}>
-        <span className="eyebrow" style={{ justifyContent: 'center' }}>Event-day gate</span>
-        <h1>Scanner</h1>
+      <header className="page-hero workspace-page-hero scanner-page-heading">
+        <span className="eyebrow">Event-day gate</span>
+        <h1>Admit your guests</h1>
+        <p>Select the event, then scan a ticket QR code or enter its code to confirm entry.</p>
       </header>
 
       {result && (

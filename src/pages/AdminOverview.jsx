@@ -99,7 +99,7 @@ export default function AdminOverview() {
 
   return (
     <div className="page reveal platform-overview">
-      <header className="page-hero">
+      <header className="page-hero workspace-page-hero">
         <span className="eyebrow">Super admin</span>
         <h1>Platform overview</h1>
         <p>Monitor platform activity, revenue, refunds, and service availability.</p>

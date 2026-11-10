@@ -36,8 +36,8 @@ export default function AdminUsers() {
   });
 
   return (
-    <div className="page reveal">
-      <header className="page-hero">
+    <div className="page reveal admin-users-page">
+      <header className="page-hero workspace-page-hero">
         <span className="eyebrow">Super admin</span>
         <h1>Users</h1>
         <p>Review account roles and update access levels for the platform.</p>

@@ -61,10 +61,10 @@ export default function MyTickets() {
     onError: (e) => setErr(messageFor(e)),
   });
 
-  if (ordersQuery.isLoading) return <p className="muted">Loading your tickets…</p>;
+  if (ordersQuery.isLoading) return <div className="page wallet-page"><p className="dashboard-loading" role="status">Loading your ticket wallet…</p></div>;
   if (ordersQuery.isError) {
     return (
-      <div className="page">
+      <div className="page wallet-page">
         <p role="alert" className="alert danger">{messageFor(ordersQuery.error)}</p>
         <button type="button" onClick={() => ordersQuery.refetch()}>Retry loading tickets</button>
       </div>
@@ -72,7 +72,7 @@ export default function MyTickets() {
   }
   if (!orders.length) {
     return (
-      <div className="panel reveal" style={{ padding: '54px 24px', textAlign: 'center' }}>
+      <div className="panel reveal wallet-empty" style={{ padding: '54px 24px', textAlign: 'center' }}>
         <span className="eyebrow">Your tickets</span>
         <h1 style={{ marginTop: 12 }}>Nothing here yet.</h1>
         <p className="muted" style={{ marginTop: 10 }}>No tickets yet — browse events to grab some, and your QR tickets will live here.</p>
@@ -84,7 +84,7 @@ export default function MyTickets() {
   for (const order of orders) groupedOrders[bucketForOrder(order, Date.now())].push(order);
 
   return (
-    <div className="page">
+    <div className="page wallet-page">
       <header className="page-hero">
         <span className="eyebrow">Your tickets</span>
         <h1>Wallet</h1>

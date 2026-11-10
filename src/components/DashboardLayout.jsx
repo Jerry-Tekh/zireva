@@ -13,29 +13,42 @@ const ROLE_NAMES = {
 
 const ROLE_LINKS = {
   registered_user: [
-    { to: '/tickets', label: 'My tickets', short: 'T' },
-    { to: '/account', label: 'Account', short: 'A' },
+    { to: '/tickets', label: 'My tickets', icon: 'ticket' },
+    { to: '/account', label: 'Account', icon: 'person' },
   ],
   organizer: [
-    { to: '/organizer', label: 'Overview', short: 'O', end: true },
-    { to: '/organizer#events', label: 'Events', short: 'E' },
-    { to: '/tickets', label: 'My tickets', short: 'T' },
-    { to: '/account', label: 'Account', short: 'A' },
+    { to: '/organizer', label: 'Overview', icon: 'overview', end: true },
+    { to: '/organizer#events', label: 'Events', icon: 'calendar' },
+    { to: '/tickets', label: 'My tickets', icon: 'ticket' },
+    { to: '/account', label: 'Account', icon: 'person' },
   ],
   event_staff: [
-    { to: '/scan', label: 'Ticket scanner', short: 'S', end: true },
-    { to: '/tickets', label: 'My tickets', short: 'T' },
-    { to: '/account', label: 'Account', short: 'A' },
+    { to: '/scan', label: 'Ticket scanner', icon: 'scan', end: true },
+    { to: '/tickets', label: 'My tickets', icon: 'ticket' },
+    { to: '/account', label: 'Account', icon: 'person' },
   ],
   super_admin: [
-    { to: '/admin/overview', label: 'Platform overview', short: 'P', end: true },
-    { to: '/organizer#events', label: 'Events', short: 'E' },
-    { to: '/scan', label: 'Ticket scanner', short: 'S', end: true },
-    { to: '/admin/users', label: 'Users', short: 'U' },
-    { to: '/tickets', label: 'My tickets', short: 'T' },
-    { to: '/account', label: 'Account', short: 'A' },
+    { to: '/admin/overview', label: 'Platform overview', icon: 'overview', end: true },
+    { to: '/organizer#events', label: 'Events', icon: 'calendar' },
+    { to: '/scan', label: 'Ticket scanner', icon: 'scan', end: true },
+    { to: '/admin/users', label: 'Users', icon: 'group' },
+    { to: '/tickets', label: 'My tickets', icon: 'ticket' },
+    { to: '/account', label: 'Account', icon: 'person' },
   ],
 };
+
+function WorkspaceIcon({ name }) {
+  const shared = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  const shapes = {
+    overview: <><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" /><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" /><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" /><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" /></>,
+    calendar: <><rect x="3.5" y="5" width="17" height="16" rx="2.5" /><path d="M7.5 3v4M16.5 3v4M3.5 9.5h17M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01" /></>,
+    ticket: <><path d="M4 7.5A2.5 2.5 0 0 0 6.5 5h11A2.5 2.5 0 0 0 20 7.5v2a2.5 2.5 0 0 0 0 5v2a2.5 2.5 0 0 0-2.5 2.5h-11A2.5 2.5 0 0 0 4 16.5v-2a2.5 2.5 0 0 0 0-5z" /><path d="M12 8v1m0 3v1m0 3v1" /></>,
+    person: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></>,
+    scan: <><path d="M8 4H5a1 1 0 0 0-1 1v3m12-4h3a1 1 0 0 1 1 1v3M4 16v3a1 1 0 0 0 1 1h3m12-4v3a1 1 0 0 1-1 1h-3M7 12h10" /></>,
+    group: <><circle cx="9" cy="8" r="3" /><path d="M3.5 20a5.5 5.5 0 0 1 11 0M16 5.5a3 3 0 0 1 0 5.8M17 14.5a5 5 0 0 1 3.5 4.8" /></>,
+  };
+  return <svg className="dashboard-glyph" viewBox="0 0 24 24" aria-hidden="true" {...shared}>{shapes[name] ?? shapes.overview}</svg>;
+}
 
 export default function DashboardLayout() {
   const { user, logout } = useAuth();
@@ -107,7 +120,7 @@ export default function DashboardLayout() {
 
         <span className="dashboard-nav-heading">Workspace</span>
         <nav className="dashboard-nav">
-          {links.map(({ to, label, short }) => {
+          {links.map(({ to, label, icon }) => {
             const [path, hash] = to.split('#');
             const active = location.pathname === path
               ? (hash ? location.hash === `#${hash}` : !location.hash)
@@ -120,7 +133,7 @@ export default function DashboardLayout() {
                 className={`dashboard-nav-link${active ? ' active' : ''}`}
                 title={collapsed ? label : undefined}
               >
-              <span className="dashboard-nav-icon" aria-hidden="true">{short}</span>
+              <span className="dashboard-nav-icon"><WorkspaceIcon name={icon} /></span>
               <span className="dashboard-nav-label">{label}</span>
               </Link>
             );

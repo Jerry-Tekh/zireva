@@ -52,8 +52,8 @@ export default function Account() {
   });
 
   return (
-    <div className="page reveal">
-      <header className="page-hero">
+    <div className="page reveal account-page">
+      <header className="page-hero workspace-page-hero">
         <span className="eyebrow">Your account</span>
         <h1>{user ? user.name : 'Account'}</h1>
       {user && (
