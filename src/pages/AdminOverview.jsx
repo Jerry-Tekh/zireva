@@ -49,8 +49,18 @@ function CountList({ title, entries, emptyText }) {
 }
 
 function Metric({ label, value, detail }) {
+  const icon = label === 'Net revenue' ? (
+    <><path d="M12 3v18" /><path d="M17 7.5c0-1.7-2.2-3-5-3s-5 1.3-5 3 1.7 2.5 5 3 5 1.3 5 3-2.2 3-5 3-5-1.3-5-3" /></>
+  ) : label === 'Attendance' ? (
+    <><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="10" cy="7" r="4" /><path d="M20 8v6M23 11h-6" /></>
+  ) : label === 'Open refunds' ? (
+    <><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8" /><path d="M3 3v5h5M12 7v5l3 2" /></>
+  ) : (
+    <><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18a2 2 0 0 1 2 2v15H6a2 2 0 0 1-2-2z" /><path d="M4 17a2 2 0 0 1 2-2h14M8 7h8M8 11h6" /></>
+  );
   return (
     <section className="section platform-metric">
+      <span className="platform-metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{icon}</svg></span>
       <span className="eyebrow">{label}</span>
       <strong>{value}</strong>
       <span className="muted">{detail}</span>
@@ -99,16 +109,40 @@ export default function AdminOverview() {
 
   return (
     <div className="page reveal platform-overview">
-      <header className="page-hero workspace-page-hero">
-        <span className="eyebrow">Super admin</span>
-        <h1>Platform overview</h1>
-        <p>Monitor platform activity, revenue, refunds, and service availability.</p>
-      </header>
+      <div className="platform-overview-header">
+        <header className="page-hero workspace-page-hero">
+          <span className="eyebrow">Super admin</span>
+          <h1>Platform overview</h1>
+          <p>Monitor ticket activity, revenue, attendance, and service availability.</p>
+        </header>
+
+        <section className="platform-health" aria-labelledby="platform-health-heading">
+          <h2 id="platform-health-heading" className="sr-only">System health</h2>
+          <span className="eyebrow platform-health-label">System health</span>
+          {health.isLoading ? (
+            <span className="badge" role="status">Checking services…</span>
+          ) : health.isError ? (
+            <div className="platform-health-error">
+              <span role="alert">{messageFor(health.error)}</span>
+              <button type="button" onClick={() => health.refetch()}>Retry health check</button>
+            </div>
+          ) : (
+            <>
+              <span className={`badge${healthOk ? ' ok' : ' danger'}`}>{healthOk ? 'All services operational' : 'Service degradation reported'}</span>
+              <ul className="platform-health-services">
+                <li>API <strong>online</strong></li>
+                <li>Database <strong>{health.data.db ? 'online' : 'unavailable'}</strong></li>
+                <li>Redis <strong>{health.data.redis ? 'online' : 'unavailable'}</strong></li>
+              </ul>
+            </>
+          )}
+        </section>
+      </div>
 
       <form className="section platform-period" onSubmit={applyPeriod}>
-        <div>
+        <div className="platform-period-copy">
           <span className="eyebrow">Reporting window</span>
-          <p className="muted">Calendar dates are inclusive; analytics use UTC and the end boundary is exclusive.</p>
+          <p className="muted">Choose up to 366 calendar days. Metrics are calculated in UTC.</p>
         </div>
         <label>From
           <input type="date" value={draftPeriod.from} max={draftPeriod.to || undefined}
@@ -122,30 +156,6 @@ export default function AdminOverview() {
       </form>
       {periodError && <p role="alert" className="alert danger">{periodError}</p>}
 
-      <section className="section platform-health" aria-labelledby="platform-health-heading">
-        <div>
-          <span className="eyebrow">Operations</span>
-          <h2 id="platform-health-heading">System health</h2>
-        </div>
-        {health.isLoading ? (
-          <p className="muted">Checking API, database, and Redis…</p>
-        ) : health.isError ? (
-          <div>
-            <p role="alert" className="alert danger">{messageFor(health.error)}</p>
-            <button type="button" onClick={() => health.refetch()}>Retry health check</button>
-          </div>
-        ) : (
-          <>
-            <span className={`badge${healthOk ? ' ok' : ' danger'}`}>{healthOk ? 'All services operational' : 'Service degradation reported'}</span>
-            <ul className="platform-health-services">
-              <li>API <strong>online</strong></li>
-              <li>Database <strong>{health.data.db ? 'online' : 'unavailable'}</strong></li>
-              <li>Redis <strong>{health.data.redis ? 'online' : 'unavailable'}</strong></li>
-            </ul>
-          </>
-        )}
-      </section>
-
       {healthAvailable && !healthOk && (
         <p role="status" className="alert danger">One or more platform dependencies need attention.</p>
       )}
@@ -154,9 +164,13 @@ export default function AdminOverview() {
       )}
 
       {summary.isLoading ? (
-        <div className="section" aria-live="polite"><p className="muted">Loading platform metrics…</p></div>
+        <div className="platform-loading-layout" role="status" aria-label="Loading platform overview">
+          <div className="platform-metric-skeletons">{[0, 1, 2, 3].map((item) => <div className="platform-skeleton metric-skeleton" key={item} />)}</div>
+          <div className="platform-skeleton platform-chart-skeleton" />
+          <div className="platform-side-skeletons"><div className="platform-skeleton" /><div className="platform-skeleton" /></div>
+        </div>
       ) : summary.isError ? (
-        <div className="section">
+        <div className="section platform-summary-error">
           <p role="alert" className="alert danger">{messageFor(summary.error)}</p>
           <button type="button" onClick={() => summary.refetch()}>Retry platform metrics</button>
         </div>
@@ -164,25 +178,30 @@ export default function AdminOverview() {
         <div className="section"><p role="alert" className="muted">Platform metrics are unavailable.</p></div>
       ) : (
         <>
-          <div className="grid-3 platform-metrics">
+          <div className="platform-metrics">
             <Metric label="Tickets sold" value={number.format(metrics.ticketsSold)} detail="Issued or used during this window" />
             <Metric label="Net revenue" value={money.format(metrics.netRevenueCents / 100)} detail={`${money.format(metrics.grossRevenueCents / 100)} gross less ${money.format(metrics.refundedAmountCents / 100)} refunded`} />
             <Metric label="Attendance" value={number.format(metrics.attendance)} detail="Unique accepted ticket scans in this window" />
+            <Metric label="Open refunds" value={number.format(metrics.openRefundRequests)} detail="Requests awaiting platform review" />
           </div>
-          <div className="grid-2 platform-counts">
-            <CountList title="Users by role" entries={data.usersByRole} emptyText="No user accounts have been created." />
-            <CountList title="Events by status" entries={data.eventsByStatus} emptyText="No events have been created." />
+          <div className="platform-dashboard-grid">
+            <section className="section platform-trends">
+              <div className="platform-section-heading">
+                <div>
+                  <span className="eyebrow">Platform activity</span>
+                  <h2>Daily trends</h2>
+                </div>
+                <p className="muted">UTC totals for the selected reporting window.</p>
+              </div>
+              {data.daily.length === 0
+                ? <p className="muted">No daily data was returned for this reporting window.</p>
+                : <DailyAnalytics daily={data.daily} showCategories={false} />}
+            </section>
+            <aside className="platform-side-column" aria-label="Platform breakdowns">
+              <CountList title="Users by role" entries={data.usersByRole} emptyText="No user accounts have been created." />
+              <CountList title="Events by status" entries={data.eventsByStatus} emptyText="No events have been created." />
+            </aside>
           </div>
-          <section className="section platform-trends">
-            <div>
-              <span className="eyebrow">Platform activity</span>
-              <h2>Daily trends</h2>
-              <p className="muted">UTC daily totals for the selected reporting window.</p>
-            </div>
-            {data.daily.length === 0
-              ? <p className="muted">No daily data was returned for this reporting window.</p>
-              : <DailyAnalytics daily={data.daily} showCategories={false} />}
-          </section>
           <section className="section platform-refunds">
             <div>
               <span className="eyebrow">Refund operations</span>
