@@ -2382,6 +2382,8 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .platform-overview-header .platform-health-services strong i { width: 6px; height: 6px; border-radius: 50%; background: #14853a; }
 .platform-overview-header .platform-health-services .service-offline { color: #a52d29; }
 .platform-overview-header .platform-health-services .service-offline i { background: #c73c35; }
+.platform-overview-header .platform-health-services .service-checking { color: #758176; }
+.platform-overview-header .platform-health-services .service-checking i { background: #a9b3aa; }
 .platform-overview-header .platform-health-error { justify-items: end; max-width: 58%; }
 @media (max-width: 620px) {
   .dashboard-profile-link { width: 36px; height: 36px; flex-basis: 36px; }
@@ -2394,6 +2396,8 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .platform-overview-header .platform-health-services { display: grid; width: 100%; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; justify-items: stretch; }
   .platform-overview-header .platform-health-services li { width: 100%; min-width: 0; min-height: 58px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 8px; font-size: .63rem; }
   .platform-overview-header .platform-health-services strong { gap: 4px; font-size: .61rem; }
+  .platform-overview-header .platform-health-services li > span,
+  .platform-overview-header .platform-health-services li > strong { white-space: nowrap; }
   .platform-overview-header .platform-health-error { max-width: none; }
 }
 

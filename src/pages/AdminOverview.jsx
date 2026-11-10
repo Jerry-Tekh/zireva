@@ -119,33 +119,27 @@ export default function AdminOverview() {
         <section className="platform-health" aria-labelledby="platform-health-heading">
           <div className="platform-health-heading">
             <h2 id="platform-health-heading" className="sr-only">Service status</h2>
-          {health.isLoading ? (
-              <span className="badge" role="status">Checking services…</span>
-          ) : health.isError ? (
+          {health.isError && (
             <div className="platform-health-error">
               <span role="alert">{messageFor(health.error)}</span>
               <button type="button" onClick={() => health.refetch()}>Retry health check</button>
             </div>
-          ) : (
-              <span className={`badge${healthOk ? ' ok' : ' danger'}`}>{healthOk ? 'All services operational' : 'Service degradation reported'}</span>
           )}
           </div>
-          {!health.isLoading && !health.isError && (
-            <ul className="platform-health-services">
-              {[
-                ['API', true],
-                ['Database', health.data.db],
-                ['Redis', health.data.redis],
-              ].map(([service, online]) => (
-                <li key={service}>
-                  <span>{service}</span>
-                  <strong className={online ? 'service-online' : 'service-offline'}>
-                    <i aria-hidden="true" />{online ? 'Online' : 'Unavailable'}
-                  </strong>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul className="platform-health-services">
+            {[
+              ['API', health.isLoading ? null : !health.isError],
+              ['Database', health.isLoading ? null : health.isError ? false : health.data.db],
+              ['Redis', health.isLoading ? null : health.isError ? false : health.data.redis],
+            ].map(([service, online]) => (
+              <li key={service}>
+                <span>{service}</span>
+                <strong className={online === null ? 'service-checking' : online ? 'service-online' : 'service-offline'} role={online === null ? 'status' : undefined}>
+                  <i aria-hidden="true" />{online === null ? 'Checking' : online ? 'Online' : 'Unavailable'}
+                </strong>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
 
