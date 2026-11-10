@@ -57,8 +57,9 @@ function Nav({ isLanding }) {
           </>
         ) : (
           <>
-            <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>
-            {isLanding && <Link to="/register" className="btn primary nav-join" onClick={close}>Get started</Link>}
+            {isLanding
+              ? <Link to="/register" className="btn primary nav-join" onClick={close}>Get started</Link>
+              : <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>}
           </>
         )}
       </div>
@@ -81,7 +82,7 @@ export default function App() {
           <BrandMark />
           <span className="brand-name">Zireva</span>
         </Link>
-        <Nav isLanding={landingRoute} />
+        {!authRoute && <Nav isLanding={landingRoute} />}
         </div>
       </header>
       <main className="app-main">
