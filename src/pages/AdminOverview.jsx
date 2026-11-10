@@ -118,10 +118,7 @@ export default function AdminOverview() {
 
         <section className="platform-health" aria-labelledby="platform-health-heading">
           <div className="platform-health-heading">
-            <div>
-              <span className="eyebrow platform-health-label">Operations</span>
-              <h2 id="platform-health-heading">System health</h2>
-            </div>
+            <h2 id="platform-health-heading" className="sr-only">Service status</h2>
           {health.isLoading ? (
               <span className="badge" role="status">Checking services…</span>
           ) : health.isError ? (

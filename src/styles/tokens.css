@@ -2371,7 +2371,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   background: #fff !important;
   box-shadow: 0 1px 2px rgba(23,43,26,.025);
 }
-.platform-overview-header .platform-health-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.platform-overview-header .platform-health-heading { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
 .platform-overview-header .platform-health-heading > div { display: grid; gap: 4px; }
 .platform-overview-header .platform-health-heading h2 { margin: 0; color: #18231b; font-size: .98rem; font-weight: 640; letter-spacing: -.025em; }
 .platform-overview-header .platform-health-label { color: #758176; font-size: .59rem !important; }
@@ -2391,8 +2391,8 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .platform-overview-header .platform-health-heading { align-items: center; flex-direction: row; gap: 8px; }
   .platform-overview-header .platform-health-heading h2 { font-size: .9rem; }
   .platform-overview-header .platform-health-heading .badge { max-width: 58%; padding: 6px 8px; font-size: .53rem; }
-  .platform-overview-header .platform-health-services { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
-  .platform-overview-header .platform-health-services li { min-height: 58px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 8px; font-size: .63rem; }
+  .platform-overview-header .platform-health-services { display: grid; width: 100%; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; justify-items: stretch; }
+  .platform-overview-header .platform-health-services li { width: 100%; min-width: 0; min-height: 58px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 8px; font-size: .63rem; }
   .platform-overview-header .platform-health-services strong { gap: 4px; font-size: .61rem; }
   .platform-overview-header .platform-health-error { max-width: none; }
 }
