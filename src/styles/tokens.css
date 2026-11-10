@@ -2388,10 +2388,12 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .dashboard-topbar-context { max-width: none; }
   .dashboard-nav-heading { margin-top: 20px; }
   .platform-overview-header .platform-health { max-width: none; padding: 14px !important; }
-  .platform-overview-header .platform-health-services { grid-template-columns: 1fr; gap: 7px; }
-  .platform-overview-header .platform-health-services li { padding: 9px 11px; }
-  .platform-overview-header .platform-health-heading { align-items: flex-start; flex-direction: column; }
-  .platform-overview-header .platform-health-heading .badge,
+  .platform-overview-header .platform-health-heading { align-items: center; flex-direction: row; gap: 8px; }
+  .platform-overview-header .platform-health-heading h2 { font-size: .9rem; }
+  .platform-overview-header .platform-health-heading .badge { max-width: 58%; padding: 6px 8px; font-size: .53rem; }
+  .platform-overview-header .platform-health-services { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+  .platform-overview-header .platform-health-services li { min-height: 58px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 8px; font-size: .63rem; }
+  .platform-overview-header .platform-health-services strong { gap: 4px; font-size: .61rem; }
   .platform-overview-header .platform-health-error { max-width: none; }
 }
 
