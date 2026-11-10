@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth.jsx';
-import SystemHealth from './SystemHealth.jsx';
 import BrandMark from './BrandMark.jsx';
 
 const ROLE_NAMES = {
@@ -46,6 +45,12 @@ function WorkspaceIcon({ name }) {
     person: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></>,
     scan: <><path d="M8 4H5a1 1 0 0 0-1 1v3m12-4h3a1 1 0 0 1 1 1v3M4 16v3a1 1 0 0 0 1 1h3m12-4v3a1 1 0 0 1-1 1h-3M7 12h10" /></>,
     group: <><circle cx="9" cy="8" r="3" /><path d="M3.5 20a5.5 5.5 0 0 1 11 0M16 5.5a3 3 0 0 1 0 5.8M17 14.5a5 5 0 0 1 3.5 4.8" /></>,
+    back: <><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></>,
+    logout: <><path d="M10 17l5-5-5-5" /><path d="M15 12H3" /><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" /></>,
+    menu: <><path d="M4 7h16M4 12h16M4 17h16" /></>,
+    close: <><path d="m6 6 12 12M18 6 6 18" /></>,
+    chevronLeft: <path d="m15 18-6-6 6-6" />,
+    chevronRight: <path d="m9 18 6-6-6-6" />,
   };
   return <svg className="dashboard-glyph" viewBox="0 0 24 24" aria-hidden="true" {...shared}>{shapes[name] ?? shapes.overview}</svg>;
 }
@@ -58,7 +63,6 @@ export default function DashboardLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const links = ROLE_LINKS[user?.role] ?? ROLE_LINKS.registered_user;
   const roleName = ROLE_NAMES[user?.role] ?? 'Account';
-  const initials = user?.name?.trim()?.charAt(0)?.toUpperCase() || user?.email?.charAt(0)?.toUpperCase() || 'U';
 
   useEffect(() => {
     setMobileOpen(false);
@@ -106,16 +110,8 @@ export default function DashboardLayout() {
             aria-label="Close navigation"
             onClick={() => setMobileOpen(false)}
           >
-            ×
+            <WorkspaceIcon name="close" />
           </button>
-        </div>
-
-        <div className="dashboard-workspace">
-          <span className="dashboard-avatar">{initials}</span>
-          <span className="dashboard-workspace-copy">
-            <strong>{roleName} workspace</strong>
-            <span>{user?.email}</span>
-          </span>
         </div>
 
         <span className="dashboard-nav-heading">Workspace</span>
@@ -142,7 +138,7 @@ export default function DashboardLayout() {
 
         <div className="dashboard-sidebar-bottom">
           <Link to="/" className="dashboard-back-link" title={collapsed ? 'Back to events' : undefined}>
-            <span className="dashboard-nav-icon" aria-hidden="true">←</span>
+            <span className="dashboard-nav-icon" aria-hidden="true"><WorkspaceIcon name="back" /></span>
             <span className="dashboard-nav-label">Back to events</span>
           </Link>
           <button
@@ -154,7 +150,7 @@ export default function DashboardLayout() {
               navigate('/');
             }}
           >
-            <span className="dashboard-nav-icon" aria-hidden="true">↗</span>
+            <span className="dashboard-nav-icon" aria-hidden="true"><WorkspaceIcon name="logout" /></span>
             <span className="dashboard-nav-label">Log out</span>
           </button>
         </div>
@@ -169,7 +165,7 @@ export default function DashboardLayout() {
             aria-expanded={!collapsed}
             onClick={() => setCollapsed((value) => !value)}
           >
-            <span aria-hidden="true">{collapsed ? '›' : '‹'}</span>
+            <WorkspaceIcon name={collapsed ? 'chevronRight' : 'chevronLeft'} />
           </button>
           <button
             type="button"
@@ -178,13 +174,14 @@ export default function DashboardLayout() {
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(true)}
           >
-            <span aria-hidden="true">☰</span>
+            <WorkspaceIcon name="menu" />
           </button>
           <div className="dashboard-topbar-context">
             <span>{roleName} workspace</span>
           </div>
-          <SystemHealth />
-          <span className="dashboard-topbar-user">{user?.email}</span>
+          <Link to="/account" className="dashboard-profile-link" aria-label={`Open ${roleName.toLowerCase()} profile`} title="Profile and account settings">
+            <WorkspaceIcon name="person" />
+          </Link>
         </header>
         <main className="dashboard-content">
           <Outlet />
