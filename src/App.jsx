@@ -39,7 +39,8 @@ function Nav({ isLanding }) {
           <a href="#events" className="nav-link" onClick={scrollTo('events')}>Discover</a>
           <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>All events</a>
           <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
-          <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Venues</a>
+          <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Places</a>
+          <a href="#for-everyone" className="nav-link" onClick={scrollTo('for-everyone')}>For everyone</a>
           <a href="#organizers" className="nav-link" onClick={scrollTo('organizers')}>For organizers</a>
         </>}
         {user ? (
@@ -109,6 +110,7 @@ export default function App() {
               <a href="#events">Upcoming events</a>
               <a href="#all-events">All events</a>
               <a href="#venues">Venues</a>
+              <a href="#for-everyone">Who it’s for</a>
             </nav>
             <nav className="landing-footer-column" aria-label="How Zireva works">
               <h2>The experience</h2>

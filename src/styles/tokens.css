@@ -1652,3 +1652,65 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .reveal { opacity: 1; animation: none; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Landing page storytelling: a clear path from discovery to entry. */
+.landing-shell #events,
+.landing-shell #all-events,
+.landing-shell #how-it-works,
+.landing-shell #for-everyone,
+.landing-shell #organizers,
+.landing-shell #venues { scroll-margin-top: 96px; }
+.landing-shell .journey-heading { align-items: end; }
+.landing-shell .journey-heading .muted { max-width: 410px; }
+.landing-shell .journey-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.landing-shell .journey-card { min-height: 232px; padding: 24px; border: 1px solid #e6ebe5; border-radius: 16px; background: linear-gradient(155deg, #fff 40%, #f6f8f5); }
+.landing-shell .journey-number { display: grid; width: 38px; height: 38px; place-items: center; margin-bottom: 34px; border-radius: 50%; color: #3d6447; background: #eaf0e8; font-size: .75rem; font-weight: 700; letter-spacing: .04em; }
+.landing-shell .journey-card h3 { margin: 0 0 10px; color: #1e2821; font-size: 1.05rem; font-weight: 600; letter-spacing: -.025em; }
+.landing-shell .journey-card p { margin: 0; color: #68736a; font-size: .88rem; line-height: 1.7; }
+.landing-shell .journey-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 26px; border-radius: 14px; background: #edf2ec; }
+.landing-shell .journey-note-label { color: #3d6447; font-size: .73rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.landing-shell .journey-note p { margin: 6px 0 0; color: #58665b; font-size: .9rem; line-height: 1.55; }
+.landing-shell .text-link,
+.landing-shell .audience-card > a { color: #315b3e; font-size: .87rem; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.landing-shell .text-link:hover,
+.landing-shell .audience-card > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.landing-shell .audience-section { display: grid; gap: 28px; }
+.landing-shell .audience-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.landing-shell .audience-card { display: flex; min-height: 285px; flex-direction: column; align-items: flex-start; padding: clamp(22px, 2.6vw, 34px); border: 1px solid #e6ebe5; border-radius: 18px; background: #fff; }
+.landing-shell .audience-attendee { background: #f5f7f3; }
+.landing-shell .audience-host { background: #edf2ec; }
+.landing-shell .audience-team { background: #f5f4f0; }
+.landing-shell .audience-index { margin-bottom: 37px; color: #637668; font-size: .69rem; font-weight: 700; letter-spacing: .11em; }
+.landing-shell .audience-card h3 { max-width: 280px; margin: 0 0 12px; color: #202a23; font-size: clamp(1.2rem, 1.7vw, 1.5rem); font-weight: 550; letter-spacing: -.04em; line-height: 1.2; }
+.landing-shell .audience-card p { margin: 0 0 22px; color: #69746c; font-size: .88rem; line-height: 1.7; }
+.landing-shell .audience-card > a { margin-top: auto; }
+.landing-shell .organizer-copy p { max-width: 510px; line-height: 1.75; }
+.landing-shell .location-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.landing-shell .location-card { position: relative; min-height: 270px; overflow: hidden; border-radius: 16px; color: #fff; background: #202a23; text-decoration: none; isolation: isolate; }
+.landing-shell .location-card::after { position: absolute; z-index: -1; inset: 25% 0 0; background: linear-gradient(180deg, transparent, rgba(12, 19, 14, .88)); content: ''; }
+.landing-shell .location-card img { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.landing-shell .location-card:hover img { transform: scale(1.04); }
+.landing-shell .location-card-copy { position: absolute; right: 20px; bottom: 20px; left: 20px; display: grid; gap: 8px; }
+.landing-shell .location-label { color: rgba(255,255,255,.76); font-size: .72rem; letter-spacing: .03em; }
+.landing-shell .location-card-copy strong { font-size: 1.25rem; font-weight: 550; letter-spacing: -.03em; }
+.landing-shell .location-explore { font-size: .78rem; color: #e2edda; }
+.landing-shell .locations-empty { padding: 34px; border: 1px solid #e6ebe5; border-radius: 16px; background: #f7f8f6; }
+.landing-shell .locations-empty h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.landing-shell .locations-empty p { margin: 0; color: #69746c; line-height: 1.6; }
+.landing-shell a:focus-visible { outline: 2px solid #4e7754; outline-offset: 4px; }
+
+@media (max-width: 980px) {
+  .landing-shell .journey-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .landing-shell .location-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .landing-shell .journey-grid,
+  .landing-shell .audience-grid { grid-template-columns: 1fr; }
+  .landing-shell .journey-card { min-height: 0; }
+  .landing-shell .journey-number { margin-bottom: 22px; }
+  .landing-shell .journey-note { align-items: flex-start; flex-direction: column; }
+  .landing-shell .audience-card { min-height: 0; }
+  .landing-shell .audience-index { margin-bottom: 24px; }
+  .landing-shell .location-grid { grid-template-columns: 1fr 1fr; }
+  .landing-shell .location-card { min-height: 220px; }
+}
