@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiGet } from '../lib/api';
 import { heroFor } from '../lib/images';
@@ -75,6 +76,7 @@ export default function MyTickets() {
       <div className="panel reveal wallet-empty" style={{ padding: '54px 24px', textAlign: 'center' }}>
         <span className="eyebrow">Your tickets</span>
         <h1 style={{ marginTop: 12 }}>Nothing here yet.</h1>
+        <Link className="btn primary" to="/#all-events">Explore upcoming events</Link>
         <p className="muted" style={{ marginTop: 10 }}>No tickets yet — browse events to grab some, and your QR tickets will live here.</p>
       </div>
     );
@@ -87,7 +89,7 @@ export default function MyTickets() {
     <div className="page wallet-page">
       <header className="page-hero">
         <span className="eyebrow">Your tickets</span>
-        <h1>Wallet</h1>
+        <h1>Ticket wallet</h1>
         <p>Your next events, ticket entry status, and complete refund history in one place. Event times use your local timezone.</p>
       </header>
       {err && <p role="alert" className="alert danger">{err}</p>}

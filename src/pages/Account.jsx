@@ -63,7 +63,7 @@ export default function Account() {
       )}
       </header>
 
-      <section className="section">
+      <section className="section account-profile-section">
         <div className="between">
           <div>
             <span className="eyebrow">Profile</span>
@@ -90,7 +90,7 @@ export default function Account() {
         )}
       </section>
 
-      <section className="section">
+      <section className="section account-security-section">
         <span className="eyebrow">Password</span>
         <h2 style={{ marginTop: 6 }}>Security</h2>
         <form
@@ -113,7 +113,7 @@ export default function Account() {
         )}
       </section>
 
-      <section className="section">
+      <section className="section account-sessions-section">
         <span className="eyebrow">Sessions</span>
         <h2 style={{ marginTop: 6 }}>Active sessions</h2>
       {sessionMessage && (

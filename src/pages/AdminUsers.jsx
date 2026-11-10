@@ -6,6 +6,12 @@ import Pagination from '../components/Pagination.jsx';
 
 const ROLES = ['super_admin', 'organizer', 'event_staff', 'registered_user'];
 const PAGE_SIZE = 20;
+const ROLE_LABELS = {
+  super_admin: 'Super admin',
+  organizer: 'Organizer',
+  event_staff: 'Gate staff',
+  registered_user: 'Attendee',
+};
 
 export default function AdminUsers() {
   const qc = useQueryClient();
@@ -43,7 +49,7 @@ export default function AdminUsers() {
         <p>Review account roles and update access levels for the platform.</p>
       </header>
       <form
-        className="row"
+        className="row admin-users-toolbar"
         role="search"
         onSubmit={(e) => { e.preventDefault(); setPage(1); setSearch(searchInput.trim()); }}
       >
@@ -51,7 +57,7 @@ export default function AdminUsers() {
         <label>Role
           <select value={roleFilter} onChange={(e) => { setPage(1); setRoleFilter(e.target.value); }}>
             <option value="">All roles</option>
-            {ROLES.map((role) => <option key={role} value={role}>{role}</option>)}
+            {ROLES.map((role) => <option key={role} value={role}>{ROLE_LABELS[role]}</option>)}
           </select>
         </label>
         <button type="submit">Search</button>
@@ -75,7 +81,11 @@ export default function AdminUsers() {
       ) : !users.length ? (
         <p className="muted">{search || roleFilter ? 'No users match these filters.' : 'No users found.'}</p>
       ) : (
-        <section className="table-card card">
+        <section className="table-card card admin-users-results">
+        <header className="admin-users-results-heading">
+          <div><span className="eyebrow">Access directory</span><h2>Platform accounts</h2></div>
+          <span className="muted">{result?.total ?? users.length} account{(result?.total ?? users.length) === 1 ? '' : 's'}</span>
+        </header>
         <table>
           <thead>
             <tr>
@@ -96,7 +106,7 @@ export default function AdminUsers() {
                 <label>
                   Role
                   <select value={nextRole} onChange={(e) => setPendingRoles((prev) => ({ ...prev, [u.id]: e.target.value }))}>
-                    {ROLES.map((role) => <option key={role} value={role}>{role}</option>)}
+                    {ROLES.map((role) => <option key={role} value={role}>{ROLE_LABELS[role]}</option>)}
                   </select>
                 </label>
                 </td>
