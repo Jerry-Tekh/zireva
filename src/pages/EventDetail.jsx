@@ -19,7 +19,7 @@ export default function EventDetail() {
       <Link to="/" className="eyebrow" style={{ color: 'var(--muted)' }}>All events</Link>
 
       <section className="hero-media reveal">
-        <img src={heroFor(data.id)} alt="" />
+        <img src={heroFor(data.id)} alt="" loading="lazy" decoding="async" />
         <div className="hero-overlay" />
         <div className="hero-content">
           <span className="badge ok" style={{ marginBottom: 14 }}>Live event</span>

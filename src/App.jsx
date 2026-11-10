@@ -16,7 +16,7 @@ import AdminUsers from './pages/AdminUsers.jsx';
 import SystemHealth from './components/SystemHealth.jsx';
 import { RequireAuth, RequireRole } from './components/RouteGuards.jsx';
 import DashboardLayout from './components/DashboardLayout.jsx';
-import logoTicUrl from './assets/logoTic.jfif?url';
+import logoTicUrl from './assets/logoTic.webp?url';
 
 function Nav({ isLanding }) {
   const { user, logout } = useAuth();

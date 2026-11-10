@@ -214,7 +214,7 @@ export default function OrganizerEvent() {
   return (
     <div className="page reveal">
       <section className="hero-media" style={{ minHeight: 280 }}>
-        <img src={heroFor(ev.id)} alt="" />
+        <img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async" />
         <div className="hero-overlay" />
         <div className="hero-content">
           <span className="badge">{ev.status}</span>

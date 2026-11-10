@@ -29,7 +29,7 @@ export default function Register() {
   return (
     <div className="auth-wrap register-page reveal">
       <aside className="register-visual">
-        <img src="/images/events/filip-rankovic-grobgaard-TVpMTnvJxlI-unsplash.jpg" alt="" />
+        <img src="/images/events/filip-rankovic-grobgaard-TVpMTnvJxlI-unsplash.webp" alt="" loading="lazy" decoding="async" />
         <div className="register-visual-shade" />
         <div className="register-visual-copy">
           <span className="register-visual-kicker">Zireva events</span>

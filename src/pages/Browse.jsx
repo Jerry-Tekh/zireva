@@ -6,10 +6,10 @@ import { heroFor } from '../lib/images';
 
 const PAGE = 8;
 const VENUES = [
-  { name: 'The Silicon Hub', events: 12, image: '/images/events/m-accelerator-yTsy3PYFPtc-unsplash.jpg' },
-  { name: 'Civic Hall', events: 9, image: '/images/events/antenna-ohNCIiKVT1g-unsplash.jpg' },
-  { name: 'North Pier Arena', events: 7, image: '/images/events/nicholas-green-nPz8akkUmDI-unsplash.jpg' },
-  { name: 'Glasshouse Live', events: 6, image: '/images/events/priscilla-du-preez-Q7wGvnbuwj0-unsplash.jpg' },
+  { name: 'The Silicon Hub', events: 12, image: '/images/events/m-accelerator-yTsy3PYFPtc-unsplash.webp' },
+  { name: 'Civic Hall', events: 9, image: '/images/events/antenna-ohNCIiKVT1g-unsplash.webp' },
+  { name: 'North Pier Arena', events: 7, image: '/images/events/nicholas-green-nPz8akkUmDI-unsplash.webp' },
+  { name: 'Glasshouse Live', events: 6, image: '/images/events/priscilla-du-preez-Q7wGvnbuwj0-unsplash.webp' },
 ];
 const TRUST_ITEMS = [
   {
@@ -104,7 +104,11 @@ export default function Browse() {
             <span className="eyebrow"><span className="live-dot" /> Live starts here</span>
             <h1>Find your next <span>live moment.</span></h1>
             <p>Big nights. New sounds. Your kind of crowd. Find the moments you’ll talk about long after the lights come up.</p>
-            <form className="browse-search" role="search" onSubmit={(e) => e.preventDefault()}>
+            <form className="browse-search" role="search" onSubmit={(e) => {
+              e.preventDefault();
+              const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              document.getElementById('all-events')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+            }}>
               <div className={`hero-search-row${q ? ' has-clear' : ''}`}>
                 <input
                   id="event-search"
@@ -124,60 +128,57 @@ export default function Browse() {
             <a className="hero-secondary-link" href="#events">See what’s coming up <span aria-hidden="true">↓</span></a>
           </div>
         </div>
-        <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/images/events/nicholas-green-nPz8akkUmDI-unsplash.jpg" aria-hidden="true" tabIndex={-1}>
+        <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/images/events/nicholas-green-nPz8akkUmDI-unsplash.webp" aria-hidden="true" tabIndex={-1}>
           <source src="/video/herovideobg.mp4" type="video/mp4" />
         </video>
         <div className="hero-shade" aria-hidden="true" />
       </header>
 
-      <section className="browse-section reveal" id="events" aria-labelledby="featured-heading">
-        <div className="section-heading">
+      <section className="browse-section reveal upcoming-section" id="events" aria-labelledby="featured-heading">
+        <div className="section-heading upcoming-heading">
           <div>
-            <span className="eyebrow">Coming up</span>
-            <h2 id="featured-heading">Upcoming events</h2>
+            <span className="eyebrow">The next date to remember</span>
+            <h2 id="featured-heading">Something good is coming.</h2>
           </div>
-          <span className="muted">A selection of events happening soon.</span>
+          <a className="section-text-link" href="#all-events">Explore every event <span aria-hidden="true">→</span></a>
         </div>
 
         {error ? (
-          <div className="empty-state compact">
-            <span className="eyebrow">Events unavailable</span>
-            <h3>Featured events could not load.</h3>
-            <p>Check the API connection and try again.</p>
-          </div>
+          <div className="empty-state compact"><span className="eyebrow">Events unavailable</span><h3>Upcoming events could not load.</h3><p>Check the API connection and try again.</p></div>
         ) : !isLoading && !hasFeatured ? (
-          <div className="empty-state compact">
-            <span className="eyebrow">No featured events</span>
-            <h3>No published events yet.</h3>
-            <p>Published events from the backend will appear here automatically.</p>
-          </div>
+          <div className="empty-state compact"><span className="eyebrow">Coming soon</span><h3>No published events yet.</h3><p>New experiences will appear here as organizers publish them.</p></div>
+        ) : isLoading ? (
+          <div className="upcoming-layout" aria-hidden="true"><div className="upcoming-lead-skeleton"/><div className="upcoming-list-skeleton"><i/><i/><i/></div></div>
         ) : (
-          <div className="featured-scroller">
-            {isLoading && [0, 1, 2].map((item) => <div key={item} className="featured-card skeleton-card" />)}
-            {!isLoading && featuredEvents.map((ev) => (
-              <Link key={ev.id} to={`/events/${ev.id}`} className="featured-card">
-                <img src={heroFor(ev.id)} alt="" />
-                <div className="featured-overlay" />
-                <div className="featured-content">
-                  <span className="badge highlight">Upcoming</span>
-                  <div>
-                    <h3>{ev.title}</h3>
-                    <p>{fmtFullDate(ev.starts_at)}{ev.location ? ` · ${ev.location}` : ''}</p>
-                  </div>
-                  <span className="btn primary">View Event</span>
+          <div className="upcoming-layout">
+            {featuredEvents.slice(0, 1).map((ev) => (
+              <Link key={ev.id} to={`/events/${ev.id}`} className="upcoming-lead">
+                <img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async" />
+                <span className="upcoming-lead-badge">Featured <span>·</span> Upcoming</span>
+                <div className="upcoming-lead-content">
+                  <p className="upcoming-lead-meta">{fmtFullDate(ev.starts_at)}{ev.location ? `  ·  ${ev.location}` : ''}</p>
+                  <h3>{ev.title}</h3>
+                  <span className="upcoming-lead-action">Explore event <span aria-hidden="true">↗</span></span>
                 </div>
               </Link>
             ))}
+            <div className="upcoming-list" aria-label="More upcoming events">
+              {featuredEvents.slice(1).map((ev) => (
+                <Link key={ev.id} to={`/events/${ev.id}`} className="upcoming-list-card">
+                  <div className="upcoming-list-media"><img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async"/><span>{fmtDate(ev.starts_at)}</span></div>
+                  <div className="upcoming-list-copy"><h3>{ev.title}</h3><p>{fmtFullDate(ev.starts_at)}</p>{ev.location && <p>{ev.location}</p>}</div>
+                  <span className="upcoming-list-arrow" aria-hidden="true">↗</span>
+                </Link>
+              ))}
+              {featuredEvents.length === 1 && <p className="upcoming-list-note">More dates are on the way. Explore all events to see what’s happening.</p>}
+            </div>
           </div>
         )}
       </section>
 
-      <section className="browse-section reveal" id="all-events" aria-labelledby="events-heading">
+      <section className="browse-section reveal explore-section" id="all-events" aria-labelledby="events-heading">
         <div className="section-heading">
-          <div>
-            <span className="eyebrow">Browse events</span>
-            <h2 id="events-heading">Explore all events</h2>
-          </div>
+          <div className="explore-heading-copy"><span className="eyebrow">Find your kind of night</span><h2 id="events-heading">Explore every event.</h2><p>Browse what’s happening, then pick the plan that feels right.</p></div>
           <label className="sort-control">Sort
             <select aria-label="Sort events" value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="date">Soonest first</option>
@@ -205,7 +206,7 @@ export default function Browse() {
               style={{ animationDelay: `${(i % PAGE) * 70}ms` }}
             >
               <div className="event-card-media">
-                <img src={heroFor(ev.id)} alt="" />
+                <img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async" />
                 <span className="date-chip">{fmtDate(ev.starts_at)}</span>
               </div>
               <div className="event-card-body">
@@ -287,7 +288,7 @@ export default function Browse() {
         <div className="venue-grid">
           {VENUES.map((venue) => (
             <article key={venue.name} className="venue-card">
-              <img src={venue.image} alt="" />
+              <img src={venue.image} alt="" loading="lazy" decoding="async" />
               <div>
                 <h3>{venue.name}</h3>
                 <p>{venue.events} Events</p>

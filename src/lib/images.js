@@ -1,11 +1,11 @@
-// Local event imagery — real downloaded photos served from /public/images/events.
+// Optimized event imagery served from /public/images/events as WebP.
 // Fewer photos than events is fine: they repeat deterministically across events.
 export const HEROES = [
-  'antenna-ohNCIiKVT1g-unsplash.jpg',
-  'filip-rankovic-grobgaard-TVpMTnvJxlI-unsplash.jpg',
-  'm-accelerator-yTsy3PYFPtc-unsplash.jpg',
-  'nicholas-green-nPz8akkUmDI-unsplash.jpg',
-  'priscilla-du-preez-Q7wGvnbuwj0-unsplash.jpg',
+  'antenna-ohNCIiKVT1g-unsplash.webp',
+  'filip-rankovic-grobgaard-TVpMTnvJxlI-unsplash.webp',
+  'm-accelerator-yTsy3PYFPtc-unsplash.webp',
+  'nicholas-green-nPz8akkUmDI-unsplash.webp',
+  'priscilla-du-preez-Q7wGvnbuwj0-unsplash.webp',
 ];
 export const HERO_COUNT = HEROES.length;
 
