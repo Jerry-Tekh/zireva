@@ -18,16 +18,30 @@ import { RequireAuth, RequireRole } from './components/RouteGuards.jsx';
 import DashboardLayout from './components/DashboardLayout.jsx';
 import logoTicUrl from './assets/logoTic.jfif?url';
 
-function Nav() {
+function Nav({ isLanding }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   const link = ({ isActive }) => `nav-link${isActive ? ' active' : ''}`;
+  const scrollTo = (id) => (event) => {
+    if (!isLanding) return;
+    event.preventDefault();
+    close();
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+  };
   return (
     <>
       <button className="nav-toggle" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>Menu</button>
       <div className={`nav ${open ? 'open' : ''}`}>
+        {isLanding && <>
+          <a href="#events" className="nav-link" onClick={scrollTo('events')}>Discover</a>
+          <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>All events</a>
+          <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
+          <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Venues</a>
+          <a href="#organizers" className="nav-link" onClick={scrollTo('organizers')}>For organizers</a>
+        </>}
         {user ? (
           <>
             <NavLink to="/dashboard" className={link} onClick={close}>Dashboard</NavLink>
@@ -35,7 +49,10 @@ function Nav() {
             <button className="ghost" onClick={async () => { close(); await logout(); navigate('/'); }}>Log out</button>
           </>
         ) : (
-          <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>
+          <>
+            <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>
+            {isLanding && <Link to="/register" className="btn primary nav-join" onClick={close}>Get started</Link>}
+          </>
         )}
       </div>
     </>
@@ -44,17 +61,18 @@ function Nav() {
 
 export default function App() {
   const { pathname } = useLocation();
+  const landingRoute = pathname === '/';
   const dashboardRoute = ['/dashboard', '/account', '/tickets', '/scan', '/admin/overview', '/admin/users'].includes(pathname)
     || pathname.startsWith('/organizer');
   return (
-    <div className={`app-shell${dashboardRoute ? ' has-dashboard' : ''}`}>
+    <div className={`app-shell${dashboardRoute ? ' has-dashboard' : ''}${landingRoute ? ' landing-shell' : ''}`}>
       <header className="app-header">
         <div className="app-header-inner">
         <Link to="/" className="brand">
           <img className="brand-logo" src={logoTicUrl} alt="" aria-hidden="true" />
           <span className="brand-name">Zireva</span>
         </Link>
-        <Nav />
+        <Nav isLanding={landingRoute} />
         </div>
       </header>
       <main className="app-main">

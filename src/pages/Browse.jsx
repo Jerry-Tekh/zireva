@@ -98,13 +98,13 @@ export default function Browse() {
 
   return (
     <div className="page browse-page">
-      <header className="browse-hero reveal">
+      <header className="browse-hero reveal" id="top">
         <div className="browse-hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow">Live events, all in one place</span>
-            <h1>Find something worth going to.</h1>
+            <span className="eyebrow"><span className="live-dot" /> Made for the moments that move you</span>
+            <h1>Make room for <span>something unforgettable.</span></h1>
             <p>
-              Browse concerts, festivals, and events. Book your tickets in a few simple steps.
+              The best nights don’t happen by accident. Find your next live experience and make it yours.
             </p>
             <form className="browse-search" role="search" onSubmit={(e) => e.preventDefault()}>
               <label htmlFor="event-search">Search events</label>
@@ -121,18 +121,19 @@ export default function Browse() {
                     Clear
                   </button>
                 )}
-                <button type="submit" className="primary">Search</button>
+                <button type="submit" className="primary">Find events <span aria-hidden="true">→</span></button>
               </div>
             </form>
-            <p className="hero-search-hint">Search by event name or venue.</p>
+            <p className="hero-search-hint">Concerts&nbsp; · &nbsp;Culture&nbsp; · &nbsp;Community</p>
           </div>
           <div className="hero-visual">
             <img src="/images/events/nicholas-green-nPz8akkUmDI-unsplash.jpg" alt="Audience at a live event" />
+            <div className="hero-image-caption"><span className="caption-spark">✳</span><span><strong>Be there when it happens.</strong><small>Find your people. Find your next.</small></span></div>
           </div>
         </div>
       </header>
 
-      <section className="browse-section reveal" aria-labelledby="featured-heading">
+      <section className="browse-section reveal" id="events" aria-labelledby="featured-heading">
         <div className="section-heading">
           <div>
             <span className="eyebrow">Coming up</span>
@@ -174,7 +175,7 @@ export default function Browse() {
         )}
       </section>
 
-      <section className="browse-section reveal" aria-labelledby="events-heading">
+      <section className="browse-section reveal" id="all-events" aria-labelledby="events-heading">
         <div className="section-heading">
           <div>
             <span className="eyebrow">Browse events</span>
@@ -232,7 +233,12 @@ export default function Browse() {
       )}
       </section>
 
-      <section className="trust-bar reveal" aria-label="How Zireva works">
+      <section className="how-section reveal" id="how-it-works" aria-labelledby="how-heading">
+        <div className="section-heading">
+          <div><span className="eyebrow">A better way to go out</span><h2 id="how-heading">From “we should go” to “that was incredible.”</h2></div>
+          <span className="muted">Good plans start here. Your next great memory is only a few taps away.</span>
+        </div>
+        <div className="trust-bar">
         {TRUST_ITEMS.map((item) => (
           <article key={item.title} className="trust-card">
             <span className="trust-icon"><TrustIcon type={item.icon} /></span>
@@ -242,6 +248,12 @@ export default function Browse() {
             </div>
           </article>
         ))}
+        </div>
+      </section>
+
+      <section className="organizer-section reveal" id="organizers" aria-labelledby="organizer-heading">
+        <div className="organizer-art" aria-hidden="true"><span className="orbit orbit-one"/><span className="orbit orbit-two"/><span className="orbit orbit-three"/><span className="ticket-shape">Z</span><span className="orbit-star">✳</span></div>
+        <div className="organizer-copy"><span className="eyebrow">For the people who make it happen</span><h2 id="organizer-heading">Your event deserves a full house.</h2><p>Bring your people together with simple ticketing, secure checkout, and a clear view of every sale.</p><Link className="btn organizer-button" to="/register">Start hosting <span aria-hidden="true">→</span></Link></div>
       </section>
 
       <section className="newsletter-cta reveal" aria-labelledby="newsletter-heading">
@@ -267,7 +279,7 @@ export default function Browse() {
         </form>
       </section>
 
-      <section className="browse-section reveal" aria-labelledby="venues-heading">
+      <section className="browse-section reveal" id="venues" aria-labelledby="venues-heading">
         <div className="section-heading">
           <div>
             <span className="eyebrow">Social proof</span>
