@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth.jsx';
 import BrandMark from './BrandMark.jsx';
@@ -61,12 +61,31 @@ export default function DashboardLayout() {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileMenuRef = useRef(null);
   const links = ROLE_LINKS[user?.role] ?? ROLE_LINKS.registered_user;
   const roleName = ROLE_NAMES[user?.role] ?? 'Account';
 
   useEffect(() => {
     setMobileOpen(false);
+    setProfileOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!profileOpen) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setProfileOpen(false);
+    };
+    const closeOnOutsideClick = (event) => {
+      if (!profileMenuRef.current?.contains(event.target)) setProfileOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('pointerdown', closeOnOutsideClick);
+    };
+  }, [profileOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return undefined;
@@ -179,9 +198,39 @@ export default function DashboardLayout() {
           <div className="dashboard-topbar-context">
             <span>{roleName} workspace</span>
           </div>
-          <Link to="/account" className="dashboard-profile-link" aria-label={`Open ${roleName.toLowerCase()} profile`} title="Profile and account settings">
-            <WorkspaceIcon name="person" />
-          </Link>
+          <div className="dashboard-profile-menu" ref={profileMenuRef}>
+            <button
+              type="button"
+              className="dashboard-profile-trigger"
+              aria-label={profileOpen ? 'Close account menu' : 'Open account menu'}
+              aria-haspopup="true"
+              aria-expanded={profileOpen}
+              aria-controls="dashboard-profile-options"
+              title="Account menu"
+              onClick={() => setProfileOpen((open) => !open)}
+            >
+              <WorkspaceIcon name="person" />
+            </button>
+            {profileOpen && (
+              <div id="dashboard-profile-options" className="dashboard-profile-popover" aria-label={`${roleName} account options`}>
+                <Link to="/account" onClick={() => setProfileOpen(false)}>
+                  <WorkspaceIcon name="person" />
+                  <span>Account</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setProfileOpen(false);
+                    await logout();
+                    navigate('/');
+                  }}
+                >
+                  <WorkspaceIcon name="logout" />
+                  <span>Log out</span>
+                </button>
+              </div>
+            )}
+          </div>
         </header>
         <main className="dashboard-content">
           <Outlet />
