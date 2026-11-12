@@ -51,7 +51,7 @@ function Nav({ isLanding }) {
         </>}
         {user ? (
           <>
-            <NavLink to="/dashboard" className={link} onClick={close}>Dashboard</NavLink>
+            <NavLink to="/dashboard" className="btn primary nav-join nav-dashboard" onClick={close}>Dashboard</NavLink>
             <span className="nav-email">{user.email}</span>
             <button className="ghost" onClick={async () => { close(); await logout(); navigate('/'); }}>Log out</button>
           </>

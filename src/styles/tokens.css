@@ -905,6 +905,7 @@ input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible
 .landing-shell .nav-link:hover, .landing-shell .nav-link.active { color: #17231a; background: #f3f6f3; }
 .landing-shell .nav .nav-join { color: #fff; background: #07851a; border: 1px solid #07851a; border-radius: 999px; padding: 11px 19px; font-size: .84rem; }
 .landing-shell .nav .nav-join:hover { background: #056b15; border-color: #056b15; }
+.landing-shell .nav .nav-dashboard { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; font-weight: 650; text-decoration: none; box-shadow: 0 4px 12px rgba(7,133,26,.12); }
 .landing-shell .nav-toggle { color: var(--text); border-color: var(--border); }
 .landing-shell .app-main { max-width: 1320px; padding: 0 36px 100px; }
 .landing-shell .browse-page { gap: clamp(76px,10vw,132px); }
@@ -1029,6 +1030,7 @@ input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible
   .landing-shell .nav.open { display: grid; }
   .landing-shell .nav .nav-link { padding: 12px; font-size: .88rem; }
   .landing-shell .nav .nav-join { text-align: center; }
+  .landing-shell .nav .nav-dashboard { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
