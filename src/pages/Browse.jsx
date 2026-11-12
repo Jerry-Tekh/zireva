@@ -247,7 +247,7 @@ export default function Browse() {
       </section>
 
       <section className="organizer-section reveal" id="organizers" aria-labelledby="organizer-heading">
-        <div className="organizer-art" aria-hidden="true"><span className="orbit orbit-one"/><span className="orbit orbit-two"/><span className="orbit orbit-three"/><span className="ticket-shape"><BrandMark className="organizer-brand-mark" /></span><span className="orbit-star">✳</span></div>
+        <div className="organizer-art" aria-hidden="true"><BrandMark className="organizer-brand-mark" /></div>
         <div className="organizer-copy"><span className="eyebrow">For the people who make it happen</span><h2 id="organizer-heading">Give your next event a home.</h2><p>Build an event listing with the details guests need: what is happening, when, where, and which ticket options are available. Publish when it is ready, then follow sales, refunds, and remaining capacity in your organizer dashboard.</p><Link className="btn organizer-button" to="/register">Create your organizer account <span aria-hidden="true">&rarr;</span></Link></div>
       </section>
     </div>

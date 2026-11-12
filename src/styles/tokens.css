@@ -971,12 +971,8 @@ input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible
 .organizer-copy p { max-width: 440px; color: #707971; font-size: .96rem; line-height: 1.7; }
 .organizer-button { border: 0; border-radius: 999px; background: #07851a; color: #fff; padding: 13px 20px; }
 .organizer-button:hover { color: #fff; background: #056b15; }
-.organizer-art { position: absolute; inset: 0 0 0 48%; overflow: hidden; background: radial-gradient(ellipse at 60% 50%,#dfeee1 0,#f4f7f4 68%); }
-.orbit { position: absolute; top: 50%; left: 56%; width: 350px; height: 150px; border: 1px solid rgba(8,126,26,.16); border-radius: 50%; transform: translate(-50%,-50%) rotate(-25deg); }
-.orbit-two { width: 410px; height: 200px; transform: translate(-50%,-50%) rotate(32deg); }
-.orbit-three { width: 290px; height: 250px; transform: translate(-50%,-50%) rotate(75deg); }
-.ticket-shape { position: absolute; top: 50%; left: 56%; display: grid; place-items: center; width: 122px; height: 122px; border: 1px solid rgba(255,255,255,.9); border-radius: 32px; color: #fff; background: linear-gradient(140deg,#14922a,#086b19); box-shadow: 0 22px 50px rgba(8,126,26,.22); font-size: 3.7rem; font-weight: 500; transform: translate(-50%,-50%) rotate(-12deg); }
-.orbit-star { position: absolute; top: 21%; left: 78%; color: #0a8b1d; font-size: 2rem; }
+.organizer-art { position: absolute; inset: 0 0 0 48%; display: grid; place-items: center; overflow: hidden; background: #f4f7f4; }
+.organizer-art .organizer-brand-mark { width: clamp(112px,14vw,152px); height: clamp(112px,14vw,152px); }
 .landing-shell .newsletter-cta { grid-template-columns: minmax(0,1fr) minmax(300px,460px); padding: clamp(24px,4vw,42px); border: 1px solid #e9eee9; border-left: 0; border-radius: 18px; background: #fff; box-shadow: none; }
 .landing-shell .newsletter-cta .eyebrow { color: #56715b; }
 .landing-shell .newsletter-cta h2 { margin-top: 9px; font-size: clamp(1.8rem,3vw,2.35rem); font-weight: 550; letter-spacing: -.045em; }
@@ -1023,7 +1019,6 @@ input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible
   .landing-shell .event-card-media { aspect-ratio: 1.6/1; }
   .landing-shell .organizer-section { grid-template-columns: 1fr; min-height: 460px; align-items: start; padding: 30px 24px; }
   .organizer-art { inset: 46% 0 0 0; }
-  .ticket-shape { width: 95px; height: 95px; border-radius: 26px; font-size: 3rem; }
   .landing-shell .newsletter-cta { grid-template-columns: 1fr; gap: 22px; }
   .landing-shell .newsletter-form { grid-template-columns: 1fr; }
   .landing-shell .newsletter-form button { min-height: 48px; }
@@ -1730,10 +1725,8 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .organizer-copy h2 { max-width: 14ch; font-size: clamp(2rem, 9vw, 2.75rem); }
   .landing-shell .organizer-copy p { max-width: 42ch; font-size: .92rem; }
   .landing-shell .organizer-button { position: relative; z-index: 2; max-width: 100%; white-space: normal; }
-  .landing-shell .organizer-art { inset: auto 0 0; height: 250px; opacity: .78; }
-  .landing-shell .ticket-shape { top: 54%; left: 57%; }
-  .landing-shell .orbit { top: 56%; left: 55%; }
-  .landing-shell .orbit-star { top: 20%; left: 80%; }
+  .landing-shell .organizer-art { inset: auto 0 0; height: 250px; opacity: 1; }
+  .landing-shell .organizer-art .organizer-brand-mark { width: 104px; height: 104px; }
 }
 
 /* Shared video-led authentication layout, using the landing page palette. */
@@ -1993,12 +1986,6 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .brand-mark-spark { fill: #07851a; stroke: #07851a; stroke-width: .6; stroke-linejoin: round; }
 .brand-mark circle { fill: #f7fbf6; }
 .landing-shell .brand-mark { width: 34px; height: 34px; }
-.ticket-shape .organizer-brand-mark { width: 100%; height: 100%; border: 0; border-radius: 0; background: transparent; }
-.ticket-shape .organizer-brand-mark svg { width: 88%; height: 88%; }
-.ticket-shape .organizer-brand-mark .brand-mark-orbit { stroke: rgba(255,255,255,.58); }
-.ticket-shape .organizer-brand-mark .brand-mark-ray { stroke: rgba(255,255,255,.9); }
-.ticket-shape .organizer-brand-mark .brand-mark-spark { fill: #fff; stroke: #fff; }
-.ticket-shape .organizer-brand-mark circle { fill: #08791b; }
 .auth-shell .app-header-inner { justify-content: flex-start; }
 
 /* Dashboard workspace refresh: quiet surfaces, clear hierarchy, Zireva green. */
