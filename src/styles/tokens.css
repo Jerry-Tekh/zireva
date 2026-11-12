@@ -1199,6 +1199,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .explore-heading-copy p { margin-top: 8px; color: #7c857e; font-size: .87rem; }
 .landing-shell .explore-section .sort-control { min-width: 170px; }
 .landing-shell .explore-section .event-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.landing-shell .explore-section .event-grid-four { grid-template-columns: repeat(2,minmax(0,1fr)); max-width: 1080px; margin-inline: auto; }
 .landing-shell .explore-section .event-card { overflow: hidden; border-color: #e9eee9; border-radius: 16px; background: #fff; }
 .landing-shell .explore-section .event-card-media { aspect-ratio: 1.42 / 1; }
 .landing-shell .explore-section .event-card-media img { transition: transform .35s ease; }
@@ -1209,6 +1210,9 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
 .landing-shell .explore-section .load-more-row { margin-top: 6px; }
 .landing-shell .explore-section .load-more-row button { min-height: 46px; padding-inline: 21px; border: 1px solid #d5e5d8; border-radius: 999px; color: #1e692b; background: #fff; font-weight: 600; }
 .landing-shell .explore-section .load-more-row button:hover { border-color: #91bd98; background: #f9fcf9; }
+@media (min-width: 1360px) {
+  .landing-shell .explore-section .event-grid-four { grid-template-columns: repeat(4,minmax(0,1fr)); max-width: none; }
+}
 @media (max-width: 950px) {
   .upcoming-layout { grid-template-columns: minmax(0, 1fr) minmax(270px, .85fr); min-height: 430px; }
   .upcoming-lead, .upcoming-lead-skeleton { min-height: 430px; }
@@ -1228,6 +1232,7 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .explore-section .section-heading { align-items: stretch; }
   .landing-shell .explore-section .sort-control { width: 100%; }
   .landing-shell .explore-section .event-grid { grid-template-columns: 1fr; gap: 13px; }
+  .landing-shell .explore-section .event-grid-four { grid-template-columns: 1fr; max-width: none; }
   .landing-shell .explore-section .event-card { display: grid; grid-template-columns: 124px minmax(0, 1fr); align-items: stretch; }
   .landing-shell .explore-section .event-card-media { min-height: 100%; aspect-ratio: auto; }
   .landing-shell .explore-section .event-card-media { min-height: 130px; }

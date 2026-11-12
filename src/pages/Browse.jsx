@@ -162,7 +162,7 @@ export default function Browse() {
           <p>{q ? 'Try another search term.' : 'Create or publish events in the organizer dashboard to make them available for buyers.'}</p>
         </div>
       ) : (
-        <div className="event-grid">
+        <div className={`event-grid${events.length === 4 ? ' event-grid-four' : ''}`}>
           {events.map((ev, i) => (
             <Link
               key={ev.id}
