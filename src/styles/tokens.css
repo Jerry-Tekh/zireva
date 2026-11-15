@@ -3825,3 +3825,112 @@ button.danger,
   .landing-shell .app-header-inner { min-height: 60px; padding-inline: 14px; }
   .landing-shell .nav { right: 10px; left: 10px; }
 }
+
+/* Keep all dashboard routes on the landing page's compact type and spacing scale. */
+.app-shell.has-dashboard .dashboard-topbar { min-height: 58px; gap: 10px; padding-inline: clamp(16px,2.5vw,30px); }
+.app-shell.has-dashboard .dashboard-topbar-context { font-size: .74rem; }
+.app-shell.has-dashboard .dashboard-profile-trigger { width: 36px; height: 36px; }
+.app-shell.has-dashboard .dashboard-content { padding: clamp(20px,2.8vw,38px); }
+.app-shell.has-dashboard .dashboard-content > .page { gap: 17px; }
+.app-shell.has-dashboard .dashboard-content .page-hero { gap: 6px; }
+.app-shell.has-dashboard .dashboard-content .page-hero h1 { font-size: clamp(1.45rem,2.8vw,2.25rem); font-weight: 650; letter-spacing: -.045em; line-height: 1.12; }
+.app-shell.has-dashboard .dashboard-content .page-hero p { max-width: 62ch; font-size: .76rem; line-height: 1.55; }
+.app-shell.has-dashboard .dashboard-content .eyebrow { font-size: .59rem; letter-spacing: .09em; }
+.app-shell.has-dashboard .dashboard-content h2 { font-size: clamp(.98rem,1.5vw,1.2rem); letter-spacing: -.025em; }
+.app-shell.has-dashboard .dashboard-content h3 { font-size: .86rem; letter-spacing: -.015em; }
+.app-shell.has-dashboard .dashboard-content p,
+.app-shell.has-dashboard .dashboard-content li,
+.app-shell.has-dashboard .dashboard-content dt,
+.app-shell.has-dashboard .dashboard-content dd { font-size: .72rem; line-height: 1.5; }
+.app-shell.has-dashboard .dashboard-content .section,
+.app-shell.has-dashboard .dashboard-content .panel,
+.app-shell.has-dashboard .dashboard-content .card,
+.app-shell.has-dashboard .dashboard-content .table-card { border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .section { padding: 15px !important; }
+.app-shell.has-dashboard .dashboard-content .grid,
+.app-shell.has-dashboard .dashboard-content .grid-2,
+.app-shell.has-dashboard .dashboard-content .grid-3 { gap: 11px; }
+.app-shell.has-dashboard .dashboard-content .form-grid { gap: 12px; }
+.app-shell.has-dashboard .dashboard-content label { gap: 5px; font-size: .64rem; letter-spacing: .035em; }
+.app-shell.has-dashboard .dashboard-content input,
+.app-shell.has-dashboard .dashboard-content select,
+.app-shell.has-dashboard .dashboard-content textarea { min-height: 38px; padding: 8px 10px; border-radius: 6px; font-size: .73rem; }
+.app-shell.has-dashboard .dashboard-content textarea { min-height: 80px; }
+.app-shell.has-dashboard .dashboard-content button,
+.app-shell.has-dashboard .dashboard-content .btn { min-height: 34px; padding: 7px 11px; border-radius: 6px; font-size: .69rem; line-height: 1.25; }
+.app-shell.has-dashboard .dashboard-content button.primary,
+.app-shell.has-dashboard .dashboard-content .btn.primary,
+.app-shell.has-dashboard .dashboard-content button.ghost,
+.app-shell.has-dashboard .dashboard-content .btn.ghost { min-height: 36px; }
+.app-shell.has-dashboard .dashboard-content .badge { min-height: 22px; padding: 3px 8px; border-radius: 5px; font-size: .57rem; }
+.app-shell.has-dashboard .dashboard-content .alert { padding: 10px 12px; border-radius: 7px; font-size: .73rem; }
+.app-shell.has-dashboard .dashboard-content .table-card th,
+.app-shell.has-dashboard .dashboard-content .table-card td { padding: 10px; font-size: .69rem; }
+.app-shell.has-dashboard .dashboard-content .table-card th { font-size: .59rem; letter-spacing: .07em; }
+.app-shell.has-dashboard .dashboard-content .organizer-summary-grid { gap: 11px; }
+.app-shell.has-dashboard .dashboard-content .organizer-summary-card { min-height: 108px; gap: 6px; padding: 14px !important; }
+.app-shell.has-dashboard .dashboard-content .organizer-summary-card strong { font-size: clamp(1.45rem,2.3vw,1.9rem); }
+.app-shell.has-dashboard .dashboard-content .organizer-summary-card p { font-size: .66rem; }
+.app-shell.has-dashboard .dashboard-content .organizer-create { border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .organizer-create > summary { min-height: 58px; padding: 11px 14px; }
+.app-shell.has-dashboard .dashboard-content .organizer-performance-section { gap: 13px; padding: 16px !important; }
+.app-shell.has-dashboard .dashboard-content .organizer-performance-heading h2 { font-size: 1rem; }
+.app-shell.has-dashboard .dashboard-content .organizer-performance-heading p { font-size: .69rem; }
+.app-shell.has-dashboard .dashboard-content .platform-overview { gap: 15px !important; }
+.app-shell.has-dashboard .dashboard-content .platform-overview-header { gap: 18px; }
+.app-shell.has-dashboard .dashboard-content .platform-health { gap: 8px; padding: 13px !important; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services { gap: 6px; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services li { padding: 8px; font-size: .63rem; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services strong { font-size: .61rem; }
+.app-shell.has-dashboard .dashboard-content .platform-period { gap: 10px; padding: 14px !important; }
+.app-shell.has-dashboard .dashboard-content .platform-period p { font-size: .67rem; }
+.app-shell.has-dashboard .dashboard-content .platform-metrics { gap: 11px; }
+.app-shell.has-dashboard .dashboard-content .platform-metrics > .platform-metric { min-height: 112px; gap: 7px; padding: 14px !important; }
+.app-shell.has-dashboard .dashboard-content .platform-metric > strong { font-size: clamp(1.35rem,2.2vw,1.85rem); }
+.app-shell.has-dashboard .dashboard-content .platform-metric > .muted { font-size: .64rem; }
+.app-shell.has-dashboard .dashboard-content .platform-dashboard-grid { gap: 12px; }
+.app-shell.has-dashboard .dashboard-content .platform-trends,
+.app-shell.has-dashboard .dashboard-content .platform-refunds { padding: 15px !important; }
+.app-shell.has-dashboard .dashboard-content .daily-chart-figure { padding: 11px; border-radius: 7px; }
+.app-shell.has-dashboard .dashboard-content .daily-chart-figure figcaption { margin-bottom: 8px; font-size: .72rem; }
+.app-shell.has-dashboard .dashboard-content .event-manage-nav { gap: 3px; padding: 5px; border-radius: 7px; }
+.app-shell.has-dashboard .dashboard-content .event-manage-nav a { min-height: 32px; padding-inline: 10px; border-radius: 5px; font-size: .67rem; }
+.app-shell.has-dashboard .dashboard-content .organizer-event-page .hero-media { min-height: clamp(210px,25vw,330px) !important; border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .organizer-event-page .event-analytics-metrics > div { min-height: 78px; padding: 12px; }
+.app-shell.has-dashboard .dashboard-content .organizer-event-page .event-analytics-metrics strong { font-size: clamp(1.1rem,1.8vw,1.45rem); }
+.app-shell.has-dashboard .dashboard-content .wallet-group { gap: 12px; padding: 14px; border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .wallet-group-heading h2 { font-size: .95rem; }
+.app-shell.has-dashboard .dashboard-content .wallet-page .ticket-media { min-height: 160px; }
+.app-shell.has-dashboard .dashboard-content .scanner-shell > form.panel { gap: 14px; padding: 18px !important; border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .scanner-shell > form.panel > button.primary { min-height: 40px; font-size: .72rem; }
+.app-shell.has-dashboard .dashboard-content .admin-users-toolbar { gap: 9px; padding: 12px !important; border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .admin-users-results-heading { padding: 14px 14px 11px; }
+.app-shell.has-dashboard .dashboard-content .admin-users-results-heading h2 { font-size: .92rem; }
+
+@media (max-width: 860px) {
+  .app-shell.has-dashboard .dashboard-content { padding: 22px 18px 30px; }
+  .app-shell.has-dashboard .dashboard-content .platform-overview-header { grid-template-columns: minmax(0,1fr); align-items: start; }
+  .app-shell.has-dashboard .dashboard-content .platform-health { max-width: none; }
+}
+@media (max-width: 620px) {
+  .app-shell.has-dashboard .dashboard-topbar { min-height: 54px; padding-inline: 12px; }
+  .app-shell.has-dashboard .dashboard-content { padding: 18px 13px 24px; }
+  .app-shell.has-dashboard .dashboard-content > .page { gap: 14px; }
+  .app-shell.has-dashboard .dashboard-content .page-hero h1 { font-size: clamp(1.4rem,7vw,1.8rem); }
+  .app-shell.has-dashboard .dashboard-content .page-hero p { font-size: .71rem; }
+  .app-shell.has-dashboard .dashboard-content .section { padding: 13px !important; }
+  .app-shell.has-dashboard .dashboard-content .organizer-summary-card { min-height: 98px; padding: 12px !important; }
+  .app-shell.has-dashboard .dashboard-content .organizer-summary-card strong { font-size: 1.4rem; }
+  .app-shell.has-dashboard .dashboard-content .platform-health-services li { min-height: 52px; padding: 7px 6px; }
+  .app-shell.has-dashboard .dashboard-content .platform-health-services li > span { font-size: .59rem; }
+  .app-shell.has-dashboard .dashboard-content .platform-health-services strong { font-size: .57rem; }
+  .app-shell.has-dashboard .dashboard-content .platform-period { padding: 12px !important; }
+  .app-shell.has-dashboard .dashboard-content .platform-metrics > .platform-metric { min-height: 100px; padding: 12px !important; }
+  .app-shell.has-dashboard .dashboard-content .platform-metric > strong { font-size: 1.25rem; }
+  .app-shell.has-dashboard .dashboard-content .platform-metric > .muted { font-size: .59rem; }
+  .app-shell.has-dashboard .dashboard-content .organizer-performance-period,
+  .app-shell.has-dashboard .dashboard-content .organizer-event-filters { padding: 10px; }
+  .app-shell.has-dashboard .dashboard-content .organizer-mobile-event { gap: 10px; padding: 13px; }
+  .app-shell.has-dashboard .dashboard-content .organizer-mobile-event dl { gap: 7px; padding: 10px 0; }
+  .app-shell.has-dashboard .dashboard-content .organizer-mobile-event dd { font-size: .7rem; }
+}
