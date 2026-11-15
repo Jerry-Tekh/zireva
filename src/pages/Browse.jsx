@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import BrandMark from '../components/BrandMark.jsx';
 import { apiGet } from '../lib/api';
 import { heroFor } from '../lib/images';
 
@@ -344,7 +343,6 @@ export default function Browse() {
       </section>
 
       <section className="organizer-section reveal" id="organizers" aria-labelledby="organizer-heading">
-        <div className="organizer-art" aria-hidden="true"><BrandMark className="organizer-brand-mark" /></div>
         <div className="organizer-copy"><span className="eyebrow">FOR ORGANIZERS</span><h2 id="organizer-heading">Your next event, on the calendar.</h2><p>Set the date and venue, describe what guests can expect, and choose your ticket options. Publish when it’s ready, then manage sales and check-ins from your organizer dashboard.</p><Link className="btn organizer-button" to="/register">Start an event <span aria-hidden="true">&rarr;</span></Link></div>
       </section>
     </div>

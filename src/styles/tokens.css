@@ -3326,3 +3326,32 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .organizer-art { display: none !important; }
   .landing-shell .organizer-section { min-height: 0; }
 }
+.auth-shell .auth-visual-shade {
+  background: linear-gradient(180deg,rgba(7,8,7,.08) 0%,rgba(7,8,7,.38) 34%,rgba(7,8,7,.94) 100%),
+    linear-gradient(115deg,rgba(7,8,7,.62) 0%,rgba(7,8,7,.14) 68%),
+    radial-gradient(ellipse at 18% 82%,rgba(242,123,43,.2),transparent 54%);
+}
+.auth-shell .auth-visual-video { filter: saturate(.86) brightness(.78); }
+.auth-shell .auth-visual-kicker { color: #ffad76; }
+.auth-shell .auth-visual-link { min-height: 42px; border-color: #f27b2b; color: #1b1009; background: #f27b2b; }
+.auth-shell .auth-visual-link:hover { border-color: #ff914d; background: #ff914d; }
+.landing-shell .landing-footer-cta { align-items: center; }
+.landing-shell .landing-footer-cta > div:first-child { margin-block: auto; }
+.landing-shell .landing-footer-actions { align-self: center; align-items: center; justify-content: center; }
+.landing-shell .landing-footer-actions a { flex: 0 0 auto; min-width: 132px; }
+@media (max-width: 680px) {
+  .landing-shell .explore-section .section-heading { align-items: stretch; }
+  .landing-shell .explore-heading-copy { width: 100%; justify-items: start; text-align: left; }
+  .landing-shell .explore-heading-copy .eyebrow,
+  .landing-shell .explore-heading-copy h2,
+  .landing-shell .explore-heading-copy p { width: 100%; max-width: none; text-align: left; }
+  .landing-shell .explore-section .sort-control { align-self: stretch; }
+  .landing-shell .category-section .section-heading { align-items: stretch; }
+  .landing-shell .category-section .category-heading > div { width: 100%; justify-items: start; text-align: left; }
+  .landing-shell .category-section .category-heading .eyebrow,
+  .landing-shell .category-section .category-heading h2,
+  .landing-shell .category-section .category-heading > p { width: 100%; max-width: none; text-align: left; }
+  .landing-shell .landing-footer-cta { align-items: flex-start; }
+  .landing-shell .landing-footer-actions { align-self: stretch; justify-content: flex-start; }
+  .landing-shell .landing-footer-actions a { flex: 1 1 132px; }
+}
