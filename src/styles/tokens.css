@@ -3867,6 +3867,9 @@ button.danger,
 .app-shell.has-dashboard .dashboard-content .table-card th,
 .app-shell.has-dashboard .dashboard-content .table-card td { padding: 10px; font-size: .69rem; }
 .app-shell.has-dashboard .dashboard-content .table-card th { font-size: .59rem; letter-spacing: .07em; }
+.app-shell.has-dashboard .dashboard-content .data-row { border-color: #303530; color: #f4f5f3; background: #191c19; }
+.app-shell.has-dashboard .dashboard-content .data-row > span { color: #e5e8e4; }
+.app-shell.has-dashboard .dashboard-content .account-sessions-section .data-row { padding: 11px 12px; border-radius: 7px; }
 .app-shell.has-dashboard .dashboard-content .organizer-summary-grid { gap: 11px; }
 .app-shell.has-dashboard .dashboard-content .organizer-summary-card { min-height: 108px; gap: 6px; padding: 14px !important; }
 .app-shell.has-dashboard .dashboard-content .organizer-summary-card strong { font-size: clamp(1.45rem,2.3vw,1.9rem); }
