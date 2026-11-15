@@ -3964,6 +3964,9 @@ button.danger,
 .app-shell.has-dashboard .loading-skeleton--confirmation,
 .app-shell.has-dashboard .loading-skeleton--chart { border-color: #303530; background-color: #141614; }
 .app-shell.has-dashboard .dashboard-content .platform-loading-layout .platform-skeleton { background: linear-gradient(100deg,#202320 25%,#2a2e2a 45%,#202320 65%); background-size: 240% 100%; }
+.landing-shell .event-notes-section { width: min(100%,820px); justify-self: center; }
+.landing-shell .event-notes-section > .section-heading { justify-content: center; text-align: center; }
+.landing-shell .event-notes-section > .section-heading > div { justify-items: center; }
 @media (max-width: 700px) {
   .loading-skeleton--cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .loading-skeleton--cards .loading-skeleton__event:last-child { display: none; }
