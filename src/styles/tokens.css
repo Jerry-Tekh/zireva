@@ -4072,6 +4072,28 @@ button.danger,
   .event-shell .nav-primary .nav-link:hover,
   .event-shell .nav-primary .nav-link.active { color: #fff !important; background: #202320 !important; }
 }
+@media (max-width: 680px) {
+  .landing-shell .nav.open,
+  .event-shell .nav.open { max-height: calc(100dvh - 82px); overflow-y: auto; padding: 11px; gap: 9px; border-radius: 10px; }
+  .landing-shell .nav.open .nav-primary,
+  .event-shell .nav.open .nav-primary { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; }
+  .landing-shell .nav.open .nav-primary .nav-link,
+  .event-shell .nav.open .nav-primary .nav-link { display: flex; width: 100%; min-height: 40px; align-items: center; justify-content: center; padding: 7px 8px; border: 1px solid #303530 !important; border-radius: 7px; color: #e4e7e2 !important; background: #191c19 !important; font-size: .72rem; font-weight: 600; line-height: 1.25; text-align: center; white-space: normal; }
+  .landing-shell .nav.open .nav-primary .nav-link:hover,
+  .landing-shell .nav.open .nav-primary .nav-link:focus-visible,
+  .event-shell .nav.open .nav-primary .nav-link:hover,
+  .event-shell .nav.open .nav-primary .nav-link:focus-visible { border-color: #65452e !important; color: #fff !important; background: #241a13 !important; }
+  .landing-shell .nav.open .nav-primary .nav-link:last-child:nth-child(odd),
+  .event-shell .nav.open .nav-primary .nav-link:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .landing-shell .nav.open .nav-utilities,
+  .event-shell .nav.open .nav-utilities { display: grid; grid-template-columns: minmax(0,1fr); gap: 7px; padding-top: 9px; border-top: 1px solid #303530; }
+  .landing-shell .nav.open .nav-utilities .nav-dashboard,
+  .event-shell .nav.open .nav-utilities .nav-dashboard { grid-column: 1; grid-row: auto; width: 100%; min-height: 40px; justify-content: center; }
+  .landing-shell .nav.open .nav-utilities .nav-email,
+  .event-shell .nav.open .nav-utilities .nav-email { display: block; width: 100%; max-width: 100%; padding: 3px 8px; color: #9da49d; font-size: .68rem; text-align: center; }
+  .landing-shell .nav.open .nav-utilities > button,
+  .event-shell .nav.open .nav-utilities > button { width: 100%; min-height: 38px; justify-content: center; text-align: center; }
+}
 @media (prefers-reduced-motion: reduce) {
   .loading-skeleton__bar, .loading-skeleton__avatar, .loading-skeleton__route-card,
   .loading-skeleton--chart > span, .loading-skeleton--confirmation > span,
