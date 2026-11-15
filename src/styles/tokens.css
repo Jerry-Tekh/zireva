@@ -3967,6 +3967,10 @@ button.danger,
 .landing-shell .event-notes-section { width: min(100%,820px); justify-self: center; }
 .landing-shell .event-notes-section > .section-heading { justify-content: center; text-align: center; }
 .landing-shell .event-notes-section > .section-heading > div { justify-items: center; }
+.landing-shell .app-main { max-width: 1320px; }
+@media (min-width: 681px) {
+  .landing-shell .app-main { padding-inline: clamp(22px,3.8vw,52px); }
+}
 @media (max-width: 700px) {
   .loading-skeleton--cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .loading-skeleton--cards .loading-skeleton__event:last-child { display: none; }
