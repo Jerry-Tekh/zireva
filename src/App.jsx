@@ -41,26 +41,30 @@ function Nav({ isLanding }) {
     <>
       <button className="nav-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen((o) => !o)}><svg viewBox="0 0 24 24" aria-hidden="true">{open ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}</svg><span className="nav-toggle-label">{open ? 'Close' : 'Menu'}</span></button>
       <div className={`nav ${open ? 'open' : ''}`}>
-        {isLanding && <>
-          <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>Events</a>
-          <a href="#categories" className="nav-link" onClick={scrollTo('categories')}>Categories</a>
-          <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Places</a>
-          <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
-          <a href="#organizers" className="nav-link" onClick={scrollTo('organizers')}>For organizers</a>
-        </>}
-        {user ? (
-          <>
-            <NavLink to="/dashboard" className="btn primary nav-join nav-dashboard" onClick={close}>Dashboard</NavLink>
-            <span className="nav-email">{user.email}</span>
-            <button className="ghost" onClick={async () => { close(); await logout(); navigate('/'); }}>Log out</button>
-          </>
-        ) : (
-          <>
-            {isLanding
-              ? <><NavLink to="/login" className="nav-link nav-login" onClick={close}>Log in</NavLink><Link to="/register" className="btn primary nav-join" onClick={close}>Create event</Link></>
-              : <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>}
-          </>
-        )}
+        <div className="nav-primary">
+          {isLanding && <>
+            <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>Events</a>
+            <a href="#categories" className="nav-link" onClick={scrollTo('categories')}>Categories</a>
+            <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Places</a>
+            <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
+            <a href="#organizers" className="nav-link" onClick={scrollTo('organizers')}>For organizers</a>
+          </>}
+          {!user && !isLanding && <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>}
+        </div>
+        <div className="nav-utilities">
+          {user ? (
+            <>
+              <NavLink to="/dashboard" className="btn primary nav-join nav-dashboard" onClick={close}>Dashboard</NavLink>
+              <span className="nav-email">{user.email}</span>
+              <button className="ghost" onClick={async () => { close(); await logout(); navigate('/'); }}>Log out</button>
+            </>
+          ) : isLanding ? (
+            <>
+              <NavLink to="/login" className="nav-link nav-login" onClick={close}>Log in</NavLink>
+              <Link to="/register" className="btn primary nav-join" onClick={close}>Create event</Link>
+            </>
+          ) : null}
+        </div>
       </div>
     </>
   );
