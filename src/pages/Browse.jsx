@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import BrandMark from '../components/BrandMark.jsx';
@@ -6,7 +6,7 @@ import { apiGet } from '../lib/api';
 import { heroFor } from '../lib/images';
 
 const PAGE = 8;
-const EVENT_CATEGORIES = ['Music', 'Social', 'Business', 'Food & drink', 'Technology', 'Community'];
+const EVENT_CATEGORIES = ['Music', 'Social events', 'Business', 'Religious events', 'Technology', 'Community', 'Arts & culture', 'Food & drink'];
 const DATE_FILTERS = [
   { value: 'all', label: 'All events' },
   { value: 'today', label: 'Happening today' },
@@ -20,8 +20,103 @@ const JOURNEY_STEPS = [
   { number: '03', title: 'Reserve and pay', copy: 'Choose how many tickets you need and reserve them at checkout. Your reservation has an expiry, so you can see how much time remains to pay.' },
   { number: '04', title: 'Keep your QR ticket close', copy: 'After successful payment, issued tickets and their QR codes are available from your ticket wallet for event entry.' },
 ];
+const EVENT_NOTES = [
+  { tag: 'FOR ORGANIZERS', title: 'Before you publish', copy: 'Have the date, venue, event description, and ticket quantities ready. Guests use these details to decide whether to book.', to: '/register', action: 'Create an event' },
+  { tag: 'FOR ATTENDEES', title: 'Keep your ticket close', copy: 'After checkout, open My tickets to see your order and entry QR code. Keep the QR code ready when you reach the door.', to: '/login', action: 'Sign in to your tickets' },
+  { tag: 'EVENT DAY', title: 'Check tickets at the door', copy: 'Staff sign in to the scanner workspace and validate each guest ticket as they arrive.', to: '/login', action: 'Staff sign in' },
+];
 const fmtDate = (s) => (s ? new Date(s).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Date TBA');
 const fmtFullDate = (s) => (s ? new Date(s).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) : 'Date TBA');
+
+function CarouselRail({ label, children, className = '' }) {
+  const railRef = useRef(null);
+  const [scrollState, setScrollState] = useState({ overflow: false, start: true, end: false });
+  const updateScrollState = () => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const maxScroll = rail.scrollWidth - rail.clientWidth;
+    const nextState = { overflow: maxScroll > 2, start: rail.scrollLeft <= 2, end: rail.scrollLeft >= maxScroll - 2 };
+    setScrollState((current) => current.overflow === nextState.overflow && current.start === nextState.start && current.end === nextState.end ? current : nextState);
+  };
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return undefined;
+    updateScrollState();
+    rail.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('resize', updateScrollState);
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(updateScrollState);
+    observer?.observe(rail);
+    return () => {
+      rail.removeEventListener('scroll', updateScrollState);
+      window.removeEventListener('resize', updateScrollState);
+      observer?.disconnect();
+    };
+  }, [children]);
+  const scroll = (direction) => {
+    const rail = railRef.current;
+    if (!rail) return;
+    rail.scrollBy({ left: direction * Math.max(rail.clientWidth * 0.82, 260), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+  return (
+    <div className={`market-carousel ${className}`}>
+      {scrollState.overflow && <div className="market-carousel-controls">
+        <button type="button" aria-label={`Scroll ${label} left`} disabled={scrollState.start} onClick={() => scroll(-1)}><span aria-hidden="true">‹</span></button>
+        <button type="button" aria-label={`Scroll ${label} right`} disabled={scrollState.end} onClick={() => scroll(1)}><span aria-hidden="true">›</span></button>
+      </div>}
+      <div className="market-carousel-track" ref={railRef} aria-label={label} tabIndex="0">{children}</div>
+    </div>
+  );
+}
+
+function HeroCarousel({ events }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slides = events.length ? events.slice(0, 4) : [null, null, null];
+  useEffect(() => {
+    if (slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = window.setInterval(() => setActiveIndex((index) => (index + 1) % slides.length), 7000);
+    return () => window.clearInterval(timer);
+  }, [slides.length]);
+  const currentIndex = activeIndex % slides.length;
+  const event = slides[currentIndex];
+  const move = (delta) => setActiveIndex((index) => (index + delta + slides.length) % slides.length);
+  return (
+    <div className="browse-hero-card" aria-roledescription="carousel" aria-label="Featured events">
+      <img className="browse-hero-image" src={heroFor(event?.id ?? `hero-${activeIndex}`)} alt="" fetchPriority="high" />
+      <div className="browse-hero-shade" />
+      <div className="browse-hero-copy" aria-live="polite">
+        <span className="hero-slide-tag">{event?.category_name ?? event?.category ?? 'LIVE IN NIGERIA'}</span>
+        <h1>{event?.title ?? ['Find a night worth going out for.', 'See what is happening near you.', 'Make plans for the weekend.'][activeIndex]}</h1>
+        {event && <p>{fmtFullDate(event.starts_at)}{event.location ? ` · ${event.location}` : ''}</p>}
+        <Link to={event ? `/events/${event.id}` : '#all-events'} className="hero-slide-action">{event ? 'View event' : 'Browse events'} <span aria-hidden="true">→</span></Link>
+      </div>
+      <div className="browse-hero-controls">
+        <button type="button" aria-label="Previous featured event" onClick={() => move(-1)}>‹</button>
+        <div className="browse-hero-dots" role="group" aria-label="Choose featured event">
+          {slides.map((slide, index) => <button key={slide?.id ?? `slide-${index}`} type="button" aria-label={`Show featured slide ${index + 1}`} aria-current={index === currentIndex ? 'true' : undefined} onClick={() => setActiveIndex(index)} />)}
+        </div>
+        <button type="button" aria-label="Next featured event" onClick={() => move(1)}>›</button>
+      </div>
+    </div>
+  );
+}
+
+function EventCard({ event }) {
+  const category = event.category_name ?? event.category ?? 'UPCOMING';
+  return (
+    <Link to={`/events/${event.id}`} className="market-event-card">
+      <div className="market-event-image">
+        <img src={heroFor(event.id)} alt="" loading="lazy" decoding="async" />
+        <span className="market-event-category">{category}</span>
+        <span className="market-event-date">{fmtDate(event.starts_at)}</span>
+      </div>
+      <div className="market-event-copy">
+        <h3>{event.title}</h3>
+        <p>{fmtFullDate(event.starts_at)}{event.location ? ` · ${event.location}` : ''}</p>
+        <span className="market-event-action">Book tickets <span aria-hidden="true">→</span></span>
+      </div>
+    </Link>
+  );
+}
 
 export default function Browse() {
   const [q, setQ] = useState('');
@@ -79,7 +174,7 @@ export default function Browse() {
       place.events += 1;
       grouped.set(key, place);
     });
-    return [...grouped.values()].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 4);
+    return [...grouped.values()].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 8);
   }, [allEvents]);
   const featuredEvents = useMemo(() => {
     return allEvents
@@ -93,87 +188,65 @@ export default function Browse() {
 
   return (
     <div className="page browse-page">
-      <header className="browse-hero reveal" id="top">
-        <div className="browse-hero-inner">
-          <div className="hero-copy">
-            <span className="eyebrow"><span className="live-dot" /> WHAT'S ON</span>
-            <h1>Events, all in <span>one place.</span></h1>
-            <p>Browse concerts, comedy, food, workshops, and more. Check the details and ticket options before you book.</p>
-            <form className="browse-search" role="search" onSubmit={(e) => {
-              e.preventDefault();
-              const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-              document.getElementById('all-events')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-            }}>
-              <div className={`hero-search-row${q ? ' has-clear' : ''}`}>
-                <input
-                  id="event-search"
-                  aria-label="Search events"
-                  placeholder="Search events or locations"
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
-                />
-                {q && (
-                  <button type="button" className="ghost" onClick={() => setQ('')}>
-                    Clear
-                  </button>
-                )}
-                <button type="submit" className="primary">Explore events <span aria-hidden="true">→</span></button>
-              </div>
-            </form>
-            <a className="hero-secondary-link" href="#events">See what’s coming up <span aria-hidden="true">↓</span></a>
+      <section className="market-intro" id="top" aria-label="Event discovery">
+        <HeroCarousel events={featuredEvents} />
+        <div className="market-search-area">
+          <form className="market-search" role="search" onSubmit={(e) => {
+            e.preventDefault();
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            document.getElementById('all-events')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+          }}>
+            <svg className="market-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></svg>
+            <input id="event-search" aria-label="Search events" placeholder="What are you looking for?" value={q} onChange={(e) => setQ(e.target.value)} />
+            {q && <button type="button" className="market-search-clear" onClick={() => setQ('')}>Clear</button>}
+            <button type="submit" className="market-search-submit">Search events</button>
+          </form>
+          <div className="market-quick-links" aria-label="Quick event filters">
+            {DATE_FILTERS.map((filter) => <button key={filter.value} type="button" className={dateFilter === filter.value ? 'active' : ''} aria-pressed={dateFilter === filter.value} onClick={() => { setDateFilter(filter.value); document.getElementById('all-events')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>{filter.label}</button>)}
           </div>
         </div>
-        <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/images/events/nicholas-green-nPz8akkUmDI-unsplash.webp" aria-hidden="true" tabIndex={-1}>
-          <source src="/video/herovideobg.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-shade" aria-hidden="true" />
-      </header>
+      </section>
 
       <section className="browse-section reveal upcoming-section" id="events" aria-labelledby="featured-heading">
         <div className="section-heading upcoming-heading">
           <div>
-            <span className="eyebrow">COMING UP</span>
-            <h2 id="featured-heading">Events coming up.</h2>
+            <span className="eyebrow">DISCOVER EVENTS IN NAIJA</span>
+            <h2 id="featured-heading">Find your next event.</h2>
           </div>
           <a className="section-text-link" href="#all-events">Explore every event <span aria-hidden="true">→</span></a>
         </div>
 
         {error ? (
           <div className="empty-state compact"><span className="eyebrow">Events unavailable</span><h3>Upcoming events could not load.</h3><p>Check the API connection and try again.</p></div>
-        ) : !isLoading && !hasFeatured ? (
-          <div className="empty-state compact"><span className="eyebrow">Coming soon</span><h3>No upcoming events yet.</h3><p>New dates will appear here as organizers publish them.</p></div>
         ) : isLoading ? (
-          <div className="upcoming-layout" aria-hidden="true"><div className="upcoming-lead-skeleton"/><div className="upcoming-list-skeleton"><i/><i/><i/></div></div>
+          <div className="market-carousel-skeleton" aria-hidden="true"><i /><i /><i /></div>
+        ) : !hasFeatured ? (
+          <div className="empty-state compact"><span className="eyebrow">Coming soon</span><h3>No upcoming events yet.</h3><p>New dates will appear here as organizers publish them.</p></div>
         ) : (
-          <div className="upcoming-layout">
-            {featuredEvents.slice(0, 1).map((ev) => (
-              <Link key={ev.id} to={`/events/${ev.id}`} className="upcoming-lead">
-                <img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async" />
-                <span className="upcoming-lead-badge">Featured <span>·</span> Upcoming</span>
-                <div className="upcoming-lead-content">
-                  <p className="upcoming-lead-meta">{fmtFullDate(ev.starts_at)}{ev.location ? `  ·  ${ev.location}` : ''}</p>
-                  <h3>{ev.title}</h3>
-                  <span className="upcoming-lead-action">Explore event <span aria-hidden="true">↗</span></span>
-                </div>
-              </Link>
-            ))}
-            <div className="upcoming-list" aria-label="More upcoming events">
-              {featuredEvents.slice(1).map((ev) => (
-                <Link key={ev.id} to={`/events/${ev.id}`} className="upcoming-list-card">
-                  <div className="upcoming-list-media"><img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async"/><span>{fmtDate(ev.starts_at)}</span></div>
-                  <div className="upcoming-list-copy"><h3>{ev.title}</h3><p>{fmtFullDate(ev.starts_at)}</p>{ev.location && <p>{ev.location}</p>}</div>
-                  <span className="upcoming-list-arrow" aria-hidden="true">↗</span>
-                </Link>
-              ))}
-              {featuredEvents.length === 1 && <p className="upcoming-list-note">More dates are on the way. Explore all events to see what’s happening.</p>}
-            </div>
-          </div>
+          <CarouselRail label="Upcoming events" className="event-carousel">
+            {featuredEvents.map((event) => <EventCard key={event.id} event={event} />)}
+          </CarouselRail>
         )}
+      </section>
+
+      <section className="browse-section reveal locations-section" id="venues" aria-labelledby="venues-heading">
+        <div className="section-heading">
+          <div><span className="eyebrow">VENUES & CITIES</span><h2 id="venues-heading">Pick a place. See what’s on.</h2><p className="muted">Browse venues attached to events currently on the calendar.</p></div>
+        </div>
+        {locations.length ? <CarouselRail label="Event places" className="location-carousel">
+          {locations.map((place) => {
+            const event = allEvents.find((item) => item.id === place.eventId);
+            return <Link key={place.name} to={event ? '/events/' + event.id : '#all-events'} className="location-card">
+              {event && <img src={heroFor(event.id)} alt="" loading="lazy" decoding="async" />}
+              <span className="location-card-copy"><span className="location-label">{place.events} {place.events === 1 ? 'event' : 'events'} listed</span><strong>{place.name}</strong><span className="location-explore">See the event <span aria-hidden="true">&nearr;</span></span></span>
+            </Link>;
+          })}
+        </CarouselRail> : <div className="locations-empty"><h3>New places will appear here.</h3><p>When an organizer publishes an event with a location, you will find it in this list.</p></div>}
       </section>
 
       <section className="browse-section reveal explore-section" id="all-events" aria-labelledby="events-heading">
         <div className="section-heading">
-          <div className="explore-heading-copy"><span className="eyebrow">THE EVENT LIST</span><h2 id="events-heading">Discover events in Nigeria.</h2><p>Search by event or place. Open a listing for the full details and ticket options.</p></div>
+          <div className="explore-heading-copy"><span className="eyebrow">ALL LISTINGS</span><h2 id="events-heading">More events to explore.</h2><p>Search by event or venue, then open a listing to see dates and ticket options.</p></div>
           <label className="sort-control">Sort
             <select aria-label="Sort events" value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="date">Soonest first</option>
@@ -182,12 +255,7 @@ export default function Browse() {
           </label>
         </div>
 
-        <div className="browse-filter-row" role="group" aria-label="Quick event filters">
-          {DATE_FILTERS.map((filter) => (
-            <button key={filter.value} type="button" className={`browse-filter-chip${dateFilter === filter.value ? ' active' : ''}`} aria-pressed={dateFilter === filter.value} onClick={() => setDateFilter(filter.value)}>{filter.label}</button>
-          ))}
-          {categoryFilter && <button type="button" className="browse-filter-reset" onClick={() => setCategoryFilter('')}>Clear {categoryFilter} filter</button>}
-        </div>
+        {categoryFilter && <button type="button" className="browse-filter-reset" onClick={() => setCategoryFilter('')}>Clear {categoryFilter} filter</button>}
 
       {isLoading && <p className="muted">Loading events…</p>}
       {error && <p className="muted">Could not load events.</p>}
@@ -199,29 +267,9 @@ export default function Browse() {
           <p>{q || categoryFilter || dateFilter !== 'all' ? 'Clear a filter or try another search.' : 'Published events will appear here.'}</p>
         </div>
       ) : (
-        <div className={`event-grid${events.length === 4 ? ' event-grid-four' : ''}`}>
-          {events.map((ev, i) => (
-            <Link
-              key={ev.id}
-              to={`/events/${ev.id}`}
-              className="event-card reveal"
-              style={{ animationDelay: `${(i % PAGE) * 70}ms` }}
-            >
-              <div className="event-card-media">
-                <img src={heroFor(ev.id)} alt="" loading="lazy" decoding="async" />
-                <span className="date-chip">{fmtDate(ev.starts_at)}</span>
-              </div>
-              <div className="event-card-body">
-                <h2 className="event-card-title">{ev.title}</h2>
-                <p className="event-meta">{fmtFullDate(ev.starts_at)}{ev.location ? ` · ${ev.location}` : ''}</p>
-                <div className="between" style={{ marginTop: 4 }}>
-                  <span className="badge ok">{ev.category_name ?? ev.category ?? 'Event'}</span>
-                  <span className="event-card-action">Get tickets <span aria-hidden="true">&rarr;</span></span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <CarouselRail label="All events" className="event-carousel browse-event-carousel">
+          {events.map((event) => <EventCard key={event.id} event={event} />)}
+        </CarouselRail>
       )}
 
       {hasNextPage && !q && (
@@ -231,41 +279,6 @@ export default function Browse() {
           </button>
         </div>
       )}
-      </section>
-
-      <section className="browse-section category-section" id="categories" aria-labelledby="category-heading">
-        <div className="section-heading category-heading">
-          <div><span className="eyebrow">BROWSE BY CATEGORY</span><h2 id="category-heading">What are you in the mood for?</h2></div>
-          <p className="muted">Choose a category to narrow the event list.</p>
-        </div>
-        <div className="category-grid">
-          {EVENT_CATEGORIES.map((category, index) => (
-            <button key={category} type="button" className={`category-card${categoryFilter === category ? ' active' : ''}`} aria-pressed={categoryFilter === category} onClick={() => {
-              setCategoryFilter(categoryFilter === category ? '' : category);
-              document.getElementById('all-events')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-            }}>
-              <img src={heroFor(`category-${index}`)} alt="" loading="lazy" decoding="async" />
-              <span>{category}</span>
-            </button>
-          ))}
-        </div>
-      </section>
-
-
-
-      <section className="browse-section reveal locations-section" id="venues" aria-labelledby="venues-heading">
-        <div className="section-heading">
-          <div><span className="eyebrow">VENUES & CITIES</span><h2 id="venues-heading">Pick a place. See what’s on.</h2><p className="muted">Browse venues attached to events currently on the calendar.</p></div>
-        </div>
-        {locations.length ? <div className="location-grid">
-          {locations.map((place) => {
-            const event = allEvents.find((item) => item.id === place.eventId);
-            return <Link key={place.name} to={event ? '/events/' + event.id : '#all-events'} className="location-card">
-              {event && <img src={heroFor(event.id)} alt="" loading="lazy" decoding="async" />}
-              <span className="location-card-copy"><span className="location-label">{place.events} {place.events === 1 ? 'event' : 'events'} listed</span><strong>{place.name}</strong><span className="location-explore">See the event <span aria-hidden="true">&nearr;</span></span></span>
-            </Link>;
-          })}
-        </div> : <div className="locations-empty"><h3>New places will appear here.</h3><p>When an organizer publishes an event with a location, you will find it in this list.</p></div>}
       </section>
 
       <section className="how-section reveal" id="how-it-works" aria-labelledby="how-heading">
@@ -296,6 +309,38 @@ export default function Browse() {
           <article className="audience-card audience-host"><span className="audience-index">02 / ORGANIZERS</span><h3>Put your event on sale.</h3><p>Add the event details, set ticket types and quantities, then publish when you are ready. Track sales, refunds, and capacity from your dashboard.</p><Link to="/register">Create an event <span aria-hidden="true">&rarr;</span></Link></article>
           <article className="audience-card audience-team"><span className="audience-index">03 / EVENT STAFF</span><h3>Keep the queue moving.</h3><p>Use the event scanner to check a guest's ticket at the door. Sign in with the staff account assigned to your event.</p><Link to="/login">Staff sign in <span aria-hidden="true">&rarr;</span></Link></article>
         </div>
+      </section>
+
+      <section className="browse-section category-section" id="categories" aria-labelledby="category-heading">
+        <div className="section-heading category-heading">
+          <div><span className="eyebrow">BROWSE BY CATEGORY</span><h2 id="category-heading">What are you in the mood for?</h2></div>
+          <p className="muted">Choose a category to narrow the event list.</p>
+        </div>
+        <CarouselRail label="Event categories" className="category-carousel">
+          {EVENT_CATEGORIES.map((category, index) => (
+            <button key={category} type="button" className={`category-card${categoryFilter === category ? ' active' : ''}`} aria-pressed={categoryFilter === category} onClick={() => {
+              setCategoryFilter(categoryFilter === category ? '' : category);
+              document.getElementById('all-events')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+            }}>
+              <img src={heroFor(`category-${index}`)} alt="" loading="lazy" decoding="async" />
+              <span>{category}<small>Explore</small></span>
+            </button>
+          ))}
+        </CarouselRail>
+      </section>
+
+      <section className="browse-section event-notes-section" id="event-guides" aria-labelledby="event-notes-heading">
+        <div className="section-heading">
+          <div><span className="eyebrow">A FEW THINGS TO KNOW</span><h2 id="event-notes-heading">Before the event day.</h2></div>
+        </div>
+        <CarouselRail label="Event guides" className="notes-carousel">
+          {EVENT_NOTES.map((note, index) => (
+            <article className="event-note-card" key={note.title}>
+              <img src={heroFor(`note-${index}`)} alt="" loading="lazy" decoding="async" />
+              <div className="event-note-copy"><span className="event-note-tag">{note.tag}</span><h3>{note.title}</h3><p>{note.copy}</p><Link to={note.to}>{note.action} <span aria-hidden="true">→</span></Link></div>
+            </article>
+          ))}
+        </CarouselRail>
       </section>
 
       <section className="organizer-section reveal" id="organizers" aria-labelledby="organizer-heading">

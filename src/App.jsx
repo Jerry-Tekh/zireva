@@ -39,15 +39,13 @@ function Nav({ isLanding }) {
   };
   return (
     <>
-      <button className="nav-toggle" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>Menu</button>
+      <button className="nav-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen((o) => !o)}><svg viewBox="0 0 24 24" aria-hidden="true">{open ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}</svg><span className="nav-toggle-label">{open ? 'Close' : 'Menu'}</span></button>
       <div className={`nav ${open ? 'open' : ''}`}>
         {isLanding && <>
-          <a href="#events" className="nav-link" onClick={scrollTo('events')}>Discover</a>
-          <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>All events</a>
+          <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>Events</a>
           <a href="#categories" className="nav-link" onClick={scrollTo('categories')}>Categories</a>
-          <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
           <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Places</a>
-          <a href="#for-everyone" className="nav-link" onClick={scrollTo('for-everyone')}>For everyone</a>
+          <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
           <a href="#organizers" className="nav-link" onClick={scrollTo('organizers')}>For organizers</a>
         </>}
         {user ? (
@@ -59,7 +57,7 @@ function Nav({ isLanding }) {
         ) : (
           <>
             {isLanding
-              ? <Link to="/register" className="btn primary nav-join" onClick={close}>Get started</Link>
+              ? <><NavLink to="/login" className="nav-link nav-login" onClick={close}>Log in</NavLink><Link to="/register" className="btn primary nav-join" onClick={close}>Create event</Link></>
               : <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>}
           </>
         )}
