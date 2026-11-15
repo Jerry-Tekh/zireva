@@ -2769,3 +2769,55 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .explore-section .event-card-media { min-height: 124px; }
   .landing-shell .app-main { padding-inline: 15px; }
 }
+.landing-shell .nav .nav-join,
+.landing-shell .hero-search-row button.primary,
+.landing-shell .organizer-button { color: #17110b; border-color: #f27b2b; background: #f27b2b; }
+.landing-shell .nav .nav-join:hover,
+.landing-shell .hero-search-row button.primary:hover,
+.landing-shell .organizer-button:hover { color: #17110b; border-color: #ff914d; background: #ff914d; }
+.landing-shell .explore-section .event-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.landing-shell .event-card-action { color: #f27b2b !important; font-size: .82rem; font-weight: 650 !important; }
+.landing-shell .section-heading { align-items: flex-start; }
+.landing-shell .locations-section .section-heading > div,
+.landing-shell .journey-heading > div,
+.landing-shell .audience-section .section-heading > div { display: grid; justify-items: start; gap: 9px; }
+.landing-shell .locations-section .section-heading .muted,
+.landing-shell .journey-heading .muted,
+.landing-shell .audience-section .section-heading .muted { max-width: 60ch; text-align: left; }
+.landing-shell .browse-filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 -4px; }
+.landing-shell .browse-filter-chip,
+.landing-shell .browse-filter-reset { min-height: 38px; padding: 0 15px; border: 1px solid #343834; border-radius: 999px; color: #c5cbc4; background: #171917; font-size: .78rem; font-weight: 600; cursor: pointer; transition: background .16s ease,border-color .16s ease,color .16s ease; }
+.landing-shell .browse-filter-chip:hover,
+.landing-shell .browse-filter-reset:hover { border-color: #f27b2b; color: #fff; }
+.landing-shell .browse-filter-chip.active { border-color: #f27b2b; color: #17110b; background: #f27b2b; }
+.landing-shell .browse-filter-chip:focus-visible,
+.landing-shell .browse-filter-reset:focus-visible,
+.landing-shell .category-card:focus-visible { outline: 2px solid #ffb276; outline-offset: 3px; }
+.landing-shell .browse-filter-reset { margin-left: auto; color: #ffb276; background: transparent; }
+.landing-shell .category-section { display: grid; gap: 22px; scroll-margin-top: 92px; }
+.landing-shell .category-section .section-heading { align-items: flex-start; }
+.landing-shell .category-section .section-heading > div { display: grid; justify-items: start; gap: 9px; }
+.landing-shell .category-section .muted { color: #a0a69f; }
+.landing-shell .category-grid { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 12px; }
+.landing-shell .category-card { position: relative; display: flex; min-width: 0; min-height: 210px; align-items: end; overflow: hidden; padding: 15px; border: 1px solid #292d29; border-radius: 13px; color: #fff; background: #171a17; text-align: left; cursor: pointer; isolation: isolate; }
+.landing-shell .category-card::after { position: absolute; z-index: -1; inset: 15% 0 0; content: ''; background: linear-gradient(0deg,rgba(5,7,5,.88),rgba(5,7,5,.05)); }
+.landing-shell .category-card img { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.landing-shell .category-card:hover img { transform: scale(1.05); }
+.landing-shell .category-card span { font-size: .9rem; font-weight: 650; letter-spacing: -.015em; }
+.landing-shell .category-card.active { border-color: #f27b2b; box-shadow: 0 0 0 1px #f27b2b; }
+.landing-shell .category-card.active span { color: #ffc18f; }
+.landing-shell .explore-section .load-more-row button { border-color: #653d23; color: #ffc18f; background: #211810; }
+.landing-shell .explore-section .load-more-row button:hover { border-color: #f27b2b; background: #302014; }
+@media (max-width: 950px) {
+  .landing-shell .category-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .landing-shell .category-card { min-height: 190px; }
+}
+@media (max-width: 680px) {
+  .landing-shell .browse-filter-row { flex-wrap: nowrap; overflow-x: auto; margin-inline: -4px; padding: 4px; scrollbar-width: none; }
+  .landing-shell .browse-filter-row::-webkit-scrollbar { display: none; }
+  .landing-shell .browse-filter-chip { flex: 0 0 auto; }
+  .landing-shell .browse-filter-reset { flex: 0 0 auto; margin-left: 0; }
+  .landing-shell .category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+  .landing-shell .category-card { min-height: 150px; padding: 12px; }
+  .landing-shell .section-heading { align-items: flex-start; }
+}

@@ -6,6 +6,14 @@ import { apiGet } from '../lib/api';
 import { heroFor } from '../lib/images';
 
 const PAGE = 8;
+const EVENT_CATEGORIES = ['Music', 'Social', 'Business', 'Food & drink', 'Technology', 'Community'];
+const DATE_FILTERS = [
+  { value: 'all', label: 'All events' },
+  { value: 'today', label: 'Happening today' },
+  { value: 'week', label: 'This week' },
+  { value: 'month', label: 'This month' },
+  { value: 'online', label: 'Online events' },
+];
 const JOURNEY_STEPS = [
   { number: '01', title: 'Find the right event', copy: 'Browse published events, search by title or location, and open an event to read its details before you decide.' },
   { number: '02', title: 'Choose your ticket', copy: 'Compare available ticket tiers, prices, and remaining quantities on the event page.' },
@@ -18,6 +26,8 @@ const fmtFullDate = (s) => (s ? new Date(s).toLocaleDateString(undefined, { week
 export default function Browse() {
   const [q, setQ] = useState('');
   const [sort, setSort] = useState('date');
+  const [dateFilter, setDateFilter] = useState('all');
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['events'],
@@ -29,14 +39,34 @@ export default function Browse() {
   const events = useMemo(() => {
     const all = (data?.pages ?? []).flat();
     const needle = q.trim().toLowerCase();
-    const filtered = needle
-      ? all.filter((e) => `${e.title} ${e.location ?? ''}`.toLowerCase().includes(needle))
+    const matchingQuery = needle
+      ? all.filter((e) => `${e.title} ${e.location ?? ''} ${e.description ?? ''} ${e.category ?? e.category_name ?? ''}`.toLowerCase().includes(needle))
       : all;
-    return [...filtered].sort((a, b) => {
+    const matchingCategory = categoryFilter
+      ? matchingQuery.filter((e) => {
+        const category = `${e.category ?? ''} ${e.category_name ?? ''} ${e.category_slug ?? ''}`.toLowerCase();
+        const searchable = `${e.title} ${e.location ?? ''} ${e.description ?? ''}`.toLowerCase();
+        return category.includes(categoryFilter.toLowerCase()) || searchable.includes(categoryFilter.toLowerCase());
+      })
+      : matchingQuery;
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const tomorrowStart = todayStart + 24 * 60 * 60 * 1000;
+    const weekEnd = todayStart + 7 * 24 * 60 * 60 * 1000;
+    const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1).getTime();
+    const matchingDate = dateFilter === 'all' ? matchingCategory : matchingCategory.filter((event) => {
+      if (dateFilter === 'online') return Boolean(event.is_online ?? event.isOnline ?? event.online_url ?? event.meeting_url);
+      const startsAt = Date.parse(event.starts_at);
+      if (Number.isNaN(startsAt) || startsAt < todayStart) return false;
+      if (dateFilter === 'today') return startsAt < tomorrowStart;
+      if (dateFilter === 'week') return startsAt < weekEnd;
+      return startsAt < monthEnd;
+    });
+    return [...matchingDate].sort((a, b) => {
       if (sort === 'name') return a.title.localeCompare(b.title);
       return (a.starts_at || '9999').localeCompare(b.starts_at || '9999'); // date asc, undated last
     });
-  }, [data, q, sort]);
+  }, [data, q, sort, dateFilter, categoryFilter]);
 
   const allEvents = useMemo(() => (data?.pages ?? []).flat(), [data]);
   const locations = useMemo(() => {
@@ -143,7 +173,7 @@ export default function Browse() {
 
       <section className="browse-section reveal explore-section" id="all-events" aria-labelledby="events-heading">
         <div className="section-heading">
-          <div className="explore-heading-copy"><span className="eyebrow">THE EVENT LIST</span><h2 id="events-heading">Find something to do.</h2><p>Search by event or place. Open a listing for the full details and ticket options.</p></div>
+          <div className="explore-heading-copy"><span className="eyebrow">THE EVENT LIST</span><h2 id="events-heading">Discover events in Nigeria.</h2><p>Search by event or place. Open a listing for the full details and ticket options.</p></div>
           <label className="sort-control">Sort
             <select aria-label="Sort events" value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="date">Soonest first</option>
@@ -152,14 +182,21 @@ export default function Browse() {
           </label>
         </div>
 
+        <div className="browse-filter-row" role="group" aria-label="Quick event filters">
+          {DATE_FILTERS.map((filter) => (
+            <button key={filter.value} type="button" className={`browse-filter-chip${dateFilter === filter.value ? ' active' : ''}`} aria-pressed={dateFilter === filter.value} onClick={() => setDateFilter(filter.value)}>{filter.label}</button>
+          ))}
+          {categoryFilter && <button type="button" className="browse-filter-reset" onClick={() => setCategoryFilter('')}>Clear {categoryFilter} filter</button>}
+        </div>
+
       {isLoading && <p className="muted">Loading events…</p>}
       {error && <p className="muted">Could not load events.</p>}
 
       {!isLoading && !error && !hasEvents ? (
         <div className="empty-state">
-          <span className="eyebrow">No events available</span>
-          <h3>{q ? `No events match "${q}".` : 'No published events yet.'}</h3>
-          <p>{q ? 'Try another search term.' : 'Create or publish events in the organizer dashboard to make them available for buyers.'}</p>
+          <span className="eyebrow">Nothing found</span>
+          <h3>{q ? `No events match "${q}".` : categoryFilter ? `No ${categoryFilter.toLowerCase()} events in this list yet.` : dateFilter !== 'all' ? 'No events in this date range.' : 'No published events yet.'}</h3>
+          <p>{q || categoryFilter || dateFilter !== 'all' ? 'Clear a filter or try another search.' : 'Published events will appear here.'}</p>
         </div>
       ) : (
         <div className={`event-grid${events.length === 4 ? ' event-grid-four' : ''}`}>
@@ -178,8 +215,8 @@ export default function Browse() {
                 <h2 className="event-card-title">{ev.title}</h2>
                 <p className="event-meta">{fmtFullDate(ev.starts_at)}{ev.location ? ` · ${ev.location}` : ''}</p>
                 <div className="between" style={{ marginTop: 4 }}>
-                  <span className="badge ok">Event details</span>
-                  <span style={{ color: 'var(--accent)', fontWeight: 800 }}>Get tickets</span>
+                  <span className="badge ok">{ev.category_name ?? ev.category ?? 'Event'}</span>
+                  <span className="event-card-action">Get tickets <span aria-hidden="true">&rarr;</span></span>
                 </div>
               </div>
             </Link>
@@ -196,12 +233,29 @@ export default function Browse() {
       )}
       </section>
 
+      <section className="browse-section category-section" id="categories" aria-labelledby="category-heading">
+        <div className="section-heading category-heading">
+          <div><span className="eyebrow">BROWSE BY CATEGORY</span><h2 id="category-heading">What are you in the mood for?</h2></div>
+          <p className="muted">Choose a category to narrow the event list.</p>
+        </div>
+        <div className="category-grid">
+          {EVENT_CATEGORIES.map((category, index) => (
+            <button key={category} type="button" className={`category-card${categoryFilter === category ? ' active' : ''}`} aria-pressed={categoryFilter === category} onClick={() => {
+              setCategoryFilter(categoryFilter === category ? '' : category);
+              document.getElementById('all-events')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+            }}>
+              <img src={heroFor(`category-${index}`)} alt="" loading="lazy" decoding="async" />
+              <span>{category}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
 
 
       <section className="browse-section reveal locations-section" id="venues" aria-labelledby="venues-heading">
         <div className="section-heading">
-          <div><span className="eyebrow">VENUES & CITIES</span><h2 id="venues-heading">Pick a place. See what’s on.</h2></div>
-          <p className="muted">A few of the places hosting upcoming events.</p>
+          <div><span className="eyebrow">VENUES & CITIES</span><h2 id="venues-heading">Pick a place. See what’s on.</h2><p className="muted">Browse venues attached to events currently on the calendar.</p></div>
         </div>
         {locations.length ? <div className="location-grid">
           {locations.map((place) => {
@@ -216,8 +270,7 @@ export default function Browse() {
 
       <section className="how-section reveal" id="how-it-works" aria-labelledby="how-heading">
         <div className="section-heading journey-heading">
-          <div><span className="eyebrow">BOOKING, MADE CLEAR</span><h2 id="how-heading">From choosing a show to walking in.</h2></div>
-          <p className="muted">The event page has the information you need before you book. Your tickets and entry QR codes stay together in your account.</p>
+          <div><span className="eyebrow">BOOKING & ENTRY</span><h2 id="how-heading">From choosing a show to walking in.</h2><p className="muted">Review the event, choose a ticket, and pay at checkout. Your order and entry QR code are saved under My tickets.</p></div>
         </div>
         <div className="journey-grid">
           {JOURNEY_STEPS.map((step) => (
@@ -236,8 +289,7 @@ export default function Browse() {
 
       <section className="audience-section reveal" id="for-everyone" aria-labelledby="audience-heading">
         <div className="section-heading">
-          <div><span className="eyebrow">MADE FOR EVENT DAYS</span><h2 id="audience-heading">For the crowd, the host, and the door.</h2></div>
-          <p className="muted">A place to find events, sell tickets, and check guests in.</p>
+          <div><span className="eyebrow">THREE SIDES OF EVERY EVENT</span><h2 id="audience-heading">For the crowd, the host, and the door.</h2><p className="muted">Find tickets, run an event, or check guests in.</p></div>
         </div>
         <div className="audience-grid">
           <article className="audience-card audience-attendee"><span className="audience-index">01 / ATTENDEES</span><h3>Find your seat in the crowd.</h3><p>Check the date, venue, and ticket choices before you book. After payment, find your order and entry QR code under My tickets.</p><a href="#all-events">Browse events <span aria-hidden="true">&rarr;</span></a></article>

@@ -44,6 +44,7 @@ function Nav({ isLanding }) {
         {isLanding && <>
           <a href="#events" className="nav-link" onClick={scrollTo('events')}>Discover</a>
           <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>All events</a>
+          <a href="#categories" className="nav-link" onClick={scrollTo('categories')}>Categories</a>
           <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
           <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Places</a>
           <a href="#for-everyone" className="nav-link" onClick={scrollTo('for-everyone')}>For everyone</a>
@@ -126,6 +127,7 @@ export default function App() {
               <h2>Discover</h2>
               <FooterSectionLink landingRoute={landingRoute} id="events">Upcoming events</FooterSectionLink>
               <FooterSectionLink landingRoute={landingRoute} id="all-events">All events</FooterSectionLink>
+              <FooterSectionLink landingRoute={landingRoute} id="categories">Categories</FooterSectionLink>
               <FooterSectionLink landingRoute={landingRoute} id="venues">Places</FooterSectionLink>
               <FooterSectionLink landingRoute={landingRoute} id="for-everyone">Who it is for</FooterSectionLink>
             </nav>
