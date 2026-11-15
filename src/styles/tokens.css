@@ -4001,6 +4001,59 @@ button.danger,
   .landing-shell .nav-authenticated .nav-email { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .landing-shell .nav-authenticated .nav-utilities > button { justify-content: center; white-space: nowrap; }
 }
+
+/* Checkout and order outcomes follow the dark marketplace theme and compact rhythm. */
+.event-shell .event-checkout-dialog {
+  width: min(480px,100%);
+  max-height: calc(100svh - 32px);
+  overflow-y: auto;
+  padding: clamp(20px,3vw,26px) !important;
+  border-color: #343834;
+  border-radius: 10px;
+  color: #f4f5f3;
+  background: #141614 !important;
+  box-shadow: 0 24px 90px rgba(0,0,0,.58);
+}
+.event-shell .event-checkout-dialog h2 { margin-top: 6px !important; color: #f4f5f3; font-size: clamp(1.35rem,3.4vw,1.65rem); font-weight: 650; letter-spacing: -.035em; }
+.event-shell .event-checkout-dialog .eyebrow { color: #f2a16a; font-size: .61rem; letter-spacing: .09em; }
+.event-shell .event-checkout-dialog label { gap: 6px; color: #c7cbc5; font-size: .65rem; letter-spacing: .06em; }
+.event-shell .event-checkout-dialog input { min-height: 42px; padding: 9px 11px; border-color: #393e39; border-radius: 7px; color: #f4f5f3; background: #171917; font-size: .76rem; }
+.event-shell .event-checkout-dialog input:focus { border-color: #a85a2b; box-shadow: 0 0 0 3px rgba(173,71,15,.15); }
+.event-shell .event-checkout-dialog .rule { height: 1px; border: 0; background: #303430; }
+.event-shell .event-checkout-dialog button { min-height: 40px; border-radius: 7px; font-size: .72rem; font-weight: 650; }
+.event-shell .event-checkout-dialog button.primary { border-color: #ad470f; color: #fff !important; background: #ad470f; }
+.event-shell .event-checkout-dialog button.primary:hover { border-color: #bd5115; background: #bd5115; }
+.event-shell .event-checkout-dialog button.ghost { border-color: #414641; color: #fff; background: #202320; }
+.event-shell .event-checkout-dialog .alert { border-color: #315538; border-radius: 7px; color: #b9e3bd; background: #17251a; font-size: .72rem !important; }
+.event-shell .event-checkout-dialog .alert.danger { border-color: #693933; color: #ffd8d3; background: #291714; }
+.event-shell .order-state-page { display: grid; min-height: min(58vh,520px); place-items: center; }
+.event-shell .order-state-card { display: grid; width: min(100%,760px); justify-items: start; gap: 12px; padding: clamp(22px,4vw,36px); border-color: #303530; border-radius: 10px; color: #f4f5f3; background: #141614; box-shadow: none; }
+.event-shell .order-state-card h1 { max-width: 24ch; color: #f4f5f3; font-size: clamp(1.5rem,3.6vw,2.25rem); font-weight: 650; letter-spacing: -.045em; line-height: 1.12; }
+.event-shell .order-state-card p { color: #a1a69f; font-size: .76rem; line-height: 1.55; }
+.event-shell .order-confirmation-page { gap: 16px; }
+.event-shell .order-confirmation-summary { padding: clamp(18px,3vw,26px); border-color: #303530; border-radius: 10px; color: #f4f5f3; background: #141614; box-shadow: none; }
+.event-shell .order-confirmation-copy { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.event-shell .order-confirmation-copy h1 { margin-top: 8px; color: #f4f5f3; font-size: clamp(1.75rem,4vw,2.4rem); font-weight: 650; letter-spacing: -.05em; }
+.event-shell .order-confirmation-copy p { margin-top: 7px; color: #a1a69f; font-size: .68rem; }
+.event-shell .order-confirmation-copy > .btn { min-height: 38px; padding: 0 13px; border-color: #ad470f; border-radius: 7px; color: #fff; background: #ad470f; font-size: .7rem; white-space: nowrap; }
+.event-shell .order-ticket-grid { grid-template-columns: repeat(auto-fit,minmax(min(100%,440px),1fr)); gap: 14px; }
+.event-shell .order-ticket-card { grid-template-columns: minmax(0,1fr) 210px; min-width: 0; border-color: #303530; border-radius: 10px; color: #f4f5f3; background: #141614; box-shadow: none; }
+.event-shell .order-ticket-copy { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 20px; min-height: 190px; padding: 18px; }
+.event-shell .order-ticket-copy .eyebrow { color: #f2a16a; font-size: .61rem; }
+.event-shell .order-ticket-copy h2 { margin-top: 7px; color: #f4f5f3; font-size: 1.2rem; font-weight: 650; }
+.event-shell .order-ticket-copy p { margin-top: 7px; color: #a1a69f; font-size: .68rem; }
+.event-shell .order-ticket-copy .badge.ok { border: 1px solid #315538; color: #b9e3bd; background: #17251a; }
+.event-shell .order-ticket-qr { display: flex; min-width: 0; align-items: center; justify-content: center; padding: 14px; border-left: 1px dashed #424842; background: #fff; }
+.event-shell .order-ticket-qr img { display: block; width: min(100%,180px); height: auto; image-rendering: pixelated; }
+.event-shell .order-ticket-qr [role="status"] { color: #29312b; font-size: .68rem; text-align: center; }
+.event-shell .loading-skeleton { --skeleton-base: #171a17; --skeleton-highlight: #252925; }
+.event-shell .loading-skeleton--confirmation { border-color: #303530; background: #141614; }
+@media (max-width: 620px) {
+  .event-shell .order-confirmation-copy { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .event-shell .order-ticket-card { grid-template-columns: minmax(0,1fr); }
+  .event-shell .order-ticket-copy { min-height: 150px; }
+  .event-shell .order-ticket-qr { min-height: 190px; border-top: 1px dashed #424842; border-left: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
   .loading-skeleton__bar, .loading-skeleton__avatar, .loading-skeleton__route-card,
   .loading-skeleton--chart > span, .loading-skeleton--confirmation > span,

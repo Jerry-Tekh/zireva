@@ -78,7 +78,7 @@ export default function App() {
   }, [pathname]);
   const landingRoute = pathname === '/';
   const authRoute = pathname === '/login' || pathname === '/register';
-  const eventRoute = pathname.startsWith('/events/');
+  const eventRoute = pathname.startsWith('/events/') || pathname.startsWith('/orders/');
   const dashboardRoute = ['/dashboard', '/account', '/tickets', '/scan', '/admin/overview', '/admin/users'].includes(pathname)
     || pathname.startsWith('/organizer');
   return (
