@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth.jsx';
 import { messageFor } from '../lib/errors';
 import AuthVisual from '../components/AuthVisual.jsx';
+import BrandMark from '../components/BrandMark.jsx';
 
 export default function Register() {
   const { register } = useAuth();
@@ -36,6 +37,10 @@ export default function Register() {
         linkLabel="Browse events"
       />
       <section className="auth-card panel register-card">
+        <Link to="/" className="auth-form-brand" aria-label="Zireva home">
+          <BrandMark />
+          <span>Zireva</span>
+        </Link>
         <span className="eyebrow">Welcome to Zireva</span>
         <h1>Create your account</h1>
         <p className="auth-intro">Create an account to book and manage your tickets.</p>

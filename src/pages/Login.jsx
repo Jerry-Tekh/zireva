@@ -4,6 +4,7 @@ import { useAuth } from '../lib/auth.jsx';
 import { messageFor } from '../lib/errors';
 import { DEMO_CREDENTIALS, DEMO_PASSWORD } from '../lib/demoCredentials';
 import AuthVisual from '../components/AuthVisual.jsx';
+import BrandMark from '../components/BrandMark.jsx';
 
 export default function Login() {
   const { login } = useAuth();
@@ -41,6 +42,10 @@ export default function Login() {
         linkLabel="Explore events"
       />
       <section className="auth-card panel">
+        <Link to="/" className="auth-form-brand" aria-label="Zireva home">
+          <BrandMark />
+          <span>Zireva</span>
+        </Link>
         <span className="eyebrow">Welcome back</span>
         <h1>Log in to Zireva</h1>
         <p className="auth-intro">Sign in to continue to your tickets and events.</p>

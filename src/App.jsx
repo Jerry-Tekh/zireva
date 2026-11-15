@@ -79,15 +79,17 @@ export default function App() {
     || pathname.startsWith('/organizer');
   return (
     <div className={`app-shell${dashboardRoute ? ' has-dashboard' : ''}${landingRoute ? ' landing-shell' : ''}${authRoute ? ' auth-shell' : ''}${eventRoute ? ' event-shell' : ''}`}>
-      <header className="app-header">
-        <div className="app-header-inner">
-        <Link to="/" className="brand">
-          <BrandMark />
-          <span className="brand-name">Zireva</span>
-        </Link>
-        {!authRoute && <Nav isLanding={landingRoute} />}
-        </div>
-      </header>
+      {!authRoute && (
+        <header className="app-header">
+          <div className="app-header-inner">
+            <Link to="/" className="brand">
+              <BrandMark />
+              <span className="brand-name">Zireva</span>
+            </Link>
+            <Nav isLanding={landingRoute} />
+          </div>
+        </header>
+      )}
       <main className="app-main">
         <Routes>
           <Route path="/" element={<Browse />} />
@@ -107,7 +109,7 @@ export default function App() {
           </Route>
         </Routes>
       </main>
-      {landingRoute || authRoute || eventRoute ? (
+      {authRoute ? null : landingRoute || eventRoute ? (
         <footer className="app-footer landing-footer">
           <div className="landing-footer-cta">
             <div><span className="eyebrow">OUT TONIGHT OR PLANNING AHEAD?</span><h2>Make a date of it.</h2><p>Browse upcoming events or sign in to manage your tickets.</p></div>
