@@ -4048,11 +4048,29 @@ button.danger,
 .event-shell .order-ticket-qr [role="status"] { color: #29312b; font-size: .68rem; text-align: center; }
 .event-shell .loading-skeleton { --skeleton-base: #171a17; --skeleton-highlight: #252925; }
 .event-shell .loading-skeleton--confirmation { border-color: #303530; background: #141614; }
+@media (min-width: 901px) {
+  .event-shell .app-header-inner { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 18px; }
+  .event-shell .nav-toggle { display: none; }
+  .event-shell .nav { position: static; display: flex; min-width: 0; flex: 1 1 auto; align-items: center; justify-content: flex-end; gap: 10px; padding: 0; border: 0; background: transparent; box-shadow: none; }
+  .event-shell .nav-primary { display: flex; min-width: 0; flex: 1 1 auto; align-items: center; justify-content: center; gap: 2px; }
+  .event-shell .nav-primary .nav-link { min-height: 36px; padding-inline: clamp(7px,.9vw,12px); border-color: transparent !important; border-radius: 7px; color: #b8bdb7 !important; background: transparent !important; font-size: .72rem; font-weight: 570; white-space: nowrap; }
+  .event-shell .nav-primary .nav-link:hover,
+  .event-shell .nav-primary .nav-link.active { color: #fff !important; background: #191c19 !important; }
+  .event-shell .nav-utilities { display: flex; min-width: 0; flex: 0 0 auto; align-items: center; gap: 8px; }
+  .event-shell .nav-authenticated .nav-dashboard { min-width: 84px; min-height: 38px; padding-inline: 12px; border-radius: 7px; color: #fff !important; background: #ad470f !important; font-size: .7rem; white-space: nowrap; }
+  .event-shell .nav-authenticated .nav-email { display: block; width: clamp(78px,10vw,130px); overflow: hidden; color: #a1a69f; font-size: .65rem; text-overflow: ellipsis; white-space: nowrap; }
+  .event-shell .nav-authenticated .nav-utilities > button { min-width: 70px; min-height: 38px; padding: 0 11px; border-radius: 7px; white-space: nowrap; font-size: .69rem; }
+}
 @media (max-width: 620px) {
   .event-shell .order-confirmation-copy { align-items: flex-start; flex-direction: column; gap: 14px; }
   .event-shell .order-ticket-card { grid-template-columns: minmax(0,1fr); }
   .event-shell .order-ticket-copy { min-height: 150px; }
   .event-shell .order-ticket-qr { min-height: 190px; border-top: 1px dashed #424842; border-left: 0; }
+}
+@media (max-width: 900px) {
+  .event-shell .nav-primary .nav-link { justify-content: flex-start; border-color: transparent !important; color: #d0d3cf !important; background: transparent !important; }
+  .event-shell .nav-primary .nav-link:hover,
+  .event-shell .nav-primary .nav-link.active { color: #fff !important; background: #202320 !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .loading-skeleton__bar, .loading-skeleton__avatar, .loading-skeleton__route-card,

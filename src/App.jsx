@@ -24,7 +24,7 @@ function FooterSectionLink({ landingRoute, id, className, children }) {
     : <a className={className} href={`/#${id}`}>{children}</a>;
 }
 
-function Nav({ isLanding }) {
+function Nav({ isLanding, showDiscovery }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -42,12 +42,12 @@ function Nav({ isLanding }) {
       <button className="nav-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen((o) => !o)}><svg viewBox="0 0 24 24" aria-hidden="true">{open ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}</svg><span className="nav-toggle-label">{open ? 'Close' : 'Menu'}</span></button>
       <div className={`nav${user ? ' nav-authenticated' : ''}${open ? ' open' : ''}`}>
         <div className="nav-primary">
-          {isLanding && <>
-            <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>Events</a>
-            <a href="#categories" className="nav-link" onClick={scrollTo('categories')}>Categories</a>
-            <a href="#venues" className="nav-link" onClick={scrollTo('venues')}>Places</a>
-            <a href="#how-it-works" className="nav-link" onClick={scrollTo('how-it-works')}>How it works</a>
-            <a href="#organizers" className="nav-link" onClick={scrollTo('organizers')}>For organizers</a>
+          {showDiscovery && <>
+            <a href={isLanding ? '#all-events' : '/#all-events'} className="nav-link" onClick={isLanding ? scrollTo('all-events') : close}>Events</a>
+            <a href={isLanding ? '#categories' : '/#categories'} className="nav-link" onClick={isLanding ? scrollTo('categories') : close}>Categories</a>
+            <a href={isLanding ? '#venues' : '/#venues'} className="nav-link" onClick={isLanding ? scrollTo('venues') : close}>Places</a>
+            <a href={isLanding ? '#how-it-works' : '/#how-it-works'} className="nav-link" onClick={isLanding ? scrollTo('how-it-works') : close}>How it works</a>
+            <a href={isLanding ? '#organizers' : '/#organizers'} className="nav-link" onClick={isLanding ? scrollTo('organizers') : close}>For organizers</a>
           </>}
           {!user && !isLanding && <NavLink to="/login" className={link} onClick={close}>Log in</NavLink>}
         </div>
@@ -90,7 +90,7 @@ export default function App() {
               <BrandMark />
               <span className="brand-name">Zireva</span>
             </Link>
-            <Nav isLanding={landingRoute} />
+            <Nav isLanding={landingRoute} showDiscovery={landingRoute || eventRoute} />
           </div>
         </header>
       )}
