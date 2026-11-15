@@ -2995,3 +2995,58 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .landing-footer-main { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px 14px; }
   .landing-shell .landing-footer-brand { grid-column: 1/-1; }
 }
+
+/* Keep the page viewport-sized while each discovery rail scrolls independently. */
+.landing-shell {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  grid-template-columns: minmax(0, 1fr);
+}
+.landing-shell > .app-header,
+.landing-shell > .app-main,
+.landing-shell > .landing-footer { width: 100%; min-width: 0; }
+.landing-shell .app-header-inner,
+.landing-shell .app-main,
+.landing-shell .browse-page,
+.landing-shell .browse-page > *,
+.landing-shell .browse-section,
+.landing-shell .how-section,
+.landing-shell .audience-section,
+.landing-shell .market-intro,
+.landing-shell .market-carousel { min-width: 0; }
+.landing-shell .market-carousel,
+.landing-shell .market-carousel-track { width: 100%; max-width: 100%; }
+.landing-shell .market-carousel-track { overscroll-behavior-x: contain; }
+.landing-shell .landing-footer { padding-inline: max(16px,calc((100% - 1120px)/2)); }
+.landing-shell .landing-footer-main,
+.landing-shell .landing-footer-bottom { width: 100%; min-width: 0; }
+
+@media (min-width: 681px) and (max-width: 1024px) {
+  .landing-shell .app-header-inner { padding-inline: 22px; }
+  .landing-shell .app-main { padding: 0 22px 64px; }
+  .landing-shell .browse-page { gap: 44px; }
+  .landing-shell .browse-hero-card { min-height: clamp(240px,34vw,330px); }
+  .landing-shell .market-carousel-track > * { flex-basis: clamp(220px,36%,300px); }
+  .landing-shell .location-carousel .market-carousel-track > * { flex-basis: clamp(210px,34%,280px); }
+  .landing-shell .notes-carousel .market-carousel-track > * { flex-basis: clamp(240px,42%,320px); }
+  .landing-shell .landing-footer { padding-inline: 22px; }
+  .landing-shell .landing-footer-main { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px 24px; padding-inline: 0; }
+  .landing-shell .landing-footer-brand { grid-column: 1 / -1; }
+  .landing-shell .landing-footer-bottom { padding-inline: 0; }
+}
+
+@media (max-width: 680px) {
+  .landing-shell .app-main { padding-inline: 13px; }
+  .landing-shell .market-search { min-width: 0; }
+  .landing-shell .market-search-submit { flex: 0 0 auto; }
+  .landing-shell .section-heading,
+  .landing-shell .explore-section .section-heading { min-width: 0; }
+  .landing-shell .market-carousel-track > * { flex-basis: min(78vw,330px); }
+  .landing-shell .location-carousel .market-carousel-track > * { flex-basis: min(72vw,300px); }
+  .landing-shell .notes-carousel .market-carousel-track > * { flex-basis: min(83vw,340px); }
+  .landing-shell .landing-footer { padding-inline: 13px; }
+  .landing-shell .landing-footer-main { grid-template-columns: repeat(2,minmax(0,1fr)); padding-inline: 0; }
+  .landing-shell .landing-footer-bottom { align-items: flex-start; flex-direction: column; padding-inline: 0; }
+}
