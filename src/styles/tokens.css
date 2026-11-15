@@ -3355,3 +3355,113 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .landing-footer-actions { align-self: stretch; justify-content: flex-start; }
   .landing-shell .landing-footer-actions a { flex: 1 1 132px; }
 }
+
+/* Premium shared footer system: compact corners, clear groups, and calm contrast. */
+.landing-shell .landing-footer,
+.auth-shell .landing-footer,
+.event-shell .landing-footer {
+  padding: 30px max(18px,calc((100% - 1120px)/2)) 0;
+  border-top: 1px solid #292d29;
+  color: #f4f5f3;
+  background: #090a09;
+}
+.landing-shell .landing-footer-cta,
+.auth-shell .landing-footer-cta,
+.event-shell .landing-footer-cta {
+  display: flex;
+  max-width: 1120px;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(22px,4vw,48px);
+  margin: 0 auto;
+  padding: clamp(22px,3.4vw,38px);
+  border: 1px solid #674025;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 92% 0%,rgba(242,123,43,.2),transparent 42%),linear-gradient(112deg,#382012 0%,#65391f 100%);
+}
+.landing-shell .landing-footer-cta > div:first-child,
+.auth-shell .landing-footer-cta > div:first-child,
+.event-shell .landing-footer-cta > div:first-child { max-width: 530px; }
+.landing-shell .landing-footer-cta .eyebrow,
+.auth-shell .landing-footer-cta .eyebrow,
+.event-shell .landing-footer-cta .eyebrow { color: #ffc18f; font-size: .67rem; letter-spacing: .1em; }
+.landing-shell .landing-footer-cta h2,
+.auth-shell .landing-footer-cta h2,
+.event-shell .landing-footer-cta h2 { margin: 10px 0 8px; color: #fff; font-size: clamp(1.55rem,2.8vw,2.1rem); font-weight: 650; letter-spacing: -.045em; line-height: 1.12; }
+.landing-shell .landing-footer-cta p,
+.auth-shell .landing-footer-cta p,
+.event-shell .landing-footer-cta p { color: rgba(255,255,255,.78); font-size: .84rem; line-height: 1.6; }
+.landing-shell .landing-footer-actions,
+.auth-shell .landing-footer-actions,
+.event-shell .landing-footer-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: center; justify-content: center; gap: 9px; }
+.landing-shell .landing-footer-actions a,
+.auth-shell .landing-footer-actions a,
+.event-shell .landing-footer-actions a { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; gap: 8px; padding: 0 15px; border-radius: 7px !important; font-size: .77rem; font-weight: 650; line-height: 1.2; text-align: center; white-space: nowrap; }
+.landing-shell .landing-footer-actions .footer-action-primary,
+.auth-shell .landing-footer-actions .footer-action-primary,
+.event-shell .landing-footer-actions .footer-action-primary { color: #1b1009; border: 1px solid #f27b2b; background: #f27b2b; }
+.landing-shell .landing-footer-actions .footer-action-primary:hover,
+.auth-shell .landing-footer-actions .footer-action-primary:hover,
+.event-shell .landing-footer-actions .footer-action-primary:hover { border-color: #ff914d; background: #ff914d; }
+.landing-shell .landing-footer-actions .footer-action-secondary,
+.auth-shell .landing-footer-actions .footer-action-secondary,
+.event-shell .landing-footer-actions .footer-action-secondary { color: #f4f5f3; border: 1px solid rgba(255,255,255,.28); background: rgba(15,16,15,.3); }
+.landing-shell .landing-footer-actions .footer-action-secondary:hover,
+.auth-shell .landing-footer-actions .footer-action-secondary:hover,
+.event-shell .landing-footer-actions .footer-action-secondary:hover { border-color: #ffad76; background: rgba(15,16,15,.58); }
+.landing-shell .landing-footer-main,
+.auth-shell .landing-footer-main,
+.event-shell .landing-footer-main { grid-template-columns: minmax(220px,1.65fr) repeat(3,minmax(120px,1fr)); gap: clamp(24px,4vw,62px); max-width: 1120px; padding: 42px 4px 36px; }
+.landing-shell .landing-footer-brand .brand,
+.auth-shell .landing-footer-brand .brand,
+.event-shell .landing-footer-brand .brand { color: #f4f5f3; }
+.landing-shell .landing-footer-brand .brand-logo,
+.auth-shell .landing-footer-brand .brand-logo,
+.event-shell .landing-footer-brand .brand-logo { border-color: #343834; }
+.landing-shell .landing-footer-brand p,
+.auth-shell .landing-footer-brand p,
+.event-shell .landing-footer-brand p { max-width: 30ch; margin-top: 14px; color: #929990; font-size: .8rem; line-height: 1.75; }
+.landing-shell .landing-footer-column,
+.auth-shell .landing-footer-column,
+.event-shell .landing-footer-column { gap: 7px; }
+.landing-shell .landing-footer-column h2,
+.auth-shell .landing-footer-column h2,
+.event-shell .landing-footer-column h2 { margin: 2px 0 7px; color: #e7e9e6; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.landing-shell .landing-footer-column a,
+.auth-shell .landing-footer-column a,
+.event-shell .landing-footer-column a { min-height: 34px; color: #969c95; font-size: .76rem; transition: color .16s ease,transform .16s ease; }
+.landing-shell .landing-footer-column a:hover,
+.auth-shell .landing-footer-column a:hover,
+.event-shell .landing-footer-column a:hover { color: #ffad76; transform: translateX(2px); }
+.landing-shell .landing-footer-bottom,
+.auth-shell .landing-footer-bottom,
+.event-shell .landing-footer-bottom { display: flex; max-width: 1120px; align-items: center; justify-content: space-between; gap: 18px; margin: 0 auto; padding: 16px 4px 20px; border-top: 1px solid #262a26; color: #777e77; font-size: .68rem; }
+.landing-shell .landing-footer-status,
+.auth-shell .landing-footer-status,
+.event-shell .landing-footer-status { display: flex; align-items: center; gap: 10px; }
+.landing-shell .landing-footer-status > span,
+.auth-shell .landing-footer-status > span,
+.event-shell .landing-footer-status > span { color: #898f88; font-size: .68rem; }
+@media (max-width: 760px) {
+  .landing-shell .landing-footer,
+  .auth-shell .landing-footer,
+  .event-shell .landing-footer { padding: 18px 15px 0; }
+  .landing-shell .landing-footer-cta,
+  .auth-shell .landing-footer-cta,
+  .event-shell .landing-footer-cta { align-items: flex-start; flex-direction: column; gap: 19px; padding: 23px 20px; }
+  .landing-shell .landing-footer-actions,
+  .auth-shell .landing-footer-actions,
+  .event-shell .landing-footer-actions { width: 100%; justify-content: flex-start; }
+  .landing-shell .landing-footer-actions a,
+  .auth-shell .landing-footer-actions a,
+  .event-shell .landing-footer-actions a { flex: 1 1 145px; }
+  .landing-shell .landing-footer-main,
+  .auth-shell .landing-footer-main,
+  .event-shell .landing-footer-main { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 18px; padding: 32px 2px 26px; }
+  .landing-shell .landing-footer-brand,
+  .auth-shell .landing-footer-brand,
+  .event-shell .landing-footer-brand { grid-column: 1/-1; }
+  .landing-shell .landing-footer-bottom,
+  .auth-shell .landing-footer-bottom,
+  .event-shell .landing-footer-bottom { align-items: flex-start; flex-direction: column; padding: 14px 2px 18px; }
+}
