@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../lib/auth.jsx';
 import { changePassword, listSessions, revokeSession, updateMe } from '../lib/authApi';
 import { messageFor } from '../lib/errors';
+import { RowsSkeleton } from '../components/LoadingSkeleton.jsx';
 
 export default function Account() {
   const { user, replaceUser } = useAuth();
@@ -121,7 +122,7 @@ export default function Account() {
           {sessionMessage.text}
         </p>
       )}
-      {sessionsQuery.isLoading && <p className="muted" style={{ marginTop: 14 }}>Loading sessions…</p>}
+      {sessionsQuery.isLoading && <RowsSkeleton count={2} label="Loading active sessions" />}
       {sessionsQuery.isError && (
         <div style={{ marginTop: 14 }}>
           <p role="alert" className="alert danger">{messageFor(sessionsQuery.error)}</p>

@@ -4,6 +4,7 @@ import { listScannableEvents, scanTicket } from '../lib/scanApi';
 import { messageFor } from '../lib/errors';
 import CameraScanner from '../components/CameraScanner.jsx';
 import StaffScanAnalytics from '../components/StaffScanAnalytics.jsx';
+import { RowsSkeleton } from '../components/LoadingSkeleton.jsx';
 
 export default function Scanner() {
   const [eventId, setEventId] = useState('');
@@ -72,7 +73,7 @@ export default function Scanner() {
             ))}
           </select>
         </label>
-        {events.isLoading && <p className="muted">Loading assigned events…</p>}
+        {events.isLoading && <RowsSkeleton count={1} label="Loading assigned events" />}
         {events.isError && (
           <div>
             <p role="alert" className="alert danger">{messageFor(events.error)}</p>

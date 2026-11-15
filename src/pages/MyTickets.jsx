@@ -6,6 +6,7 @@ import { heroFor } from '../lib/images';
 import { listMyRefundRequests, requestRefund } from '../lib/refundApi';
 import { messageFor } from '../lib/errors';
 import QrCode from '../components/QrCode.jsx';
+import { RowsSkeleton, TicketWalletSkeleton } from '../components/LoadingSkeleton.jsx';
 
 const money = (cents) => `$${(cents / 100).toFixed(2)}`;
 const dateTime = (value) => {
@@ -62,7 +63,7 @@ export default function MyTickets() {
     onError: (e) => setErr(messageFor(e)),
   });
 
-  if (ordersQuery.isLoading) return <div className="page wallet-page"><p className="dashboard-loading" role="status">Loading your ticket wallet…</p></div>;
+  if (ordersQuery.isLoading) return <div className="page wallet-page"><TicketWalletSkeleton /></div>;
   if (ordersQuery.isError) {
     return (
       <div className="page wallet-page">
@@ -93,7 +94,7 @@ export default function MyTickets() {
         <p>Your next events, ticket entry status, and complete refund history in one place. Event times use your local timezone.</p>
       </header>
       {err && <p role="alert" className="alert danger">{err}</p>}
-      {refundRequests.isLoading && <p className="muted">Loading refund request history…</p>}
+      {refundRequests.isLoading && <RowsSkeleton count={2} label="Loading refund request history" />}
       {refundRequests.isError && (
         <div>
           <p role="alert" className="alert danger">{messageFor(refundRequests.error)}</p>

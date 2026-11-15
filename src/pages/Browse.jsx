@@ -3,6 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { apiGet } from '../lib/api';
 import { heroFor } from '../lib/images';
+import { EventCardsSkeleton } from '../components/LoadingSkeleton.jsx';
 
 const PAGE = 8;
 const EVENT_CATEGORIES = ['Music', 'Social events', 'Business', 'Religious events', 'Technology', 'Community', 'Arts & culture', 'Food & drink'];
@@ -256,7 +257,7 @@ export default function Browse() {
 
         {categoryFilter && <button type="button" className="browse-filter-reset" onClick={() => setCategoryFilter('')}>Clear {categoryFilter} filter</button>}
 
-      {isLoading && <p className="muted">Loading events…</p>}
+      {isLoading && <EventCardsSkeleton count={3} />}
       {error && <p className="muted">Could not load events.</p>}
 
       {!isLoading && !error && !hasEvents ? (
@@ -265,7 +266,7 @@ export default function Browse() {
           <h3>{q ? `No events match "${q}".` : categoryFilter ? `No ${categoryFilter.toLowerCase()} events in this list yet.` : dateFilter !== 'all' ? 'No events in this date range.' : 'No published events yet.'}</h3>
           <p>{q || categoryFilter || dateFilter !== 'all' ? 'Clear a filter or try another search.' : 'Published events will appear here.'}</p>
         </div>
-      ) : (
+      ) : isLoading || error ? null : (
         <CarouselRail label="All events" className="event-carousel browse-event-carousel">
           {events.map((event) => <EventCard key={event.id} event={event} />)}
         </CarouselRail>

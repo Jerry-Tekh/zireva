@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { listUsers, updateUserRole } from '../lib/authApi';
 import { messageFor } from '../lib/errors';
 import Pagination from '../components/Pagination.jsx';
+import { RowsSkeleton } from '../components/LoadingSkeleton.jsx';
 
 const ROLES = ['super_admin', 'organizer', 'event_staff', 'registered_user'];
 const PAGE_SIZE = 20;
@@ -73,7 +74,7 @@ export default function AdminUsers() {
         </p>
       )}
 
-      {usersQuery.isLoading ? <p className="muted">Loading users…</p> : usersQuery.isError ? (
+      {usersQuery.isLoading ? <RowsSkeleton count={5} label="Loading users" /> : usersQuery.isError ? (
         <div>
           <p role="alert" className="alert danger">{messageFor(usersQuery.error)}</p>
           <button type="button" onClick={() => usersQuery.refetch()}>Retry loading users</button>

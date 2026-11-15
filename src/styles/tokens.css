@@ -3910,6 +3910,79 @@ button.danger,
 .app-shell.has-dashboard .dashboard-content .admin-users-results-heading { padding: 14px 14px 11px; }
 .app-shell.has-dashboard .dashboard-content .admin-users-results-heading h2 { font-size: .92rem; }
 
+/* Shared content-shaped placeholders for data fetched from the API. */
+.loading-skeleton { --skeleton-base: #e8ece8; --skeleton-highlight: #f7f9f7; display: grid; gap: 14px; width: 100%; }
+.loading-skeleton__bar,
+.loading-skeleton__avatar,
+.loading-skeleton__route-card,
+.loading-skeleton--chart > span,
+.loading-skeleton--confirmation > span,
+.loading-skeleton--event-workspace > span { display: block; background: linear-gradient(105deg,var(--skeleton-base) 25%,var(--skeleton-highlight) 42%,var(--skeleton-base) 64%); background-size: 250% 100%; animation: loading-skeleton-shimmer 1.45s ease-in-out infinite; }
+.loading-skeleton__bar { width: var(--skeleton-width,100%); height: 12px; border-radius: 6px; }
+.loading-skeleton--cards { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.loading-skeleton__event { overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.loading-skeleton__image { width: 100%; height: clamp(130px,18vw,220px); border-radius: 0; }
+.loading-skeleton__event-copy { display: grid; gap: 12px; padding: 16px; }
+.loading-skeleton--rows { gap: 8px; margin-top: 14px; }
+.loading-skeleton__row { display: flex; align-items: center; gap: 12px; min-height: 62px; padding: 11px 13px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
+.loading-skeleton__avatar { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; }
+.loading-skeleton__row-copy { display: grid; flex: 1; gap: 8px; }
+.loading-skeleton--summary { grid-template-columns: repeat(3,minmax(0,1fr)); margin-block: 14px; }
+.loading-skeleton__summary-card { display: grid; align-content: start; gap: 12px; min-height: 112px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.loading-skeleton__summary-value { height: 25px; }
+.loading-skeleton--wallet { gap: 20px; }
+.loading-skeleton__wallet-heading { display: grid; gap: 12px; max-width: 360px; padding: 18px 0; }
+.loading-skeleton__wallet-group { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.loading-skeleton__ticket { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 9px; }
+.loading-skeleton__ticket-image { width: 100%; height: 94px; border-radius: 6px; }
+.loading-skeleton__ticket > div { display: grid; align-content: center; gap: 11px; }
+.loading-skeleton--route { width: min(100% - 32px,900px); margin: 36px auto; }
+.loading-skeleton__route-card { height: 280px; border: 1px solid var(--border); border-radius: 12px; }
+.loading-skeleton--confirmation { max-width: 760px; min-height: 270px; align-content: center; justify-items: center; margin: 40px auto; padding: 34px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+.loading-skeleton--confirmation > span { width: 70%; height: 18px; border-radius: 8px; }
+.loading-skeleton--confirmation > span:first-child { width: 34%; height: 25px; }
+.loading-skeleton--chart { position: relative; display: flex; align-items: end; justify-content: space-around; min-height: 220px; overflow: hidden; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.loading-skeleton--chart > span { width: 11%; height: 42%; border-radius: 5px 5px 0 0; }
+.loading-skeleton--chart > span:nth-child(2) { height: 72%; }
+.loading-skeleton--chart > span:nth-child(3) { height: 55%; }
+.loading-skeleton--event-workspace { gap: 16px; }
+.loading-skeleton--event-workspace > span { min-height: 140px; border: 1px solid var(--border); border-radius: 10px; }
+.loading-skeleton--event-workspace > span:first-child { min-height: 330px; }
+@keyframes loading-skeleton-shimmer { to { background-position-x: -250%; } }
+.landing-shell .loading-skeleton { --skeleton-base: #171a17; --skeleton-highlight: #252925; }
+.landing-shell .loading-skeleton__event,
+.landing-shell .loading-skeleton__row,
+.landing-shell .loading-skeleton__summary-card,
+.landing-shell .loading-skeleton__wallet-group,
+.landing-shell .loading-skeleton--confirmation,
+.landing-shell .loading-skeleton--chart { border-color: #303530; background-color: #141614; }
+.app-shell.has-dashboard .loading-skeleton { --skeleton-base: #202320; --skeleton-highlight: #2a2e2a; }
+.app-shell.has-dashboard .loading-skeleton__event,
+.app-shell.has-dashboard .loading-skeleton__row,
+.app-shell.has-dashboard .loading-skeleton__summary-card,
+.app-shell.has-dashboard .loading-skeleton__wallet-group,
+.app-shell.has-dashboard .loading-skeleton--confirmation,
+.app-shell.has-dashboard .loading-skeleton--chart { border-color: #303530; background-color: #141614; }
+.app-shell.has-dashboard .dashboard-content .platform-loading-layout .platform-skeleton { background: linear-gradient(100deg,#202320 25%,#2a2e2a 45%,#202320 65%); background-size: 240% 100%; }
+@media (max-width: 700px) {
+  .loading-skeleton--cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .loading-skeleton--cards .loading-skeleton__event:last-child { display: none; }
+  .loading-skeleton--summary { gap: 8px; }
+  .loading-skeleton__summary-card { min-height: 92px; padding: 12px; }
+  .loading-skeleton__ticket { grid-template-columns: 96px 1fr; gap: 10px; }
+  .loading-skeleton__ticket-image { height: 78px; }
+}
+@media (max-width: 460px) {
+  .loading-skeleton--cards { grid-template-columns: 1fr; }
+  .loading-skeleton--cards .loading-skeleton__event:not(:first-child) { display: none; }
+  .loading-skeleton__row { gap: 9px; padding-inline: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-skeleton__bar, .loading-skeleton__avatar, .loading-skeleton__route-card,
+  .loading-skeleton--chart > span, .loading-skeleton--confirmation > span,
+  .loading-skeleton--event-workspace > span { animation: none; }
+}
+
 @media (max-width: 860px) {
   .app-shell.has-dashboard .dashboard-content { padding: 22px 18px 30px; }
   .app-shell.has-dashboard .dashboard-content .platform-overview-header { grid-template-columns: minmax(0,1fr); align-items: start; }

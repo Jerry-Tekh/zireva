@@ -2,6 +2,7 @@ import { lazy, Suspense, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { staffScanAnalytics } from '../lib/analyticsApi';
 import { messageFor } from '../lib/errors';
+import { LoadingSkeleton, SummarySkeleton } from './LoadingSkeleton.jsx';
 
 const StaffScanTrendChart = lazy(() => import('./AnalyticsCharts.jsx').then((module) => ({
   default: module.StaffScanTrendChart,
@@ -104,7 +105,7 @@ export default function StaffScanAnalytics() {
       {periodError && <p role="alert" className="alert danger">{periodError}</p>}
 
       {scans.isLoading ? (
-        <p className="muted" aria-live="polite">Loading scan activity…</p>
+        <><SummarySkeleton /><LoadingSkeleton label="Loading scan activity" className="loading-skeleton--chart"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton></>
       ) : scans.isError ? (
         <div>
           <p role="alert" className="alert danger">{messageFor(scans.error)}</p>
@@ -131,7 +132,7 @@ export default function StaffScanAnalytics() {
             <p className="muted" role="status">No scan attempts were recorded in this reporting window.</p>
           )}
           <div className="staff-scan-chart" aria-label="Daily scan attempts by result">
-            <Suspense fallback={<p className="muted">Preparing scan chart…</p>}>
+            <Suspense fallback={<LoadingSkeleton label="Preparing scan chart" className="loading-skeleton--chart"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton>}>
               <StaffScanTrendChart daily={scans.data.daily} />
             </Suspense>
           </div>

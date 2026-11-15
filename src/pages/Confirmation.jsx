@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { apiGet } from '../lib/api';
 import QrCode from '../components/QrCode.jsx';
+import { LoadingSkeleton } from '../components/LoadingSkeleton.jsx';
 
 const money = (c) => `$${(c / 100).toFixed(2)}`;
 
@@ -12,7 +13,7 @@ export default function Confirmation() {
     queryFn: () => apiGet(`/orders/${id}`),
     refetchInterval: (q) => (['paid', 'failed', 'refunded'].includes(q.state.data?.status) ? false : 1500),
   });
-  if (isLoading || !data) return <p className="muted">Loading order…</p>;
+  if (isLoading || !data) return <div className="page"><LoadingSkeleton label="Loading order details" className="loading-skeleton--confirmation"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton></div>;
   if (data.status === 'failed') {
     return (
       <div className="panel reveal" style={{ textAlign: 'center', padding: '54px 24px', maxWidth: 760, margin: '0 auto' }}>

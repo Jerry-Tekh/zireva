@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { LoadingSkeleton } from './LoadingSkeleton.jsx';
 import './DailyAnalytics.css';
 
 const DailyBarChart = lazy(() => import('./AnalyticsCharts.jsx')
@@ -20,7 +21,7 @@ export default function DailyAnalytics({ daily, ticketCategories = [], showCateg
         <figure className="daily-chart-figure" aria-labelledby="daily-revenue-title">
           <figcaption id="daily-revenue-title">Daily revenue and refunds</figcaption>
           <div className="daily-chart" role="group" aria-labelledby="daily-revenue-title">
-            <Suspense fallback={<div className="chart-loading" aria-live="polite">Loading chart…</div>}>
+            <Suspense fallback={<LoadingSkeleton label="Loading chart" className="loading-skeleton--chart"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton>}>
               <DailyBarChart
                 daily={daily}
                 firstKey="grossRevenueCents"
@@ -36,7 +37,7 @@ export default function DailyAnalytics({ daily, ticketCategories = [], showCateg
         <figure className="daily-chart-figure" aria-labelledby="daily-ticket-title">
           <figcaption id="daily-ticket-title">Daily ticket activity</figcaption>
           <div className="daily-chart" role="group" aria-labelledby="daily-ticket-title">
-            <Suspense fallback={<div className="chart-loading" aria-live="polite">Loading chart…</div>}>
+            <Suspense fallback={<LoadingSkeleton label="Loading chart" className="loading-skeleton--chart"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton>}>
               <DailyBarChart
                 daily={daily}
                 firstKey="ticketsSold"
@@ -63,7 +64,7 @@ export default function DailyAnalytics({ daily, ticketCategories = [], showCateg
               <figure className="daily-chart-figure category-sales-chart" aria-labelledby="category-sales-chart-title">
                 <figcaption id="category-sales-chart-title">Ticket sales by category</figcaption>
                 <div className="daily-chart category-sales-chart-plot" role="group" aria-labelledby="category-sales-chart-title">
-                  <Suspense fallback={<div className="chart-loading" aria-live="polite">Loading chart…</div>}>
+                  <Suspense fallback={<LoadingSkeleton label="Loading chart" className="loading-skeleton--chart"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton>}>
                     <CategorySalesChart ticketCategories={ticketCategories} />
                   </Suspense>
                 </div>

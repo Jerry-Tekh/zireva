@@ -7,6 +7,7 @@ import { messageFor } from '../lib/errors';
 import { EVENT_STATUSES, fromDateTimeLocal, optionalText } from '../lib/eventForms';
 import Pagination from '../components/Pagination.jsx';
 import EventPerformanceChart from '../components/EventPerformanceChart.jsx';
+import { EventCardsSkeleton, SummarySkeleton } from '../components/LoadingSkeleton.jsx';
 import './OrganizerDashboardPerformance.css';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -112,7 +113,7 @@ export default function OrganizerDashboard() {
         </div>
       )}
 
-      <div className="grid-3 organizer-summary-grid" aria-label="Event totals">
+      {isLoading ? <SummarySkeleton /> : <div className="grid-3 organizer-summary-grid" aria-label="Event totals">
         <section className="section organizer-summary-card">
           <span className="eyebrow">Events managed</span>
           <strong>{isLoading || isError ? '—' : Object.values(result?.statusCounts ?? {}).reduce((sum, count) => sum + count, 0)}</strong>
@@ -128,7 +129,7 @@ export default function OrganizerDashboard() {
           <strong>{isLoading || isError ? '—' : result?.statusCounts?.draft ?? 0}</strong>
           <p className="muted">Not yet visible to guests</p>
         </section>
-      </div>
+      </div>}
 
       <details className="organizer-create">
         <summary>
@@ -202,7 +203,7 @@ export default function OrganizerDashboard() {
           </button>
         )}
       </form>
-      {isLoading ? <p className="muted">Loading events…</p> : isError ? null : !events?.length ? (
+      {isLoading ? <EventCardsSkeleton count={3} /> : isError ? null : !events?.length ? (
         <p className="muted" style={{ marginTop: 16 }}>{search || filterStatus ? 'No events match these filters.' : 'No events yet. Create an event to get started.'}</p>
       ) : (
         <>

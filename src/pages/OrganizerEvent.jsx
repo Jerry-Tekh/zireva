@@ -16,6 +16,7 @@ import {
   updateEvent,
 } from '../lib/organizerApi';
 import { messageFor } from '../lib/errors';
+import { LoadingSkeleton, RowsSkeleton, SummarySkeleton } from '../components/LoadingSkeleton.jsx';
 import { heroFor } from '../lib/images';
 import { EVENT_STATUSES, fromDateTimeLocal, optionalText, toDateTimeLocal } from '../lib/eventForms';
 import { eventAnalytics } from '../lib/analyticsApi';
@@ -183,7 +184,7 @@ export default function OrganizerEvent() {
     onError: (e) => setErr(messageFor(e)),
   });
 
-  if (event.isLoading) return <p className="muted">Loading event…</p>;
+  if (event.isLoading) return <div className="page"><LoadingSkeleton label="Loading event workspace" className="loading-skeleton--event-workspace"><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></LoadingSkeleton></div>;
   if (event.isError) {
     return (
       <div className="page">
@@ -236,7 +237,7 @@ export default function OrganizerEvent() {
         {sales.isLoading ? (
           <div className="section">
             <span className="eyebrow">Sales</span>
-            <p className="muted">Loading sales…</p>
+            <SummarySkeleton count={1} />
           </div>
         ) : sales.isError ? (
           <div className="section">
@@ -285,7 +286,7 @@ export default function OrganizerEvent() {
         </div>
         {analyticsPeriodError && <p role="alert" className="alert danger">{analyticsPeriodError}</p>}
         {analytics.isLoading ? (
-          <p className="muted" aria-live="polite">Loading event analytics…</p>
+          <SummarySkeleton />
         ) : analytics.isError ? (
           <div>
             <p role="alert" className="alert danger">{messageFor(analytics.error)}</p>
@@ -392,7 +393,7 @@ export default function OrganizerEvent() {
         <label style={{ flex: '1 1 240px' }}>Staff email<input type="email" value={staffEmail} onChange={(e) => setStaffEmail(e.target.value)} required /></label>
         <button className="primary" type="submit" disabled={!staffEmail || assignStaff.isPending}>{assignStaff.isPending ? 'Assigning…' : 'Assign staff'}</button>
       </form>
-      {staff.isLoading && <p className="muted">Loading staff…</p>}
+      {staff.isLoading && <RowsSkeleton count={2} label="Loading event staff" />}
       {staff.isError && (
         <div>
           <p role="alert" className="alert danger">{messageFor(staff.error)}</p>
@@ -421,7 +422,7 @@ export default function OrganizerEvent() {
           <option value="rejected">Rejected</option>
         </select>
       </label>
-      {refundRequests.isLoading && <p className="muted">Loading refund requests…</p>}
+      {refundRequests.isLoading && <RowsSkeleton count={2} label="Loading refund requests" />}
       {refundRequests.isError && (
         <div>
           <p role="alert" className="alert danger">{messageFor(refundRequests.error)}</p>
@@ -471,7 +472,7 @@ export default function OrganizerEvent() {
           <option value="refunded">Refunded</option>
         </select>
       </label>
-      {orders.isLoading && <p className="muted">Loading orders…</p>}
+      {orders.isLoading && <RowsSkeleton count={3} label="Loading event orders" />}
       {orders.isError && (
         <div>
           <p role="alert" className="alert danger">{messageFor(orders.error)}</p>
