@@ -3465,3 +3465,91 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .auth-shell .landing-footer-bottom,
   .event-shell .landing-footer-bottom { align-items: flex-start; flex-direction: column; padding: 14px 2px 18px; }
 }
+
+/* Application-wide button label rule. Keep neutral buttons dark enough for white text. */
+button,
+.btn { color: #fff !important; }
+button:not(.primary):not(.ghost):not(.danger):not(.category-card):not(.browse-filter-chip) {
+  border-color: #414641;
+  background-color: #262a26;
+}
+.btn:not(.primary):not(.ghost):not(.danger) { border-color: #414641; background-color: #262a26; }
+button.ghost,
+.btn.ghost { color: #fff !important; border-color: #414641; background-color: #202320; }
+button.danger,
+.btn.danger { color: #fff !important; border-color: #8d302d; background-color: #8d302d; }
+.landing-shell .browse-filter-chip,
+.landing-shell .browse-filter-reset,
+.landing-shell .market-quick-links button,
+.landing-shell .market-carousel-controls button,
+.landing-shell .browse-hero-controls > button { color: #fff !important; }
+.landing-shell .browse-filter-chip.active,
+.landing-shell .market-quick-links button.active { color: #fff !important; border-color: #ad470f; background: #ad470f; }
+.landing-shell .market-quick-links button:hover,
+.landing-shell .market-carousel-controls button:hover,
+.landing-shell .browse-hero-controls > button:hover { color: #fff !important; }
+.landing-shell .hero-slide-action,
+.landing-shell .market-search-submit,
+.landing-shell .market-event-action,
+.landing-shell .organizer-button,
+.landing-shell .hero-search-row button,
+.landing-shell .upcoming-lead-action,
+.landing-shell .landing-footer-actions .footer-action-primary,
+.auth-shell .auth-form button.primary,
+.auth-shell .auth-visual-link,
+.event-shell .nav .nav-link,
+.event-shell .nav .nav-join,
+.event-shell .event-hero-cta,
+.event-shell .event-ticket-button,
+.event-shell .event-mobile-ticket-bar button {
+  color: #fff !important;
+  border-color: #ad470f !important;
+  background-color: #ad470f !important;
+}
+.landing-shell .hero-slide-action:hover,
+.landing-shell .market-search-submit:hover,
+.landing-shell .market-event-action:hover,
+.landing-shell .organizer-button:hover,
+.landing-shell .hero-search-row button:hover,
+.landing-shell .upcoming-lead-action:hover,
+.landing-shell .landing-footer-actions .footer-action-primary:hover,
+.auth-shell .auth-form button.primary:hover,
+.auth-shell .auth-visual-link:hover,
+.event-shell .nav .nav-link:hover,
+.event-shell .nav .nav-join:hover,
+.event-shell .event-hero-cta:hover,
+.event-shell .event-ticket-button:hover,
+.event-shell .event-mobile-ticket-bar button:hover {
+  color: #fff !important;
+  border-color: #bd5115 !important;
+  background-color: #bd5115 !important;
+}
+.landing-shell .event-card-action { color: #fff !important; }
+.landing-shell .market-event-action { color: #fff !important; }
+.landing-shell .market-event-action,
+.landing-shell .organizer-button,
+.landing-shell .hero-slide-action,
+.landing-shell .market-search-submit,
+.landing-shell .hero-search-row button,
+.landing-shell .upcoming-lead-action { border-color: #ad470f !important; background-color: #ad470f !important; }
+.landing-shell .hero-search-row button.ghost { color: #fff !important; border-color: #414641 !important; background: #202320 !important; }
+.landing-shell .featured-content .btn { color: #fff !important; border-color: #ad470f !important; background: #ad470f !important; }
+.landing-shell .section-text-link { color: #fff !important; }
+.event-shell .event-checkout-dialog button.ghost { color: #fff !important; }
+.dashboard-profile-popover button:focus-visible { color: #fff !important; background: #202a21 !important; }
+.landing-shell .browse-hero-dots button { border-color: transparent; background: rgba(255,255,255,.55) !important; }
+.landing-shell .browse-hero-dots button[aria-current="true"] { background: #f27b2b !important; }
+.event-shell .event-ticket-button:disabled,
+.event-shell .event-mobile-ticket-bar button:disabled { color: #fff !important; }
+.landing-shell .landing-footer-actions a,
+.auth-shell .landing-footer-actions a,
+.event-shell .landing-footer-actions a { color: #fff !important; }
+.landing-shell .landing-footer-actions .footer-action-primary,
+.auth-shell .landing-footer-actions .footer-action-primary,
+.event-shell .landing-footer-actions .footer-action-primary { color: #fff !important; border-color: #ad470f; background: #ad470f; }
+.landing-shell .landing-footer-actions .footer-action-primary:hover,
+.auth-shell .landing-footer-actions .footer-action-primary:hover,
+.event-shell .landing-footer-actions .footer-action-primary:hover { color: #fff !important; border-color: #bd5115; background: #bd5115; }
+.landing-shell .landing-footer-actions .footer-action-secondary,
+.auth-shell .landing-footer-actions .footer-action-secondary,
+.event-shell .landing-footer-actions .footer-action-secondary { color: #fff !important; }
