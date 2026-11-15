@@ -111,7 +111,7 @@ export default function App() {
       {landingRoute || authRoute || eventRoute ? (
         <footer className="app-footer landing-footer">
           <div className="landing-footer-cta">
-            <div><span className="eyebrow">Make room for the next one</span><h2>Find your next live moment.</h2><p>Explore the events already listed on Zireva, or create an account and start planning.</p></div>
+            <div><span className="eyebrow">OUT TONIGHT OR PLANNING AHEAD?</span><h2>Make a date of it.</h2><p>Browse upcoming events or sign in to manage your tickets.</p></div>
             <div className="landing-footer-actions"><FooterSectionLink landingRoute={landingRoute} id="all-events" className="footer-action-primary">Explore events <span aria-hidden="true">→</span></FooterSectionLink><Link to="/register" className="footer-action-secondary">Create an account</Link></div>
           </div>
           <div className="landing-footer-main">
@@ -143,7 +143,7 @@ export default function App() {
             </nav>
           </div>
           <div className="landing-footer-bottom">
-            <span>© {new Date().getFullYear()} Zireva. Made for live moments.</span>
+            <span>© {new Date().getFullYear()} Zireva. Events, tickets, and entry in one place.</span>
             <div className="landing-footer-status"><span>Platform status</span><SystemHealth /></div>
           </div>
         </footer>

@@ -66,9 +66,9 @@ export default function Browse() {
       <header className="browse-hero reveal" id="top">
         <div className="browse-hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow"><span className="live-dot" /> Live starts here</span>
-            <h1>Find your next <span>live moment.</span></h1>
-            <p>Find concerts, festivals, and gatherings happening near you. Compare event details and ticket options in one place, then keep your entry QR ready in your Zireva ticket wallet.</p>
+            <span className="eyebrow"><span className="live-dot" /> WHAT'S ON</span>
+            <h1>Events, all in <span>one place.</span></h1>
+            <p>Browse concerts, comedy, food, workshops, and more. Check the details and ticket options before you book.</p>
             <form className="browse-search" role="search" onSubmit={(e) => {
               e.preventDefault();
               const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -102,8 +102,8 @@ export default function Browse() {
       <section className="browse-section reveal upcoming-section" id="events" aria-labelledby="featured-heading">
         <div className="section-heading upcoming-heading">
           <div>
-            <span className="eyebrow">Real events, ready to explore</span>
-            <h2 id="featured-heading">Make room for a live moment.</h2>
+            <span className="eyebrow">COMING UP</span>
+            <h2 id="featured-heading">Events coming up.</h2>
           </div>
           <a className="section-text-link" href="#all-events">Explore every event <span aria-hidden="true">→</span></a>
         </div>
@@ -143,7 +143,7 @@ export default function Browse() {
 
       <section className="browse-section reveal explore-section" id="all-events" aria-labelledby="events-heading">
         <div className="section-heading">
-          <div className="explore-heading-copy"><span className="eyebrow">Your next plan starts here</span><h2 id="events-heading">Explore every event.</h2><p>Search by event name or location, compare dates, and open any listing for its full description and available ticket options.</p></div>
+          <div className="explore-heading-copy"><span className="eyebrow">THE EVENT LIST</span><h2 id="events-heading">Find something to do.</h2><p>Search by event or place. Open a listing for the full details and ticket options.</p></div>
           <label className="sort-control">Sort
             <select aria-label="Sort events" value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="date">Soonest first</option>
@@ -200,15 +200,15 @@ export default function Browse() {
 
       <section className="browse-section reveal locations-section" id="venues" aria-labelledby="venues-heading">
         <div className="section-heading">
-          <div><span className="eyebrow">Places in the listings</span><h2 id="venues-heading">Explore by location.</h2></div>
-          <p className="muted">These places come from published event listings. Open an event to see its full details and ticket availability.</p>
+          <div><span className="eyebrow">VENUES & CITIES</span><h2 id="venues-heading">Pick a place. See what’s on.</h2></div>
+          <p className="muted">A few of the places hosting upcoming events.</p>
         </div>
         {locations.length ? <div className="location-grid">
           {locations.map((place) => {
             const event = allEvents.find((item) => item.id === place.eventId);
             return <Link key={place.name} to={event ? '/events/' + event.id : '#all-events'} className="location-card">
               {event && <img src={heroFor(event.id)} alt="" loading="lazy" decoding="async" />}
-              <span className="location-card-copy"><span className="location-label">Event location</span><strong>{place.name}</strong><span className="location-explore">Explore this place <span aria-hidden="true">&nearr;</span></span></span>
+              <span className="location-card-copy"><span className="location-label">{place.events} {place.events === 1 ? 'event' : 'events'} listed</span><strong>{place.name}</strong><span className="location-explore">See the event <span aria-hidden="true">&nearr;</span></span></span>
             </Link>;
           })}
         </div> : <div className="locations-empty"><h3>New places will appear here.</h3><p>When an organizer publishes an event with a location, you will find it in this list.</p></div>}
@@ -216,8 +216,8 @@ export default function Browse() {
 
       <section className="how-section reveal" id="how-it-works" aria-labelledby="how-heading">
         <div className="section-heading journey-heading">
-          <div><span className="eyebrow">A better way to go out</span><h2 id="how-heading">From first search to event day.</h2></div>
-          <p className="muted">A good night should be easy to plan. Zireva brings event discovery, ticket selection, checkout, and entry details into one clear journey.</p>
+          <div><span className="eyebrow">BOOKING, MADE CLEAR</span><h2 id="how-heading">From choosing a show to walking in.</h2></div>
+          <p className="muted">The event page has the information you need before you book. Your tickets and entry QR codes stay together in your account.</p>
         </div>
         <div className="journey-grid">
           {JOURNEY_STEPS.map((step) => (
@@ -236,19 +236,19 @@ export default function Browse() {
 
       <section className="audience-section reveal" id="for-everyone" aria-labelledby="audience-heading">
         <div className="section-heading">
-          <div><span className="eyebrow">One platform, many ways to take part</span><h2 id="audience-heading">Built around the whole event.</h2></div>
-          <p className="muted">Whether you are finding a night out or bringing one to life, the right tools are close at hand.</p>
+          <div><span className="eyebrow">MADE FOR EVENT DAYS</span><h2 id="audience-heading">For the crowd, the host, and the door.</h2></div>
+          <p className="muted">A place to find events, sell tickets, and check guests in.</p>
         </div>
         <div className="audience-grid">
-          <article className="audience-card audience-attendee"><span className="audience-index">01 / ATTEND</span><h3>For people who love going out.</h3><p>Discover published events, check the date and location, compare ticket tiers, and keep issued QR tickets together in your wallet.</p><a href="#all-events">Find your next event <span aria-hidden="true">&rarr;</span></a></article>
-          <article className="audience-card audience-host"><span className="audience-index">02 / HOST</span><h3>For people who bring a crowd together.</h3><p>Create and publish event listings with a description, venue, date, and ticket options. Follow sales, refunds, and remaining capacity from your organizer dashboard.</p><Link to="/register">Start hosting <span aria-hidden="true">&rarr;</span></Link></article>
-          <article className="audience-card audience-team"><span className="audience-index">03 / WELCOME</span><h3>For the team at the door.</h3><p>Event staff can use the scanner workspace to check a guest ticket at entry. Staff access is role-based and requires an event team account.</p><Link to="/login">Staff sign in <span aria-hidden="true">&rarr;</span></Link></article>
+          <article className="audience-card audience-attendee"><span className="audience-index">01 / ATTENDEES</span><h3>Find your seat in the crowd.</h3><p>Check the date, venue, and ticket choices before you book. After payment, find your order and entry QR code under My tickets.</p><a href="#all-events">Browse events <span aria-hidden="true">&rarr;</span></a></article>
+          <article className="audience-card audience-host"><span className="audience-index">02 / ORGANIZERS</span><h3>Put your event on sale.</h3><p>Add the event details, set ticket types and quantities, then publish when you are ready. Track sales, refunds, and capacity from your dashboard.</p><Link to="/register">Create an event <span aria-hidden="true">&rarr;</span></Link></article>
+          <article className="audience-card audience-team"><span className="audience-index">03 / EVENT STAFF</span><h3>Keep the queue moving.</h3><p>Use the event scanner to check a guest's ticket at the door. Sign in with the staff account assigned to your event.</p><Link to="/login">Staff sign in <span aria-hidden="true">&rarr;</span></Link></article>
         </div>
       </section>
 
       <section className="organizer-section reveal" id="organizers" aria-labelledby="organizer-heading">
         <div className="organizer-art" aria-hidden="true"><BrandMark className="organizer-brand-mark" /></div>
-        <div className="organizer-copy"><span className="eyebrow">For the people who make it happen</span><h2 id="organizer-heading">Give your next event a home.</h2><p>Build an event listing with the details guests need: what is happening, when, where, and which ticket options are available. Publish when it is ready, then follow sales, refunds, and remaining capacity in your organizer dashboard.</p><Link className="btn organizer-button" to="/register">Create your organizer account <span aria-hidden="true">&rarr;</span></Link></div>
+        <div className="organizer-copy"><span className="eyebrow">FOR ORGANIZERS</span><h2 id="organizer-heading">Your next event, on the calendar.</h2><p>Set the date and venue, describe what guests can expect, and choose your ticket options. Publish when it’s ready, then manage sales and check-ins from your organizer dashboard.</p><Link className="btn organizer-button" to="/register">Start an event <span aria-hidden="true">&rarr;</span></Link></div>
       </section>
     </div>
   );
