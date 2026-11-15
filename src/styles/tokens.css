@@ -3553,3 +3553,171 @@ button.danger,
 .landing-shell .landing-footer-actions .footer-action-secondary,
 .auth-shell .landing-footer-actions .footer-action-secondary,
 .event-shell .landing-footer-actions .footer-action-secondary { color: #fff !important; }
+
+/* Shared dashboard workspace follows the charcoal and ember marketplace palette. */
+.app-shell.has-dashboard {
+  --bg: #0b0c0b;
+  --surface: #141614;
+  --raised: #1b1e1b;
+  --border: #2d322d;
+  --line-strong: #414641;
+  --text: #f4f5f3;
+  --muted: #a1a69f;
+  --faint: #858c84;
+  --accent: #f27b2b;
+  --accent-bright: #ff914d;
+  --accent-ink: #fff;
+  --accent-soft: #2a1c12;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.18);
+  --shadow: 0 14px 36px rgba(0,0,0,.2);
+  color: #f4f5f3;
+  background: #0b0c0b;
+}
+.app-shell.has-dashboard .dashboard-layout,
+.app-shell.has-dashboard .dashboard-main { color: #f4f5f3; background: #0b0c0b; }
+.app-shell.has-dashboard .dashboard-sidebar { border-right-color: #252925; background: #101210; }
+.app-shell.has-dashboard .dashboard-sidebar-brand { color: #f4f5f3; }
+.app-shell.has-dashboard .dashboard-brand-mark { border-color: #303530; border-radius: 50%; color: #f4f5f3; background: #171a17; }
+.app-shell.has-dashboard .dashboard-nav-heading { color: #8e958d; }
+.app-shell.has-dashboard .dashboard-nav-link,
+.app-shell.has-dashboard .dashboard-back-link { color: #b8bdb7; }
+.app-shell.has-dashboard .dashboard-nav-link:hover,
+.app-shell.has-dashboard .dashboard-back-link:hover { color: #fff; background: #1b1e1b; }
+.app-shell.has-dashboard .dashboard-nav-link.active { color: #fff; background: #292019; }
+.app-shell.has-dashboard .dashboard-nav-link.active .dashboard-nav-icon { color: #ffad76; background: #382518; }
+.app-shell.has-dashboard .dashboard-sidebar-bottom { border-top-color: #292d29; }
+.app-shell.has-dashboard .dashboard-topbar { border-bottom-color: #292d29; background: rgba(12,13,12,.94); }
+.app-shell.has-dashboard .dashboard-topbar-context { color: #e6e8e5; }
+.app-shell.has-dashboard .dashboard-menu-toggle,
+.app-shell.has-dashboard .dashboard-collapse-toggle,
+.app-shell.has-dashboard .dashboard-mobile-close { color: #d6d9d5; border-color: #383d38; background: #171a17; }
+.app-shell.has-dashboard .dashboard-profile-trigger { color: #f4f5f3; border-color: #383d38; background: #171a17; }
+.app-shell.has-dashboard .dashboard-profile-trigger:hover,
+.app-shell.has-dashboard .dashboard-profile-trigger[aria-expanded="true"] { border-color: #8e542d; color: #ffb276; background: #211810; }
+.app-shell.has-dashboard .dashboard-profile-popover { border-color: #343934; background: #171a17; box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+.app-shell.has-dashboard .dashboard-profile-popover a,
+.app-shell.has-dashboard .dashboard-profile-popover button { color: #e2e5e1; }
+.app-shell.has-dashboard .dashboard-profile-popover .dashboard-glyph { color: #ffad76; }
+.app-shell.has-dashboard .dashboard-profile-popover a:hover,
+.app-shell.has-dashboard .dashboard-profile-popover button:hover,
+.app-shell.has-dashboard .dashboard-profile-popover a:focus-visible,
+.app-shell.has-dashboard .dashboard-profile-popover button:focus-visible { color: #fff; background: #242824; }
+.app-shell.has-dashboard .dashboard-profile-popover button { border-top-color: #303430; }
+.app-shell.has-dashboard .dashboard-content { max-width: 1640px; color: #f4f5f3; background: #0b0c0b; }
+.app-shell.has-dashboard .dashboard-content h1,
+.app-shell.has-dashboard .dashboard-content h2,
+.app-shell.has-dashboard .dashboard-content h3,
+.app-shell.has-dashboard .dashboard-content .section > h2,
+.app-shell.has-dashboard .dashboard-content .section > .between h2 { color: #f4f5f3; }
+.app-shell.has-dashboard .dashboard-content .page-hero p,
+.app-shell.has-dashboard .dashboard-content .muted { color: #a1a69f; }
+.app-shell.has-dashboard .dashboard-content .eyebrow { color: #f2a16a; }
+.app-shell.has-dashboard .dashboard-content .section,
+.app-shell.has-dashboard .dashboard-content .panel,
+.app-shell.has-dashboard .dashboard-content .card,
+.app-shell.has-dashboard .dashboard-content .table-card,
+.app-shell.has-dashboard .dashboard-content .organizer-create,
+.app-shell.has-dashboard .dashboard-content .wallet-group,
+.app-shell.has-dashboard .dashboard-content .scanner-shell > form.panel,
+.app-shell.has-dashboard .dashboard-content .platform-health,
+.app-shell.has-dashboard .dashboard-content .platform-overview-header .platform-health { border-color: #2d322d !important; color: #f4f5f3; background: #141614 !important; box-shadow: 0 1px 2px rgba(0,0,0,.18); }
+.app-shell.has-dashboard .dashboard-content .section { padding: clamp(16px,2vw,22px); }
+.app-shell.has-dashboard .dashboard-content .platform-period,
+.app-shell.has-dashboard .dashboard-content .organizer-performance-period,
+.app-shell.has-dashboard .dashboard-content .organizer-event-filters,
+.app-shell.has-dashboard .dashboard-content .admin-users-toolbar { border-color: #303530; background: #111311 !important; }
+.app-shell.has-dashboard .dashboard-content input,
+.app-shell.has-dashboard .dashboard-content select,
+.app-shell.has-dashboard .dashboard-content textarea { border-color: #414641; color: #f4f5f3; background: #0f110f; }
+.app-shell.has-dashboard .dashboard-content input::placeholder,
+.app-shell.has-dashboard .dashboard-content textarea::placeholder { color: #858c84; }
+.app-shell.has-dashboard .dashboard-content option { color: #f4f5f3; background: #171a17; }
+.app-shell.has-dashboard .dashboard-content label { color: #c1c6c0; }
+.app-shell.has-dashboard .dashboard-content input:focus,
+.app-shell.has-dashboard .dashboard-content select:focus,
+.app-shell.has-dashboard .dashboard-content textarea:focus { border-color: #c86e35; box-shadow: 0 0 0 3px rgba(242,123,43,.16); }
+.app-shell.has-dashboard .dashboard-content button.primary,
+.app-shell.has-dashboard .dashboard-content .btn.primary { min-height: 40px; border-color: #ad470f; border-radius: 7px; color: #fff; background: #ad470f; }
+.app-shell.has-dashboard .dashboard-content button.primary:hover,
+.app-shell.has-dashboard .dashboard-content .btn.primary:hover { border-color: #bd5115; color: #fff; background: #bd5115; }
+.app-shell.has-dashboard .dashboard-content button.ghost,
+.app-shell.has-dashboard .dashboard-content .btn.ghost { border-color: #414641; color: #fff; background: #202320; }
+.app-shell.has-dashboard .dashboard-content button.danger,
+.app-shell.has-dashboard .dashboard-content .btn.danger { border-color: #8d302d; color: #fff; background: #8d302d; }
+.app-shell.has-dashboard .dashboard-content :focus-visible { outline-color: #ffad76; }
+.app-shell.has-dashboard .dashboard-content .badge { border: 1px solid #383d38; color: #d0d4cf; background: #202320; }
+.app-shell.has-dashboard .dashboard-content .badge.ok { border-color: #285338; color: #a8dfb5; background: #17271b; }
+.app-shell.has-dashboard .dashboard-content .badge.danger { border-color: #68302d; color: #ffc1bb; background: #2c1716; }
+.app-shell.has-dashboard .dashboard-content .badge.warn { border-color: #66502b; color: #f2d59b; background: #292116; }
+.app-shell.has-dashboard .dashboard-content .alert { border: 1px solid #47351f; color: #f5c18d; background: #211810; }
+.app-shell.has-dashboard .dashboard-content .alert.danger { border-color: #68302d; color: #ffc1bb; background: #2c1716; }
+.app-shell.has-dashboard .dashboard-content .alert.ok { border-color: #285338; color: #a8dfb5; background: #17271b; }
+.app-shell.has-dashboard .dashboard-content .organizer-summary-card,
+.app-shell.has-dashboard .dashboard-content .organizer-mobile-event,
+.app-shell.has-dashboard .dashboard-content .wallet-page .wallet-ticket,
+.app-shell.has-dashboard .dashboard-content .wallet-order-details,
+.app-shell.has-dashboard .dashboard-content .event-analytics-metrics > div,
+.app-shell.has-dashboard .dashboard-content .organizer-event-page .event-analytics-metrics > div,
+.app-shell.has-dashboard .dashboard-content .scanner-shell > form.panel > .section { border-color: #303530 !important; color: #f4f5f3; background: #191c19 !important; }
+.app-shell.has-dashboard .dashboard-content .organizer-summary-card strong,
+.app-shell.has-dashboard .dashboard-content .event-analytics-metrics strong,
+.app-shell.has-dashboard .dashboard-content .organizer-event-page .event-analytics-metrics strong { color: #f4f5f3; }
+.app-shell.has-dashboard .dashboard-content .organizer-create > form { border-top-color: #303530; background: #141614; }
+.app-shell.has-dashboard .dashboard-content .organizer-create-toggle { color: #ffad76; background: #2a1c12; }
+.app-shell.has-dashboard .dashboard-content .organizer-performance-period,
+.app-shell.has-dashboard .dashboard-content .organizer-event-filters,
+.app-shell.has-dashboard .dashboard-content .admin-users-toolbar { padding: 14px; border-radius: 9px; }
+.app-shell.has-dashboard .dashboard-content .table-card { overflow-x: auto; }
+.app-shell.has-dashboard .dashboard-content table { color: #e5e8e4; }
+.app-shell.has-dashboard .dashboard-content table th { color: #aeb5ad; background: #191c19; }
+.app-shell.has-dashboard .dashboard-content table th,
+.app-shell.has-dashboard .dashboard-content table td { border-bottom-color: #2b302b; }
+.app-shell.has-dashboard .dashboard-content table tbody tr:hover { background: #1b1e1b; }
+.app-shell.has-dashboard .dashboard-content .admin-users-results-heading,
+.app-shell.has-dashboard .dashboard-content .wallet-group-heading { border-bottom-color: #2b302b; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services li { border-color: #303530; color: #b2b8b1; background: #191c19; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services strong { color: #b5e2bf; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services .service-offline { color: #ffc1bb; }
+.app-shell.has-dashboard .dashboard-content .platform-health-services .service-checking { color: #a1a69f; }
+.app-shell.has-dashboard .dashboard-content .platform-overview-header .platform-health-heading h2 { color: #f4f5f3; }
+.app-shell.has-dashboard .dashboard-content .daily-chart-figure { border-color: #303530; color: #f4f5f3; background: #191c19; }
+.app-shell.has-dashboard .dashboard-content .daily-chart-figure figcaption { color: #f4f5f3; }
+.app-shell.has-dashboard .dashboard-content .platform-metric-icon { border-color: #57351f; color: #ffad76; background: #2a1c12; }
+.app-shell.has-dashboard .dashboard-content .platform-metric > strong { color: #f4f5f3; }
+.app-shell.has-dashboard .dashboard-content .platform-count-list > div,
+.app-shell.has-dashboard .dashboard-content .wallet-group-heading { border-color: #303530; }
+.app-shell.has-dashboard .dashboard-content .platform-loading-layout .platform-skeleton { background-color: #1b1e1b; }
+.app-shell.has-dashboard .dashboard-content .dashboard-loading { border-color: #303530; color: #a1a69f; background: #141614; }
+.app-shell.has-dashboard .dashboard-content .event-manage-nav { border-color: #303530; background: rgba(20,22,20,.96); }
+.app-shell.has-dashboard .dashboard-content .event-manage-nav a { color: #c4c9c3; }
+.app-shell.has-dashboard .dashboard-content .event-manage-nav a:hover,
+.app-shell.has-dashboard .dashboard-content .event-manage-nav a:focus-visible { color: #fff; background: #292019; }
+.app-shell.has-dashboard .dashboard-content .camera-frame { border-color: #303530; }
+.app-shell.has-dashboard .dashboard-content .wallet-empty-mark { border-color: #303530; background: #191c19; }
+.app-shell.has-dashboard .dashboard-content .ticket-card { border-color: #303530; background: #141614; }
+.app-shell.has-dashboard .dashboard-content .ticket-card h2,
+.app-shell.has-dashboard .dashboard-content .ticket-card h3 { color: #f4f5f3; }
+
+@media (max-width: 860px) {
+  .app-shell.has-dashboard .dashboard-sidebar { border-right-color: #303530; background: #101210; box-shadow: 16px 0 40px rgba(0,0,0,.48); }
+  .app-shell.has-dashboard .dashboard-scrim { background: rgba(0,0,0,.66); }
+  .app-shell.has-dashboard .dashboard-content { padding: 24px 20px 34px; }
+}
+@media (max-width: 620px) {
+  .app-shell.has-dashboard .dashboard-content { padding: 20px 14px 28px; }
+  .app-shell.has-dashboard .dashboard-content > .page { gap: 18px; }
+  .app-shell.has-dashboard .dashboard-content .page-hero h1 { font-size: clamp(1.8rem,8vw,2.35rem); }
+  .app-shell.has-dashboard .dashboard-content .platform-health-services { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .app-shell.has-dashboard .dashboard-content .platform-health-services li { min-height: 58px; }
+  .app-shell.has-dashboard .dashboard-content .platform-period { padding: 14px !important; }
+  .app-shell.has-dashboard .dashboard-content .organizer-summary-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .app-shell.has-dashboard .dashboard-content .organizer-summary-card:first-child { grid-column: 1 / -1; }
+  .app-shell.has-dashboard .dashboard-content .organizer-performance-period,
+  .app-shell.has-dashboard .dashboard-content .organizer-event-filters { padding: 12px; }
+  .app-shell.has-dashboard .dashboard-content .organizer-performance-period button,
+  .app-shell.has-dashboard .dashboard-content .organizer-event-filters button,
+  .app-shell.has-dashboard .dashboard-content .platform-period button { width: 100%; justify-content: center; }
+  .app-shell.has-dashboard .dashboard-content .admin-users-results-heading { padding-inline: 14px; }
+  .app-shell.has-dashboard .dashboard-content .organizer-mobile-event dl { border-color: #303530; }
+  .app-shell.has-dashboard .dashboard-content .organizer-mobile-event dd { color: #e5e8e4; }
+}

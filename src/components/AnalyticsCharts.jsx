@@ -47,8 +47,8 @@ export function DailyBarChart({ daily, firstKey, secondKey, firstLabel, secondLa
           contentStyle={{ borderRadius: 10, borderColor: 'var(--border)' }}
         />
         <Legend />
-        <Bar dataKey={firstKey} name={firstLabel} fill="#c352ed" radius={[4, 4, 0, 0]} maxBarSize={18} />
-        <Bar dataKey={secondKey} name={secondLabel} fill="#a872e6" radius={[4, 4, 0, 0]} maxBarSize={18} />
+        <Bar dataKey={firstKey} name={firstLabel} fill="#f27b2b" radius={[4, 4, 0, 0]} maxBarSize={18} />
+        <Bar dataKey={secondKey} name={secondLabel} fill="#ffb276" radius={[4, 4, 0, 0]} maxBarSize={18} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -81,7 +81,7 @@ export function CategorySalesChart({ ticketCategories }) {
           tickLine={false}
         />
         <Tooltip formatter={(value) => [`${number(value)} sold`, 'Tickets']} />
-        <Bar dataKey="sold" name="Tickets sold" fill="#c352ed" radius={[0, 4, 4, 0]} maxBarSize={22} />
+        <Bar dataKey="sold" name="Tickets sold" fill="#f27b2b" radius={[0, 4, 4, 0]} maxBarSize={22} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -121,9 +121,9 @@ export function EventPerformancePlot({ events }) {
           contentStyle={{ borderRadius: 10, borderColor: 'var(--border)' }}
         />
         <Legend />
-        <Bar dataKey="grossRevenueCents" name="Gross sales" fill="#c352ed" radius={[0, 4, 4, 0]} maxBarSize={18} />
-        <Bar dataKey="refundedAmountCents" name="Refunds" fill="#a872e6" radius={[0, 4, 4, 0]} maxBarSize={18} />
-        <Bar dataKey="netRevenueCents" name="Net revenue" fill="#764ba2" radius={[0, 4, 4, 0]} maxBarSize={18} />
+        <Bar dataKey="grossRevenueCents" name="Gross sales" fill="#f27b2b" radius={[0, 4, 4, 0]} maxBarSize={18} />
+        <Bar dataKey="refundedAmountCents" name="Refunds" fill="#ffb276" radius={[0, 4, 4, 0]} maxBarSize={18} />
+        <Bar dataKey="netRevenueCents" name="Net revenue" fill="#bd5115" radius={[0, 4, 4, 0]} maxBarSize={18} />
       </BarChart>
     </ResponsiveContainer>
   );
