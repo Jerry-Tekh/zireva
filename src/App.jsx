@@ -40,7 +40,7 @@ function Nav({ isLanding }) {
   return (
     <>
       <button className="nav-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen((o) => !o)}><svg viewBox="0 0 24 24" aria-hidden="true">{open ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}</svg><span className="nav-toggle-label">{open ? 'Close' : 'Menu'}</span></button>
-      <div className={`nav ${open ? 'open' : ''}`}>
+      <div className={`nav${user ? ' nav-authenticated' : ''}${open ? ' open' : ''}`}>
         <div className="nav-primary">
           {isLanding && <>
             <a href="#all-events" className="nav-link" onClick={scrollTo('all-events')}>Events</a>
