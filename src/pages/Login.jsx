@@ -46,9 +46,8 @@ export default function Login() {
           <BrandMark />
           <span>Zireva</span>
         </Link>
-        <span className="eyebrow">Welcome back</span>
         <h1>Log in to Zireva</h1>
-        <p className="auth-intro">Sign in to continue to your tickets and events.</p>
+        <p className="auth-intro">Access your tickets, saved events, and organizer tools.</p>
         {err && <p className="alert danger" style={{ marginTop: 16 }}>{err}</p>}
         <form onSubmit={onSubmit} className="stack auth-form">
           <label>Email<input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>

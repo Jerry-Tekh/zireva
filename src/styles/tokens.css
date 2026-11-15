@@ -3764,9 +3764,11 @@ button.danger,
 .auth-shell .brand-mark-ray { stroke: #e28a4d; }
 .auth-shell .brand-mark-spark { fill: #ad470f; stroke: #ad470f; }
 .auth-shell .brand-mark circle { fill: #fff9f3; }
-.auth-form-brand { display: inline-flex; width: fit-content; align-items: center; align-self: flex-start; gap: 9px; margin-bottom: clamp(20px,3vh,30px); color: #f4f5f3; font-size: .92rem; font-weight: 700; letter-spacing: -.025em; text-decoration: none; }
-.auth-form-brand .brand-mark { width: 34px; height: 34px; }
+.auth-form-brand { display: inline-flex; width: fit-content; min-height: 42px; align-items: center; align-self: flex-start; gap: 9px; margin: 0 0 clamp(22px,3vh,32px); padding: 4px 10px 4px 4px; border: 1px solid #303430; border-radius: 7px; color: #f4f5f3; background: #171917; font-size: .82rem; font-weight: 650; letter-spacing: -.02em; text-decoration: none; transition: border-color .16s ease,background .16s ease; }
+.auth-form-brand .brand-mark { width: 32px; height: 32px; }
+.auth-form-brand:hover { border-color: #85512f; background: #201a15; }
 .auth-form-brand:focus-visible { border-radius: 5px; outline: 2px solid #ffad76; outline-offset: 4px; }
+.auth-shell .auth-split .auth-card h1 { margin-top: 0; }
 
 .landing-shell .upcoming-section > .empty-state {
   min-height: 170px;

@@ -41,9 +41,8 @@ export default function Register() {
           <BrandMark />
           <span>Zireva</span>
         </Link>
-        <span className="eyebrow">Welcome to Zireva</span>
         <h1>Create your account</h1>
-        <p className="auth-intro">Create an account to book and manage your tickets.</p>
+        <p className="auth-intro">One account for booking tickets and hosting events.</p>
         {err && <p className="alert danger" style={{ marginTop: 16 }}>{err}</p>}
         <form onSubmit={onSubmit} className="stack auth-form register-form">
           <label>Name<input autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} required /></label>
