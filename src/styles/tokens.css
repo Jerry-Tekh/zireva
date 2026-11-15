@@ -3050,3 +3050,238 @@ html:has(.landing-shell) { scroll-behavior: smooth; }
   .landing-shell .landing-footer-main { grid-template-columns: repeat(2,minmax(0,1fr)); padding-inline: 0; }
   .landing-shell .landing-footer-bottom { align-items: flex-start; flex-direction: column; padding-inline: 0; }
 }
+
+/* Marketplace treatment for sign-in, registration, and event checkout pages. */
+.auth-shell,
+.event-shell { --market-bg: #0b0c0b; --market-panel: #141614; --market-line: #2d312d; --market-text: #f4f5f3; --market-muted: #a1a69f; color: var(--market-text); background: var(--market-bg); }
+.auth-shell .app-header,
+.event-shell .app-header { border-bottom: 1px solid #242724; color: var(--market-text); background: rgba(10,11,10,.97); box-shadow: none; }
+.auth-shell .app-header-inner,
+.event-shell .app-header-inner { min-height: 62px; max-width: 1120px; padding-inline: 22px; }
+.auth-shell .brand,
+.event-shell .brand { color: var(--market-text); }
+.auth-shell .app-main { max-width: 1120px; padding: 28px 22px 54px; }
+.auth-shell .auth-wrap.auth-split { width: 100%; min-height: min(690px,calc(100svh - 166px)); border-color: #2d312d; border-radius: 12px; background: #111311; box-shadow: 0 28px 80px -58px rgba(0,0,0,.8); }
+.auth-shell .auth-visual { min-height: 590px; background-color: #171a17; }
+.auth-shell .auth-visual-shade { background: linear-gradient(180deg,rgba(5,6,5,.12) 8%,rgba(5,6,5,.88) 100%),linear-gradient(90deg,rgba(5,6,5,.35),transparent); }
+.auth-shell .auth-visual-kicker { color: #ffb276; }
+.auth-shell .auth-visual-copy h2 { color: #fff; }
+.auth-shell .auth-visual-link { min-height: 42px; border-color: #555a54; border-radius: 7px; color: #fff; background: rgba(15,16,15,.4); }
+.auth-shell .auth-visual-link:hover { border-color: #f27b2b; color: #20140c; background: #f27b2b; }
+.auth-shell .auth-split .auth-card { max-width: 540px; color: var(--market-text); background: #111311; }
+.auth-shell .auth-card > .eyebrow,
+.auth-shell .demo-roles > .eyebrow { color: #f2a16a; }
+.auth-shell .auth-split .auth-card h1 { color: #f5f6f4; }
+.auth-shell .auth-intro,
+.auth-shell .register-password-hint,
+.auth-shell .auth-switch { color: #a1a69f; }
+.auth-shell .auth-form label { color: #e1e4df; }
+.auth-shell .auth-form input { min-width: 0; color: #f4f5f3; border-color: #393e39; border-radius: 7px; background: #171917; }
+.auth-shell .auth-form input:focus { border-color: #b96a36; box-shadow: 0 0 0 3px rgba(242,123,43,.13); }
+.auth-shell .auth-form button.primary { min-height: 46px; border-color: #f27b2b; border-radius: 7px; color: #1b1009; background: #f27b2b; }
+.auth-shell .auth-form button.primary:hover { border-color: #ff914d; background: #ff914d; }
+.auth-shell .demo-roles { border-top-color: #303430; }
+.auth-shell .demo-roles button { min-height: 40px; border-color: #343834; border-radius: 7px; color: #d0d3cf; background: #171917; }
+.auth-shell .demo-roles button:hover { border-color: #8a4d29; color: #ffc18f; }
+.auth-shell .auth-switch a,
+.auth-shell .register-login a { color: #ffad76 !important; }
+.auth-shell .alert.danger { color: #ffd8d3; border-color: #693933; background: #291714; }
+.event-shell .app-main { width: 100%; max-width: 1164px; min-width: 0; padding: 20px 22px 72px; }
+.event-shell .nav { flex-wrap: nowrap; gap: 3px; }
+.event-shell .nav-link { color: #c5c8c4; font-size: .76rem; white-space: nowrap; }
+.event-shell .nav-link:hover,
+.event-shell .nav-link.active { color: #fff; background: #202320; }
+.event-shell .nav .nav-join { min-height: 34px; padding-inline: 14px; border-radius: 7px; color: #1b1009; border-color: #f27b2b; background: #f27b2b; }
+.event-shell .nav .nav-join:hover { border-color: #ff914d; background: #ff914d; }
+.event-shell .nav .ghost,
+.event-shell .nav-toggle { color: #e5e7e3; border-color: #383c38; background: #171917; }
+.event-shell .nav.open { border-color: #303430; background: #111311; }
+.event-shell .event-detail-page { min-width: 0; gap: 18px; color: #f4f5f3; }
+.event-shell .event-back-link { color: #c5c8c4; }
+.event-shell .event-back-link span { color: #ffad76; }
+.event-shell .event-detail-hero { min-height: clamp(300px,34vw,420px); border: 1px solid #2d312d; border-radius: 10px; background-color: #171a17; }
+.event-shell .event-detail-shade { background: linear-gradient(90deg,rgba(7,8,7,.78),rgba(7,8,7,.38) 58%,rgba(7,8,7,.08)),linear-gradient(0deg,rgba(7,8,7,.56),transparent 68%); }
+.event-shell .event-detail-hero-copy { padding: clamp(22px,4vw,42px); }
+.event-shell .event-hero-label { min-height: 25px; border-color: rgba(255,255,255,.24); border-radius: 5px; color: #fff; background: rgba(10,11,10,.56); font-size: .64rem; }
+.event-shell .event-detail-hero h1 { max-width: 18ch; font-size: clamp(2.1rem,5vw,4rem); line-height: 1.02; }
+.event-shell .event-hero-meta { color: rgba(255,255,255,.84); font-size: .82rem; }
+.event-shell .event-meta-separator { color: #ffad76; }
+.event-shell .event-hero-cta { min-height: 40px; margin-top: 18px; padding-inline: 15px; border-radius: 7px; color: #1b1009; background: #f27b2b; font-size: .76rem; }
+.event-shell .event-hero-cta:hover { color: #1b1009; background: #ff914d; }
+.event-shell .event-hero-cta:disabled { color: #9a9f98; background: #303430; }
+.event-shell .event-facts { border-color: #2d312d; border-radius: 9px; background: #141614; }
+.event-shell .event-fact { border-color: #2d312d; }
+.event-shell .event-fact > span { color: #f2a16a; font-size: .62rem; }
+.event-shell .event-fact strong { color: #f4f5f3; font-size: .82rem; }
+.event-shell .event-fact small { color: #a1a69f; font-size: .67rem; }
+.event-shell .event-detail-content { grid-template-columns: minmax(0,1.08fr) minmax(320px,.82fr); gap: 18px; }
+.event-shell .event-about,
+.event-shell .event-how,
+.event-shell .event-ticket-panel { padding: clamp(18px,2.5vw,25px); border-color: #2d312d; border-radius: 9px; background: #141614; }
+.event-shell .event-about h2,
+.event-shell .event-how h2,
+.event-shell .event-ticket-heading h2 { color: #f4f5f3; font-size: clamp(1.25rem,2.2vw,1.7rem); }
+.event-shell .event-detail-page .eyebrow { color: #f2a16a; font-size: .61rem; letter-spacing: .08em; }
+.event-shell .event-description { color: #c1c6bf; font-size: .88rem; line-height: 1.75; }
+.event-shell .event-description-empty { border-left-color: #a75d2c; color: #c1c6bf; background: #1b1a17; }
+.event-shell .event-steps li { border-color: #303430; }
+.event-shell .event-steps li > span { color: #ffc18f; background: #2a1c12; }
+.event-shell .event-steps h3 { color: #e5e8e3; }
+.event-shell .event-steps p,
+.event-shell .event-ticket-heading > p { color: #a1a69f; }
+.event-shell .event-refund-note { border: 1px solid #343834; border-radius: 8px; background: #171917; }
+.event-shell .event-refund-icon { color: #ffad76; background: #26201a; }
+.event-shell .event-refund-note h3 { color: #f4f5f3; }
+.event-shell .event-refund-note p { color: #a1a69f; }
+.event-shell .event-refund-note > a { color: #ffad76; }
+.event-shell .event-ticket-panel { box-shadow: none; }
+.event-shell .event-ticket-option { padding: 14px; border-color: #343834; border-radius: 8px; background: #171917; }
+.event-shell .event-ticket-option-top h3 { color: #f4f5f3; }
+.event-shell .event-ticket-state { color: #ffad76; }
+.event-shell .event-ticket-state.is-muted { color: #a1a69f; }
+.event-shell .event-ticket-price { color: #f4f5f3; }
+.event-shell .event-ticket-meta { border-color: #343834; }
+.event-shell .event-ticket-meta dt,
+.event-shell .event-ticket-footnote { color: #969d95; }
+.event-shell .event-ticket-meta dd { color: #d0d3cf; }
+.event-shell .event-ticket-button { min-height: 42px; border-color: #f27b2b; border-radius: 7px; color: #1b1009; background: #f27b2b; }
+.event-shell .event-ticket-button:hover { color: #1b1009; background: #ff914d; }
+.event-shell .event-ticket-button:disabled { color: #9a9f98; border-color: #383c38; background: #272a27; }
+.event-shell .event-no-tickets { border-color: #414641; background: #171917; }
+.event-shell .event-no-tickets > span { color: #ffad76; background: #2a1c12; }
+.event-shell .event-no-tickets h3 { color: #f4f5f3; }
+.event-shell .event-no-tickets p { color: #a1a69f; }
+.event-shell .event-detail-state { border-color: #2d312d; border-radius: 10px; color: #f4f5f3; background: #141614; }
+.event-shell .event-detail-state h1 { color: #f4f5f3; }
+.event-shell .event-detail-state > p { color: #a1a69f; }
+.event-shell .event-mobile-ticket-bar { border-color: #303430; background: rgba(17,19,17,.96); box-shadow: 0 -10px 28px rgba(0,0,0,.28); }
+.event-shell .event-mobile-ticket-bar span { color: #a1a69f; }
+.event-shell .event-mobile-ticket-bar strong { color: #f4f5f3; }
+.event-shell .event-mobile-ticket-bar button { border-radius: 7px; color: #1b1009; background: #f27b2b; }
+.event-shell .event-mobile-ticket-bar button:disabled { color: #9a9f98; background: #303430; }
+.auth-shell .landing-footer,
+.event-shell .landing-footer { padding-inline: max(16px,calc((100% - 1120px)/2)); color: #f4f5f3; border-color: #292d29; background: #080908; }
+.auth-shell .landing-footer-cta,
+.event-shell .landing-footer-cta { border: 1px solid #44301e; border-radius: 9px; background: linear-gradient(105deg,#49250f,#764321); }
+.auth-shell .landing-footer-cta .eyebrow,
+.event-shell .landing-footer-cta .eyebrow { color: #ffd3a5; }
+.auth-shell .landing-footer-cta h2,
+.event-shell .landing-footer-cta h2 { color: #fff; }
+.auth-shell .landing-footer-cta p,
+.event-shell .landing-footer-cta p { color: rgba(255,255,255,.76); }
+.auth-shell .landing-footer-main,
+.event-shell .landing-footer-main { border-color: #292d29; }
+.auth-shell .landing-footer-brand .brand,
+.event-shell .landing-footer-brand .brand,
+.auth-shell .landing-footer-column h2,
+.event-shell .landing-footer-column h2 { color: #f5f6f4; }
+.auth-shell .landing-footer-brand p,
+.event-shell .landing-footer-brand p,
+.auth-shell .landing-footer-column a,
+.event-shell .landing-footer-column a,
+.auth-shell .landing-footer-bottom,
+.event-shell .landing-footer-bottom { color: #9da49d; }
+.auth-shell .landing-footer-bottom,
+.event-shell .landing-footer-bottom { border-color: #292d29; }
+.auth-shell a:focus-visible,
+.auth-shell button:focus-visible,
+.event-shell a:focus-visible,
+.event-shell button:focus-visible { outline: 2px solid #f27b2b; outline-offset: 3px; }
+
+@media (max-width: 900px) {
+  .event-shell .app-header-inner { padding-inline: 17px; }
+  .event-shell .nav-toggle { display: inline-flex; }
+  .event-shell .nav { display: none; position: absolute; z-index: 100; top: calc(100% + 7px); right: 12px; left: 12px; align-items: stretch; flex-direction: column; padding: 9px; border: 1px solid #303430; border-radius: 9px; background: #111311; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+  .event-shell .nav.open { display: flex; }
+  .event-shell .nav-link { width: 100%; min-height: 40px; padding-inline: 12px; text-align: left; }
+  .event-shell .nav .nav-join { justify-content: center; width: 100%; min-height: 40px; }
+  .event-shell .event-detail-content { grid-template-columns: minmax(0,1fr); grid-template-areas: "tickets" "details"; }
+  .event-shell .event-ticket-panel { position: static; }
+}
+@media (max-width: 720px) {
+  .auth-shell .app-header-inner { min-height: 58px; padding-inline: 15px; }
+  .auth-shell .app-main { padding: 16px 14px 38px; }
+  .auth-shell .auth-wrap.auth-split { min-height: 0; border-radius: 9px; }
+  .auth-shell .auth-visual { min-height: 250px; padding: 24px 20px; }
+  .auth-shell .auth-split .auth-card { padding: 27px 20px 29px; }
+  .auth-shell .auth-card > .eyebrow { font-size: .61rem; }
+  .auth-shell .auth-split .auth-card h1 { font-size: clamp(1.8rem,8vw,2.35rem); }
+  .auth-shell .auth-form { gap: 14px; margin-top: 22px; }
+  .auth-shell .auth-form input { min-height: 46px; }
+  .auth-shell .demo-roles { margin-top: 20px; }
+  .event-shell .app-main { padding: 16px 14px 100px; }
+  .event-shell .event-detail-page { gap: 13px; }
+  .event-shell .event-detail-hero { min-height: 340px; border-radius: 8px; }
+  .event-shell .event-detail-hero-copy { padding: 21px 17px; }
+  .event-shell .event-detail-hero h1 { font-size: clamp(2rem,10vw,3.15rem); }
+  .event-shell .event-facts { border-radius: 8px; }
+  .event-shell .event-fact { padding: 13px 11px; }
+  .event-shell .event-fact strong { font-size: .78rem; }
+  .event-shell .event-fact small { font-size: .64rem; }
+  .event-shell .event-about,
+  .event-shell .event-how,
+  .event-shell .event-ticket-panel { padding: 17px 14px; border-radius: 8px; }
+  .event-shell .event-ticket-meta { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .auth-shell .landing-footer,
+  .event-shell .landing-footer { padding-inline: 14px; }
+  .auth-shell .landing-footer-main,
+  .event-shell .landing-footer-main { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px 14px; padding-inline: 0; }
+  .auth-shell .landing-footer-brand,
+  .event-shell .landing-footer-brand { grid-column: 1/-1; }
+  .auth-shell .landing-footer-bottom,
+  .event-shell .landing-footer-bottom { align-items: flex-start; flex-direction: column; padding-inline: 0; }
+}
+@media (max-width: 380px) {
+  .auth-shell .demo-roles .grid-2 { grid-template-columns: minmax(0,1fr); }
+  .event-shell .event-fact { padding-inline: 9px; }
+  .event-shell .event-fact strong { font-size: .73rem; }
+  .event-shell .event-ticket-meta { grid-template-columns: minmax(0,1fr); }
+}
+
+/* Finish the dark marketplace theme for nested checkout and normalize controls. */
+.auth-shell button,
+.auth-shell .btn,
+.event-shell button,
+.event-shell .btn { display: inline-flex; align-items: center; justify-content: center; text-align: center; vertical-align: middle; line-height: 1.2; }
+.event-shell .nav .nav-link { display: inline-flex; min-height: 36px; align-items: center; justify-content: center; padding: 0 13px; border: 1px solid #f27b2b; border-radius: 7px; color: #1b1009 !important; background: #f27b2b !important; line-height: 1; font-weight: 700; }
+.event-shell .nav .nav-link:hover,
+.event-shell .nav .nav-link.active { border-color: #ff914d; color: #1b1009 !important; background: #ff914d !important; }
+.event-shell .nav.open .nav-link { width: 100%; min-height: 42px; }
+.event-shell .event-ticket-button { justify-content: space-between; }
+.event-shell .event-state-actions .btn { min-height: 42px; border-radius: 7px; color: #e4e7e2; border-color: #393e39; background: #171917; }
+.event-shell .event-state-actions button.primary { color: #1b1009; border-color: #f27b2b; background: #f27b2b; }
+.event-shell .event-checkout-overlay { background: rgba(0,0,0,.76) !important; backdrop-filter: blur(8px) !important; }
+.event-shell .event-checkout-dialog {
+  --text: #f4f5f3;
+  --surface: #141614;
+  --border: #343834;
+  --line-strong: #414641;
+  --accent: #f27b2b;
+  --accent-bright: #ff914d;
+  --accent-ink: #1b1009;
+  --accent-soft: #2a1c12;
+  --muted: #a1a69f;
+  --faint: #858b83;
+  color: #f4f5f3;
+  border-color: #343834;
+  border-radius: 10px;
+  background: #141614 !important;
+  box-shadow: 0 24px 90px rgba(0,0,0,.55);
+}
+.event-shell .event-checkout-dialog h2 { color: #f4f5f3; }
+.event-shell .event-checkout-dialog .rule { background: #343834; }
+.event-shell .event-checkout-dialog label { color: #e1e4df; }
+.event-shell .event-checkout-dialog input { color: #f4f5f3; border-color: #393e39; background: #171917; }
+.event-shell .event-checkout-dialog button { min-height: 40px; }
+.event-shell .event-checkout-dialog button.primary { color: #1b1009; border-color: #f27b2b; background: #f27b2b; }
+.event-shell .event-checkout-dialog button.primary:hover { border-color: #ff914d; background: #ff914d; }
+.event-shell .event-checkout-dialog button.ghost { color: #ffc18f; border-color: #493a2d; background: #211a14; }
+.event-shell .event-checkout-dialog .alert { color: #ffc18f; border-color: #553a27; background: #251b13; }
+.event-shell .event-checkout-dialog .alert.danger { color: #ffd8d3; border-color: #693933; background: #291714; }
+.event-shell .event-checkout-dialog .alert.ok { color: #b9e3bd; border-color: #315538; background: #17251a; }
+.event-shell .event-loading-hero { background: linear-gradient(110deg,#171a17 25%,#252925 37%,#171a17 63%); background-size: 400% 100%; }
+.event-shell .event-loading-columns i { background: #171a17; }
+@media (max-width: 720px) {
+  .event-shell .event-checkout-dialog { max-height: calc(100svh - 32px); overflow-y: auto; padding: 22px !important; }
+  .event-shell .nav.open .nav-link { justify-content: flex-start; }
+}

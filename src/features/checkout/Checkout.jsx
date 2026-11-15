@@ -90,6 +90,7 @@ export default function Checkout({ category, onClose }) {
 
   return (
     <div
+      className="event-checkout-overlay"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
       style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(46, 27, 64, 0.52)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
     >
